@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOcupacionesTable extends Migration
+class CreateCiudadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateOcupacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ocupaciones', function (Blueprint $table) {
+        Schema::create('ciudades', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('egresado_id');
-            $table->unsignedInteger('empresa_id');
-            $table->string('puesto');
-            $table->string('descripcion');
-            $table->string('lugar');
-            $table->string('antiguedad');
+            $table->unsignedInteger('estado_id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateOcupacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ocupaciones');
+        Schema::dropIfExists('ciudades');
     }
 }
