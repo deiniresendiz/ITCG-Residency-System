@@ -19,17 +19,17 @@ class CreateEgresadosTable extends Migration
             $table->unsignedInteger('estado_civi_id');
             $table->unsignedInteger('ciudad_id');
             $table->unsignedInteger('sexo_id');
-            $table->string('no_control');
-            $table->string('nombre');
-            $table->dateTime('nacimineto');
-            $table->string('curp');
-            $table->string('telefono');
-            $table->string('celular');
-            $table->string('email');
-            $table->string('titulado',2);
-            $table->dateTime('fecha_egreso');
-            $table->float('promedio');
-            $table->string('imagen');
+            $table->string('no_control')->nullable();
+            $table->string('nombre')->nullable();
+            $table->dateTime('nacimineto')->nullable();
+            $table->string('curp')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('email')->nullable();
+            $table->string('titulado',2)->nullable();
+            $table->dateTime('fecha_egreso')->nullable();
+            $table->float('promedio')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

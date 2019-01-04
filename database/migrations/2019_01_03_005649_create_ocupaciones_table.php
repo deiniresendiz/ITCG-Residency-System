@@ -17,10 +17,10 @@ class CreateOcupacionesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('egresado_id');
             $table->unsignedInteger('empresa_id');
-            $table->string('puesto');
-            $table->string('descripcion');
-            $table->string('lugar');
-            $table->string('antiguedad');
+            $table->string('puesto')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('antiguedad')->nullable();
             $table->timestamps();
         });
     }

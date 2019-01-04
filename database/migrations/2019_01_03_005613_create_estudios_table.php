@@ -16,11 +16,11 @@ class CreateEstudiosTable extends Migration
         Schema::create('estudios', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('egresado_id');
-            $table->string('instituto');
+            $table->string('instituto')->nullable();
             $table->unsignedInteger('posgrado_id');
-            $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_final');
-            $table->string('descripcion');
+            $table->dateTime('fecha_inicio')->nullable();
+            $table->dateTime('fecha_final')->nullable();
+            $table->string('descripcion')->nullable();
             $table->unsignedInteger('nivel_id');
             $table->timestamps();
         });
