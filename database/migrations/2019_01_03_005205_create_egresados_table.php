@@ -21,7 +21,7 @@ class CreateEgresadosTable extends Migration
             $table->unsignedInteger('sexo_id');
             $table->string('no_control')->nullable();
             $table->string('nombre')->nullable();
-            $table->dateTime('nacimineto')->nullable();
+            $table->dateTime('nacimiento')->nullable();
             $table->string('curp')->nullable();
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();

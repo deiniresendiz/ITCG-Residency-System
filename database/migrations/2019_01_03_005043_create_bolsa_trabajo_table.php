@@ -30,6 +30,7 @@ class CreateBolsaTrabajoTable extends Migration
             $table->string('localidad')->nullable();
             $table->string('sueldo')->nullable();
             $table->string('estado')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }

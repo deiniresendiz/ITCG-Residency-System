@@ -16,12 +16,14 @@ class CreateCursosTable extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre')->nullable();
+            $table->string('descripcion',5000);
             $table->string('instructor')->nullable();
             $table->string('lugar')->nullable();
             $table->dateTime('fecha_inicio')->nullable();
             $table->dateTime('fecha_final')->nullable();
             $table->string('precio')->nullable();
             $table->string('estado')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
         });
     }
