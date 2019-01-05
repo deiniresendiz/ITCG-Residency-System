@@ -18,7 +18,7 @@ class BolsaTrabajo extends Model
         'contracto',
         'telefono',
         'email',
-        'localidad',
+        'domicilio',
         'sueldo',
         'estado',
         'imagen',

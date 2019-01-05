@@ -21,7 +21,6 @@
         Form::textarea('descripcion',
         null,
         [
-            'required',
             'class' => 'form-control',
             'placeholder' => 'Descripcion',
             'maxlength' => 5000,
@@ -41,7 +40,6 @@
         Form::text('instructor',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
@@ -58,7 +56,6 @@
         Form::text('lugar',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
@@ -75,7 +72,6 @@
         Form::date('fecha_inicio',
             ($curso->fecha_inicio? $curso->fecha_inicio : date('Y-m-d')),
             [
-                'required',
                 'class' => 'form-control'
             ]
         )
@@ -94,7 +90,6 @@
         Form::date('fecha_final',
             ($curso->fecha_final? $curso->fecha_final : date('Y-m-d')),
             [
-                'required',
                 'class' => 'form-control'
             ]
         )
@@ -113,12 +108,11 @@
         Form::text('precio',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
 
-    @if($errors->has('nombre'))
+    @if($errors->has('precio'))
         <span class="help-block">
             <strong>{{ $errors->first('precio') }}</strong>
         </span>
@@ -132,7 +126,6 @@
             ['Activo' => 'Activo', 'Terminado' => 'Terminado',],
             null,
             [
-                'required',
                 'class' => 'form-control'
             ]
         )
@@ -155,7 +148,6 @@
             ]
         )
      !!}
-
 
     @if($errors->has('image'))
         <span class="help-block">

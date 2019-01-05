@@ -41,7 +41,7 @@
 
     {!!
         Form::select('area_id',
-            $empresas,
+            $areas,
             null,
             [
                 'required',
@@ -61,7 +61,7 @@
 
     {!!
         Form::select('ciudad_id',
-            $empresas,
+            $ciudades,
             null,
             [
                 'required',
@@ -83,7 +83,6 @@
         Form::text('tipo',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
@@ -119,7 +118,6 @@
         Form::textarea('descripcion',
         null,
         [
-            'required',
             'class' => 'form-control',
             'placeholder' => 'Descripcion',
             'maxlength' => 5000,
@@ -184,20 +182,19 @@
         </span>
     @endif
 </div>
-<div class="form-group {{ $errors->has('localidad')? 'has-error':'' }}">
-    {!! Form::label('localidad','Localidad') !!}
+<div class="form-group {{ $errors->has('domicilio')? 'has-error':'' }}">
+    {!! Form::label('domicilio','Domiclio') !!}
     {!!
-        Form::text('localidad',
+        Form::text('domicilio',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
 
-    @if($errors->has('localidad'))
+    @if($errors->has('domicilio'))
         <span class="help-block">
-            <strong>{{ $errors->first('localidad') }}</strong>
+            <strong>{{ $errors->first('domicilio') }}</strong>
         </span>
     @endif
 </div>
@@ -207,7 +204,6 @@
         Form::text('sueldo',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}

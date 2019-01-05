@@ -2,45 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b95b2aa-37e0-4051-be3c-87dcca9af496" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/cursos/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cursos/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cursos/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/cursos/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/egresados/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/egresados/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/egresados/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/egresados/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/empresas/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/empresas/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/empresas/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/empresas/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/trabajos/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/trabajos/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/trabajos/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/trabajos/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/BolsaTrabajo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/BolsaTrabajo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Egresados.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Egresados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Empresas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Empresas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/EstadoCivil.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Estudios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Estudios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CursosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CursosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/IdiomaDetalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/IdiomaDetalle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Niveles.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Sexo.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_005205_create_egresados_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_01_03_005205_create_egresados_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_005613_create_estudios_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_01_03_005613_create_estudios_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_012425_create_estado_civil_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_012507_create_sexo_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_015643_create_idioma_detalle_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_01_03_015643_create_idioma_detalle_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_025410_create_niveles_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_03_005043_create_bolsa_trabajo_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_01_03_005043_create_bolsa_trabajo_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,17 +22,7 @@
     <favorites_list name="ITCG-Residency-System" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,7 +46,6 @@
         <option value="$PROJECT_DIR$/app/AreaTrabajo.php" />
         <option value="$PROJECT_DIR$/app/Carreras.php" />
         <option value="$PROJECT_DIR$/app/Ciudades.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_01_03_005043_create_bolsa_trabajo_table.php" />
         <option value="$PROJECT_DIR$/app/EstadoCivil.php" />
         <option value="$PROJECT_DIR$/app/Estados.php" />
         <option value="$PROJECT_DIR$/app/Idiomas.php" />
@@ -105,20 +61,21 @@
         <option value="$PROJECT_DIR$/resources/views/cursos/create.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/trabajos/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_01_03_005205_create_egresados_table.php" />
         <option value="$PROJECT_DIR$/app/Egresados.php" />
-        <option value="$PROJECT_DIR$/app/BolsaTrabajo.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_01_03_005613_create_estudios_table.php" />
         <option value="$PROJECT_DIR$/app/Estudios.php" />
         <option value="$PROJECT_DIR$/app/IdiomaDetalle.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_01_03_015643_create_idioma_detalle_table.php" />
         <option value="$PROJECT_DIR$/resources/views/empresas/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php" />
         <option value="$PROJECT_DIR$/app/Empresas.php" />
-        <option value="$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/egresados/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php" />
+        <option value="$PROJECT_DIR$/app/BolsaTrabajo.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_01_03_005043_create_bolsa_trabajo_table.php" />
       </list>
     </option>
   </component>
@@ -246,28 +203,22 @@
             <path>
               <item name="ITCG-Residency-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="ITCG-Residency-System" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ITCG-Residency-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="ITCG-Residency-System" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ITCG-Residency-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="ITCG-Residency-System" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="egresados" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITCG-Residency-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITCG-Residency-System" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="egresados" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Requests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -317,12 +268,12 @@
       <workItem from="1546479400333" duration="4934000" />
       <workItem from="1546584354159" duration="9188000" />
       <workItem from="1546659800403" duration="6062000" />
-      <workItem from="1546667113592" duration="5257000" />
+      <workItem from="1546667113592" duration="7171000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29030000" />
+    <option name="totallyTimeSpent" value="30944000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1366" height="734" extended-state="6" />
@@ -375,13 +326,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_01_03_015031_create_ciudades_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_01_03_015537_create_idiomas_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -485,13 +429,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_01_03_005205_create_egresados_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -513,13 +450,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/BolsaTrabajo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -583,23 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="241" selection-start-line="241" selection-end-line="264" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Empresas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Ciudades.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -617,10 +530,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/cursos/partials/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/egresados/partials/form.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="277">
+          <caret line="192" column="8" lean-forward="true" selection-start-line="192" selection-start-column="8" selection-end-line="192" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/empresas/partials/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="99" column="9" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/trabajos/partials/form.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-398">
+          <caret line="205" column="9" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Empresas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/BolsaTrabajo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_01_03_005043_create_bolsa_trabajo_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
         </state>
       </provider>
     </entry>

@@ -27,7 +27,7 @@ class CreateBolsaTrabajoTable extends Migration
             $table->string('contracto')->nullable();
             $table->string('telefono',100)->nullable();
             $table->string('email',100)->nullable();
-            $table->string('localidad')->nullable();
+            $table->string('domicilio')->nullable();
             $table->string('sueldo')->nullable();
             $table->string('estado')->nullable();
             $table->string('imagen')->nullable();

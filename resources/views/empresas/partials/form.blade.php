@@ -22,7 +22,6 @@
         Form::textarea('descripcion',
         null,
         [
-            'required',
             'class' => 'form-control',
             'placeholder' => 'Descripcion',
             'maxlength' => 5000,
@@ -99,7 +98,6 @@
         Form::text('contacto',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
