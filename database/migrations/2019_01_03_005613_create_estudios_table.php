@@ -16,9 +16,9 @@ class CreateEstudiosTable extends Migration
         Schema::create('estudios', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('egresado_id');
-            $table->unsignedInteger('nivel_id');
             $table->unsignedInteger('posgrado_id');
             $table->string('instituto')->nullable();
+            $table->string('nivel')->nullable();
             $table->dateTime('fecha_inicio')->nullable();
             $table->dateTime('fecha_final')->nullable();
             $table->string('descripcion',5000)->nullable();

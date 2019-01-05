@@ -16,7 +16,6 @@ class Empresas extends Model
         'domicilio',
         'telefono',
         'contacto',
-        'nombre',
         'imagen',
     ];
 

@@ -34,8 +34,8 @@ class BolsaTrabajo extends Model
         return $this->belongsTo(AreaTrabajo::class);
     }
 
-    public function sexo(){
-        return $this->belongsTo(Sexo::class);
+    public function ciudad(){
+        return $this->belongsTo(Ciudades::class);
     }
 }
 

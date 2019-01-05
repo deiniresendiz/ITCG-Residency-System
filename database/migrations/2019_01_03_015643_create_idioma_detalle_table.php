@@ -17,7 +17,7 @@ class CreateIdiomaDetalleTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('idioma_id');
             $table->unsignedInteger('egresado_id');
-            $table->unsignedInteger('nivel_id');
+            $table->string('nivel')->nullable();
             $table->timestamps();
         });
     }

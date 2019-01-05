@@ -12,7 +12,7 @@ class IdiomaDetalle extends Model
     protected $fillable = [
         'idioma_id',
         'egresado_id',
-        'nivel_id',
+        'nivel',
     ];
 
 
@@ -21,8 +21,5 @@ class IdiomaDetalle extends Model
     }
     public function egresado(){
         return $this->belongsTo(Egresados::class);
-    }
-    public function nivel(){
-        return $this->belongsTo(Niveles::class);
     }
 }
