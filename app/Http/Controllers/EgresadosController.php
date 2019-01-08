@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Carreras;
+use App\Ciudades;
 use Illuminate\Http\Request;
 
-class EgresadoController extends Controller
+class EgresadosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +25,9 @@ class EgresadoController extends Controller
      */
     public function create()
     {
-        //
+        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
+        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('egresados.create', compact('carerras','ciudades'));
     }
 
     /**

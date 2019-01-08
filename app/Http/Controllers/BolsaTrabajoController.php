@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AreaTrabajo;
+use App\Ciudades;
+use App\Empresas;
 use Illuminate\Http\Request;
 
 class BolsaTrabajoController extends Controller
@@ -24,6 +27,11 @@ class BolsaTrabajoController extends Controller
     public function create()
     {
         //
+
+        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+        $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
+        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        return view('trabajos.create', compact('empresas','areas','ciudades'));
     }
 
     /**

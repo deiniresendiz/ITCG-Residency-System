@@ -26,8 +26,9 @@ class BolsaTrabajo extends Model
 
     protected $dates = ['fecha'];
 
-    public function empresa(){
+    public function empresas(){
         return $this->belongsTo(Empresas::class);
+
     }
 
     public function area(){

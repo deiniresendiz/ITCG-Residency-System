@@ -5,7 +5,7 @@
     <h1>Nuevo Trabajo</h1>
     {!!
         Form::model(
-            $trabajo= new \App\Cursos(),
+            $trabajo= new \App\BolsaTrabajo(),
             [
                 'route' => 'trabajos.store',
                 'riles' => 'true'

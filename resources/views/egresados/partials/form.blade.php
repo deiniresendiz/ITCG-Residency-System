@@ -58,7 +58,7 @@
 
     {!!
         Form::select('ciudad_id',
-            $empresas,
+            $ciudades,
             null,
             [
                 'required',
