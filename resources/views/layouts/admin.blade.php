@@ -67,8 +67,8 @@
             </span>
 
             <div id="egresados" class="collapse">
-                <a href="#news" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="#news" class="nav-link text-white font-weight-light ">Nuevo</a>
+                <a href="{{ Route('egresados.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                <a href="{{ Route('egresados.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
             </div>
         </li>
         <li class="list-group-item bg-primary text-white font-weight-bold">
@@ -77,8 +77,8 @@
             </span>
 
             <div id="empresas" class="collapse">
-                <a href="#news" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="#news" class="nav-link text-white font-weight-light ">Nuevo</a>
+                <a href="{{ Route('empresas.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                <a href="{{ Route('empresas.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
             </div>
         </li>
         <li class="list-group-item bg-primary text-white font-weight-bold">
@@ -87,8 +87,8 @@
             </span>
 
             <div id="trabajos" class="collapse">
-                <a href="#news" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="#news" class="nav-link text-white font-weight-light ">Nuevo</a>
+                <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                <a href="{{ Route('trabajos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
             </div>
         </li>
         <li class="list-group-item bg-primary text-white font-weight-bold">
@@ -97,8 +97,8 @@
             </span>
 
             <div id="cursos" class="collapse">
-                <a href="#news" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="#news" class="nav-link text-white font-weight-light ">Nuevo</a>
+                <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                <a href="{{ Route('cursos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
             </div>
         </li>
     </ul>
