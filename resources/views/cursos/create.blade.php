@@ -8,7 +8,7 @@
             $curso = new \App\Cursos(),
             [
                 'route' => 'cursos.store',
-                'riles' => 'true'
+                'files' => 'true'
             ]
         )
      !!}
