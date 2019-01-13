@@ -131,6 +131,25 @@
         </span>
     @endif
 </div>
+<div class="form-group {{ $errors->has('requisitos')? 'has-error':'' }}">
+    {!! Form::label('requisitos','Requisitos') !!}
+    {!!
+        Form::textarea('requisitos',
+        null,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Requisitos',
+            'maxlength' => 5000,
+            'autocomplete' => 'off'
+        ])
+     !!}
+
+    @if($errors->has('requisitos'))
+        <span class="help-block">
+            <strong>{{ $errors->first('requisitos') }}</strong>
+        </span>
+    @endif
+</div>
 <div class="form-group {{ $errors->has('contracto')? 'has-error':'' }}">
     {!! Form::label('contracto','Contracto') !!}
     {!!
@@ -171,12 +190,11 @@
         Form::text('email',
         null,
         [
-            'required',
             'class' => 'form-control'
         ])
      !!}
 
-    @if($errors->has('puesto'))
+    @if($errors->has('email'))
         <span class="help-block">
             <strong>{{ $errors->first('email') }}</strong>
         </span>

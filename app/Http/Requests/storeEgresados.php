@@ -24,7 +24,7 @@ class storeEgresados extends FormRequest
     public function rules()
     {
         return [
-            //
+
         ];
     }
 }

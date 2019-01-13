@@ -15,6 +15,7 @@ class BolsaTrabajo extends Model
         'tipo',
         'fecha',
         'descripcion',
+        'requisitos',
         'contracto',
         'telefono',
         'email',
@@ -26,7 +27,7 @@ class BolsaTrabajo extends Model
 
     protected $dates = ['fecha'];
 
-    public function empresas(){
+    public function empresa(){
         return $this->belongsTo(Empresas::class);
 
     }

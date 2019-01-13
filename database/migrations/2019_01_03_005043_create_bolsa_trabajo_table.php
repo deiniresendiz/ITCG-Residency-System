@@ -18,7 +18,6 @@ class CreateBolsaTrabajoTable extends Migration
             $table->unsignedInteger('empresa_id');
             $table->unsignedInteger('area_id');
             $table->unsignedInteger('ciudad_id');
-            $table->unsignedInteger('sexo_id');
             $table->string('puesto')->nullable()->nullable();
             $table->string('tipo')->nullable()->nullable();
             $table->dateTime('fecha')->nullable();

@@ -29,7 +29,7 @@ class CursosController extends Controller
             $title = "Cursos/Talleres ".$request->has('state');
             $cursos = $cursos->where('estado', $request->has('state'));
         }
-        $cursos = $cursos->orderBy('fecha_inicio','desc');
+        $cursos = $cursos->sortByDesc('fecha_inicio');
         //$cursos = $cursos->paginate();
         return view('cursos.index',compact('cursos','title'));
     }

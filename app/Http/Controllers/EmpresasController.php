@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Ciudades;
+use App\Empresas;
+use App\Http\Requests\storeEmpresas;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class EmpresasController extends Controller
 {
@@ -11,9 +15,21 @@ class EmpresasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+    public function index(Request $request)
+    {
+        $title = "Empresas";
+        $empresas = Empresas::all();
+        if($request->has('state')){
+            $title = "Cursos/Talleres ".$request->has('state');
+            $empresas = $empresas->where('ciudad_id', $request->has('state'));
+        }
+        $empresas = $empresas->sortByDesc('fecha_inicio');
+        //$cursos = $cursos->paginate();
+        return view('empresas.index',compact('empresas','title'));
     }
 
     /**
@@ -23,7 +39,8 @@ class EmpresasController extends Controller
      */
     public function create()
     {
-        //
+        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        return view('empresas.create',compact('citys'));
     }
 
     /**
@@ -32,9 +49,30 @@ class EmpresasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeEmpresas $request)
     {
-        //
+        $empresa = new Empresas($request->all());
+        $city=$request->get('ciudad_id');
+
+        if(!is_numeric($city)){
+            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+            $empresa->ciudad_id = $newCity->id;
+        }else{
+            $empresa->ciudad_id = $city;
+        }
+
+        $empresa->nombre = $request->get('nombre');
+        $empresa->descripcion = $request->get('descripcion');
+        $empresa->domicilio = $request->get('domicilio');
+        $empresa->telefono = $request->get('telefono');
+        $empresa->contacto = $request->get('contacto');
+        if($request->hasFile('imagen')){
+            $imagen = $request->file('imagen');
+            $file = $imagen->store('imagenes/empresas');
+            $empresa->imagen = $file;
+        }
+        $empresa->save();
+        return view('empresas.show',compact('empresa'));
     }
 
     /**
@@ -45,7 +83,8 @@ class EmpresasController extends Controller
      */
     public function show($id)
     {
-        //
+        $empresa = Empresas::where('id',$id)->first();
+        return view('empresas.show',compact('empresa'));
     }
 
     /**
@@ -56,7 +95,9 @@ class EmpresasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empresa = Empresas::where('id',$id)->first();
+        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        return view('empresas.edit',compact('empresa','id','citys'));
     }
 
     /**
@@ -68,7 +109,28 @@ class EmpresasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $empresa = Empresas::where('id',$id)->first();
+        $city=$request->get('ciudad_id');
+
+        if(!is_numeric($city)){
+            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+            $empresa->ciudad_id = $newCity->id;
+        }else{
+            $empresa->ciudad_id = $city;
+        }
+
+        $empresa->nombre = $request->get('nombre');
+        $empresa->descripcion = $request->get('descripcion');
+        $empresa->domicilio = $request->get('domicilio');
+        $empresa->telefono = $request->get('telefono');
+        $empresa->contacto = $request->get('contacto');
+        if($request->hasFile('imagen')){
+            $imagen = $request->file('imagen');
+            $file = $imagen->store('imagenes/empresas');
+            $empresa->imagen = $file;
+        }
+        $empresa->save();
+        return view('empresas.show',compact('empresa'));
     }
 
     /**

@@ -8,7 +8,7 @@
             $trabajo= new \App\BolsaTrabajo(),
             [
                 'route' => 'trabajos.store',
-                'riles' => 'true'
+                'files' => 'true'
             ]
         )
      !!}

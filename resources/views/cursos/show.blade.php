@@ -27,11 +27,11 @@
             <td>{{ $curso->lugar }}</td>
         </tr>
         <tr>
-            <th>fecha_inicio</th>
+            <th>Fecha de Inicio</th>
             <td>{{ date_format($curso->fecha_inicio,'d/m/Y') }}</td>
         </tr>
         <tr>
-            <th>fecha_final</th>
+            <th>Fecha de Terminacion</th>
             <td>{{  date_format($curso->fecha_final,'d/m/Y') }}</td>
         </tr>
         <tr>

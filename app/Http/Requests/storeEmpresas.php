@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class storeEmpresas extends FormRequest
 {
@@ -13,7 +14,7 @@ class storeEmpresas extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,13 @@ class storeEmpresas extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ciudad_id' => 'required',
+            'nombre' => 'required',
+            'descripcion' => 'required|min:3|max:50000',
+            'domicilio' => 'required',
+            'telefono' => 'required',
+            'contacto' => 'required',
+            'imagen' => 'image',
         ];
     }
 }

@@ -22,15 +22,7 @@ class storeCurso extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     *  'nombre',
-    'descripcion',
-    'instructor',
-    'lugar',
-    'fecha_inicio',
-    'fecha_final',
-    'precio',
-    'estado',
-    'imagen',
+     *
      */
     public function rules()
     {

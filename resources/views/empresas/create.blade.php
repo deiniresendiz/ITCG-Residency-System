@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Movement New</h1>
+    <h1>Nueva Empresa</h1>
     {!!
         Form::model(
-            $empresa = new \App\Movements(),
+            $empresa = new \App\Empresas(),
             [
                 'route' => 'empresas.store',
                 'files' => 'true'

@@ -67,7 +67,7 @@
     @endif
 </div>
 <div class="form-group {{$errors->has('fecha_inicio') ? 'has-error': '' }}">
-    {!! Form::label('fecha_inicio','Fecha de inicio') !!}
+    {!! Form::label('fecha_inicio','Fecha de Inicio') !!}
     {!!
         Form::date('fecha_inicio',
             ($curso->fecha_inicio? $curso->fecha_inicio : date('Y-m-d')),
@@ -85,7 +85,7 @@
 
 </div>
 <div class="form-group {{$errors->has('fecha_final') ? 'has-error': '' }}">
-    {!! Form::label('fecha_final','Fecha de terminacion') !!}
+    {!! Form::label('fecha_final','Fecha de Terminacion') !!}
     {!!
         Form::date('fecha_final',
             ($curso->fecha_final? $curso->fecha_final : date('Y-m-d')),
