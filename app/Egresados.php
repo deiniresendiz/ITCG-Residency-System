@@ -9,12 +9,12 @@ class Egresados extends Model
 
     protected $table = "egresados";
     protected $fillable = [
-        'carreara_id',
+        'carrera_id',
         'ciudad_id',
         'no_control',
         'nombre',
         'sexo',
-        'estado_civi',
+        'estado_civil',
         'nacimiento',
         'curp',
         'telefono',

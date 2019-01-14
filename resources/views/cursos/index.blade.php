@@ -10,7 +10,7 @@
                 <td>Lugar</td>
                 <td>Fecha de Inicio</td>
                 <td>Precio</td>
-                <td>Estaddo</td>
+                <td>Estado</td>
                 <td colspan="2">Acciones</td>
             </tr>
         </thead>

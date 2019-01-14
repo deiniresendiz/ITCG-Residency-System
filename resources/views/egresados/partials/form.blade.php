@@ -33,11 +33,11 @@
         </span>
     @endif
 </div>
-<div class="form-group {{$errors->has('carreara_id') ? 'has-error': '' }}">
-    {!! Form::label('carreara_id','Carerra') !!}
+<div class="form-group {{$errors->has('carrera_id') ? 'has-error': '' }}">
+    {!! Form::label('carrera_id','Carerra') !!}
 
     {!!
-        Form::select('carreara_id',
+        Form::select('carrera_id',
             $carerras,
             null,
             [
@@ -47,9 +47,9 @@
         )
      !!}
 
-    @if($errors->has('carreara_id'))
+    @if($errors->has('carrera_id'))
         <span class="help-block">
-            <strong>{{ $errors->first('carreara_id') }}</strong>
+            <strong>{{ $errors->first('carrera_id') }}</strong>
         </span>
     @endif
 </div>
@@ -93,8 +93,8 @@
         </span>
     @endif
 </div>
-<div class="form-group {{$errors->has('estado_civi') ? 'has-error': '' }}">
-    {!! Form::label('estado_civi','Estado Civil') !!}
+<div class="form-group {{$errors->has('estado_civil') ? 'has-error': '' }}">
+    {!! Form::label('estado_civil','Estado Civil') !!}
 
     {!!
         Form::select('sexo',
@@ -107,9 +107,9 @@
         )
      !!}
 
-    @if($errors->has('estado_civi'))
+    @if($errors->has('estado_civil'))
         <span class="help-block">
-            <strong>{{ $errors->first('estado_civi') }}</strong>
+            <strong>{{ $errors->first('estado_civil') }}</strong>
         </span>
     @endif
 </div>
