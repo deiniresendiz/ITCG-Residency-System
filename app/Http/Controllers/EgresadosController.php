@@ -6,7 +6,9 @@ use App\Carreras;
 use App\Ciudades;
 use App\Egresados;
 use App\Http\Requests\storeEgresados;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EgresadosController extends Controller
 {
@@ -78,6 +80,7 @@ class EgresadosController extends Controller
         $egresado->email = $request->get('email');
         $egresado->fecha_egreso = $request->get('fecha_egreso');
         $egresado->promedio = $request->get('promedio');
+        $egresado->password = $request->get('no_control');
 
         $city=$request->get('ciudad_id');
 
@@ -102,6 +105,13 @@ class EgresadosController extends Controller
             $file = $imagen->store('imagenes/cursos');
             $egresado->imagen = $file;
         }
+
+        User::create([
+            'name' => $request->get('no_control'),
+            'email' => $request->get('no_control'),
+            'password' => Hash::make($request->get('no_control')),
+            'isAdmin' => 0,
+        ]);
         $egresado->save();
         return redirect()->route('egresados.show',$egresado);
     }

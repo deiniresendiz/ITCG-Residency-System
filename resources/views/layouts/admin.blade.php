@@ -22,7 +22,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between" style="background-color: #e3f2fd;height:9%;">
-    <a class="navbar-brand font-weight-bold" href="#">Dashboard</a>
+    <a class="navbar-brand font-weight-bold" href="{{ route('home') }}">Dashboard</a>
     <form class="form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -61,46 +61,56 @@
 
 
     <ul id="menuVertical" class="bg-dark navbar-nav  navbar-dark mr-auto">
-        <li class="list-group-item bg-primary  text-white font-weight-bold">
+        @if(Auth::user()->isAdmin == 1)
+            <li class="list-group-item bg-primary  text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#egresados">
                  Egresados
             </span>
 
-            <div id="egresados" class="collapse">
-                <a href="{{ Route('egresados.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="{{ Route('egresados.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-            </div>
-        </li>
-        <li class="list-group-item bg-primary text-white font-weight-bold">
+                <div id="egresados" class="collapse">
+                    <a href="{{ Route('egresados.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                    <a href="{{ Route('egresados.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                </div>
+            </li>
+            <li class="list-group-item bg-primary text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#empresas">
                  Empresas
             </span>
 
-            <div id="empresas" class="collapse">
-                <a href="{{ Route('empresas.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="{{ Route('empresas.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-            </div>
-        </li>
-        <li class="list-group-item bg-primary text-white font-weight-bold">
+                <div id="empresas" class="collapse">
+                    <a href="{{ Route('empresas.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                    <a href="{{ Route('empresas.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                </div>
+            </li>
+            <li class="list-group-item bg-primary text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#trabajos">
                  Trabajos
             </span>
 
-            <div id="trabajos" class="collapse">
-                <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="{{ Route('trabajos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-            </div>
-        </li>
-        <li class="list-group-item bg-primary text-white font-weight-bold">
+                <div id="trabajos" class="collapse">
+                    <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                    <a href="{{ Route('trabajos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                </div>
+            </li>
+            <li class="list-group-item bg-primary text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#cursos">
                  Cursos/Telleres
             </span>
 
-            <div id="cursos" class="collapse">
-                <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                <a href="{{ Route('cursos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                <div id="cursos" class="collapse">
+                    <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                    <a href="{{ Route('cursos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                </div>
+            </li>
+        @else
+            <div class="list-group-item bg-primary text-white font-weight-bold">
+                <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Cursos</a>
             </div>
-        </li>
+            <div class="list-group-item bg-primary text-white font-weight-bold">
+                <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Trabajos</a>
+            </div>
+        @endif
+
     </ul>
     <div style="margin-left:15%;padding:1px 1em;height:90%; margin-top: 4%; " class="jumbotron jumbotron-fluid">
 

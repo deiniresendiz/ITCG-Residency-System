@@ -17,8 +17,8 @@ class CreateEgresadosTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('carrera_id');
             $table->unsignedInteger('ciudad_id');
-            $table->string('no_control')->nullable();
-            $table->string('nombre')->nullable();
+            $table->string('no_control');
+            $table->string('nombre');
             $table->dateTime('nacimiento')->nullable();
             $table->string('curp')->nullable();
             $table->string('sexo')->nullable();
@@ -30,6 +30,7 @@ class CreateEgresadosTable extends Migration
             $table->dateTime('fecha_egreso')->nullable();
             $table->float('promedio')->nullable();
             $table->string('imagen')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

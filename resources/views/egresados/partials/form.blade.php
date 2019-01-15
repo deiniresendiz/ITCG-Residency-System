@@ -19,7 +19,7 @@
 <div class="form-group {{ $errors->has('nombre')? 'has-error':'' }}">
     {!! Form::label('nombre','Nombre') !!}
     {!!
-        Form::text('no_control',
+        Form::text('nombre',
         null,
         [
             'required',
@@ -97,8 +97,8 @@
     {!! Form::label('estado_civil','Estado Civil') !!}
 
     {!!
-        Form::select('sexo',
-            ['No Especificado' => 'No Especificado', 'Casado(a)' => 'Casado(a)', 'Soltero(a)' => 'Soltero(a)'],
+        Form::select('estado_civil',
+            ['NoEspecificado' => 'No Especificado', 'Casado(a)' => 'Casado(a)', 'Soltero(a)' => 'Soltero(a)'],
             null,
             [
                 'required',

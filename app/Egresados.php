@@ -22,7 +22,8 @@ class Egresados extends Model
         'email',
         'fecha_egreso',
         'promedio',
-        'imagen'
+        'imagen',
+        'password'
     ];
 
     protected $dates = ['nacimiento','fecha_egreso'];

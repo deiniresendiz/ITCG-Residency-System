@@ -25,7 +25,13 @@ class storeEgresados extends FormRequest
     public function rules()
     {
         return [
-
+            'carrera_id'  => 'required',
+            'ciudad_id'  => 'required',
+            'no_control'  => 'required',
+            'nombre'  => 'required',
+            'sexo'  => 'required',
+            'estado_civil'  => 'required',
+            'nacimiento'  => 'required',
         ];
     }
 }
