@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ $egrensado->nombre }}</td>
                 <td>{{ $egrensado->no_control }}</td>
-                <td>{{ $egrensado->carrera->nombre }}</td>
+                <td>{{ $egrensado->carrera }}</td>
                 <td>{{ $egrensado->sexo }}</td>
                 <td>{{ \Illuminate\Support\Carbon::parse($egrensado->nacimiento)->age }}</td>
                 <td>{{ $egrensado->fecha_egreso }}</td>

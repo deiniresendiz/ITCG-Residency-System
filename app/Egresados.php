@@ -28,11 +28,12 @@ class Egresados extends Model
 
     protected $dates = ['nacimiento','fecha_egreso'];
 
-    public function carrera(){
-        return $this->belongsTo(Carreras::class);
-    }
     public function ciudad(){
         return $this->belongsTo(Ciudades::class);
+    }
+
+    public function carrara(){
+        return $this->belongsTo(Carreras::class);
     }
 
 }

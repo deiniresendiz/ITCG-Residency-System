@@ -9,6 +9,7 @@ class Carreras extends Model
 
     protected $table = "carreras";
     protected $fillable = [
+        'carrara_id',
         'clave',
         'nombre',
     ];

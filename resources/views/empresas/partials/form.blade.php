@@ -36,6 +36,27 @@
     @endif
 </div>
 
+<div class="form-group {{$errors->has('estado_id') ? 'has-error': '' }}">
+    {!! Form::label('estado_id','Estado') !!}
+
+    {!!
+        Form::select('estado_id',
+            $state,
+            null,
+            [
+                'required',
+                'class' => 'form-control'
+            ]
+        )
+     !!}
+
+    @if($errors->has('estado_id'))
+        <span class="help-block">
+            <strong>{{ $errors->first('estado_id') }}</strong>
+        </span>
+    @endif
+</div>
+
 <div class="form-group {{$errors->has('ciudad_id') ? 'has-error': '' }}">
     {!! Form::label('ciudad_id','Ciudad') !!}
 
@@ -50,12 +71,13 @@
         )
      !!}
 
-    @if($errors->has('empresa_id'))
+    @if($errors->has('ciudad_id'))
         <span class="help-block">
             <strong>{{ $errors->first('ciudad_id') }}</strong>
         </span>
     @endif
 </div>
+
 
 <div class="form-group {{ $errors->has('domicilio')? 'has-error':'' }}">
     {!! Form::label('domicilio','Domicilio') !!}

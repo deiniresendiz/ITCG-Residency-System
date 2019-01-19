@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <th>Carrera</th>
-            <td>{{ $egresado }}</td>
+            <td>{{ $egresado->carraras }}</td>
         </tr>
         <tr>
             <th>Curp</th>

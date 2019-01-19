@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ciudades;
 use App\Empresas;
+use App\Estados;
 use App\Http\Requests\storeEmpresas;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -40,7 +41,8 @@ class EmpresasController extends Controller
     public function create()
     {
         $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
-        return view('empresas.create',compact('citys'));
+        $state = Estados::orderBy('nombre')->pluck('nombre','id');
+        return view('empresas.create',compact('citys','state'));
     }
 
     /**

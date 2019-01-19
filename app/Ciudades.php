@@ -9,7 +9,6 @@ class Ciudades extends Model
 
     protected $table = "ciudades";
     protected $fillable = [
-        'estado_id',
         'nombre',
     ];
 
