@@ -42,7 +42,8 @@
             null,
             [
                 'required',
-                'class' => 'form-control'
+                'class' => 'form-control',
+
             ]
         )
      !!}
@@ -53,16 +54,42 @@
         </span>
     @endif
 </div>
+
+<div class="form-group {{$errors->has('estado_id') ? 'has-error': '' }}">
+    {!! Form::label('estado_id','Estado') !!}
+
+    {!!
+        Form::select('estado_id',
+            $state,
+            null,
+            [
+                'placeholder' => 'Selecciona un estado',
+                'required',
+                'class' => 'form-control',
+                'id' => 'stateEgresados'
+            ]
+        )
+     !!}
+
+    @if($errors->has('estado_id'))
+        <span class="help-block">
+            <strong>{{ $errors->first('estado_id') }}</strong>
+        </span>
+    @endif
+</div>
+
 <div class="form-group {{$errors->has('ciudad_id') ? 'has-error': '' }}">
     {!! Form::label('ciudad_id','Ciudad') !!}
 
     {!!
         Form::select('ciudad_id',
-            $ciudades,
+            ['placeholder' => 'Selecciona un estado'],
             null,
             [
+
                 'required',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'id' => 'townEgresados'
             ]
         )
      !!}
@@ -73,6 +100,7 @@
         </span>
     @endif
 </div>
+
 <div class="form-group {{$errors->has('sexo') ? 'has-error': '' }}">
     {!! Form::label('sexo','Sexo') !!}
 

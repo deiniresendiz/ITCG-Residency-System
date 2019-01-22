@@ -14,5 +14,6 @@
 
     @include('empresas.partials.form')
 
+
     {!! Form::close() !!}
 @endsection

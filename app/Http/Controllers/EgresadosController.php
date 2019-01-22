@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Carreras;
 use App\Ciudades;
 use App\Egresados;
+use App\Estados;
 use App\Http\Requests\storeEgresados;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,8 +43,14 @@ class EgresadosController extends Controller
     public function create()
     {
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
-        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('egresados.create', compact('carerras','ciudades'));
+        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+        return view('egresados.create', compact('carerras','state'));
+    }
+    public function getTowns(Request $request, $id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
     }
 
     /**
@@ -85,7 +92,7 @@ class EgresadosController extends Controller
         $city=$request->get('ciudad_id');
 
         if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+            $newCity = Ciudades::firstOrCreate(['estado_id' => $request->get('estado_id'),'nombre' => ucwords($city)]);
             $egresado->ciudad_id = $newCity->id;
         }else{
             $egresado->ciudad_id = $city;

@@ -44,8 +44,10 @@
             $state,
             null,
             [
+                'placeholder' => 'Selecciona un estado',
                 'required',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'id' => 'stateEmpresa'
             ]
         )
      !!}
@@ -62,11 +64,13 @@
 
     {!!
         Form::select('ciudad_id',
-            $citys,
+            ['placeholder' => 'Selecciona un estado'],
             null,
             [
+
                 'required',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'id' => 'townEmpresa'
             ]
         )
      !!}
@@ -154,3 +158,17 @@
         Guardar
     </button>
 </div>
+
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $('#townEmpresa').select2({
+                placeholder:'Seleccione una Categoria',
+                tags:true,
+                tokenSeparators:[',']
+            });
+        });
+
+    </script>
+@endsection

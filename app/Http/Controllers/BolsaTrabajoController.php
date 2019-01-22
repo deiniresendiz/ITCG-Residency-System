@@ -6,6 +6,7 @@ use App\AreaTrabajo;
 use App\BolsaTrabajo;
 use App\Ciudades;
 use App\Empresas;
+use App\Estados;
 use App\Http\Requests\storeBolsaTrabajo;
 use Illuminate\Http\Request;
 
@@ -42,8 +43,8 @@ class BolsaTrabajoController extends Controller
     {
         $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
         $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
-        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre','id');
-        return view('trabajos.create', compact('empresas','areas','ciudades'));
+        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+        return view('trabajos.create', compact('empresas','areas','state'));
     }
 
     /**
@@ -101,6 +102,13 @@ class BolsaTrabajoController extends Controller
         $trabajo->save();
         return redirect()->route('trabajos.show',$trabajo);
 
+    }
+
+    public function getTowns(Request $request, $id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
     }
 
     /**

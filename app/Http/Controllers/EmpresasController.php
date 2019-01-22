@@ -40,9 +40,15 @@ class EmpresasController extends Controller
      */
     public function create()
     {
-        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre','id');
-        return view('empresas.create',compact('citys','state'));
+        return view('empresas.create',compact('state'));
+    }
+
+    public function getTowns(Request $request, $id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
     }
 
     /**

@@ -27,4 +27,7 @@ Route::resource('/cursos','CursosController');
 Route::resource('/trabajos','BolsaTrabajoController');
 Route::resource('/egresados','EgresadosController');
 Route::resource('/empresas','EmpresasController');
+Route::get('empresas/towns/{id}','EmpresasController@getTowns');
+Route::get('egresados/towns/{id}','EgresadosController@getTowns');
+Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
 
