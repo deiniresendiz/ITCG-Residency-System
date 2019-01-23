@@ -305,3 +305,27 @@
     </button>
 </div>
 
+@section('script')
+    <script type="text/javascript" >
+
+        jQuery(function ($) {
+            $('#townTrabajos').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+                disabled: true
+            });
+            $('#stateTraajos').select2({
+                placeholder:'Seleccione un Estado',
+            });
+            $('#area_id').select2({
+                placeholder:'Seleccione el Area Profesional',
+            });
+            $('#empresa_id').select2({
+                placeholder:'Seleccione una empresa',
+            });
+        });
+
+    </script>
+@endsection
+

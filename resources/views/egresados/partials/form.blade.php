@@ -286,3 +286,25 @@
         Guardar
     </button>
 </div>
+
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $('#townEgresados').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+                disabled: true
+            });
+            $('#stateEgresados').select2({
+                placeholder:'Seleccione un Estado',
+            });
+            $('#carrera_id').select2({
+                placeholder:'Seleccione una Carrera',
+            });
+
+        });
+
+    </script>
+@endsection

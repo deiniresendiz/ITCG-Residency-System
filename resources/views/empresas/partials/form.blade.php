@@ -67,10 +67,9 @@
             ['placeholder' => 'Selecciona un estado'],
             null,
             [
-
                 'required',
                 'class' => 'form-control',
-                'id' => 'townEmpresa'
+                'id' => 'townEmpresa',
             ]
         )
      !!}
@@ -164,9 +163,13 @@
     <script type="text/javascript" >
         jQuery(function ($) {
             $('#townEmpresa').select2({
-                placeholder:'Seleccione una Categoria',
+                placeholder:'Seleccione una ciudad',
                 tags:true,
-                tokenSeparators:[',']
+                tokenSeparators:[','],
+                disabled: true
+            });
+            $('#stateEmpresa').select2({
+                placeholder:'Seleccione un Estado',
             });
         });
 

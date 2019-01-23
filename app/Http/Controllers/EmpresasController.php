@@ -63,7 +63,9 @@ class EmpresasController extends Controller
         $city=$request->get('ciudad_id');
 
         if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+            $newCity = Ciudades::firstOrCreate(
+                ['estado_id' => $request->get('estado_id'),
+                    'nombre' => ucwords($city)]);
             $empresa->ciudad_id = $newCity->id;
         }else{
             $empresa->ciudad_id = $city;

@@ -92,7 +92,9 @@ class EgresadosController extends Controller
         $city=$request->get('ciudad_id');
 
         if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['estado_id' => $request->get('estado_id'),'nombre' => ucwords($city)]);
+            $newCity = Ciudades::firstOrCreate(
+                ['estado_id' => $request->get('estado_id'),
+                    'nombre' => ucwords($city)]);
             $egresado->ciudad_id = $newCity->id;
         }else{
             $egresado->ciudad_id = $city;
