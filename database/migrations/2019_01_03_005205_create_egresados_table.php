@@ -15,6 +15,7 @@ class CreateEgresadosTable extends Migration
     {
         Schema::create('egresados', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('carrera_id');
             $table->unsignedInteger('ciudad_id');
             $table->string('no_control');

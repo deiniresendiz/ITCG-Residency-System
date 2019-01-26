@@ -2,17 +2,17 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    <table class="table table-border">
-        <thead>
+    <table class="table">
+        <thead class="thead-dark">
         <tr>
-            <td>Nombre</td>
-            <td>No° Control</td>
-            <td>Carrera</td>
-            <td>Sexo</td>
-            <td>Edad</td>
-            <td>Fecha de Egreso</td>
-            <td>Telefono</td>
-            <td colspan="2">Acciones</td>
+            <td scope="col" >Nombre</td>
+            <td scope="col">No° Control</td>
+            <td scope="col">Carrera</td>
+            <td scope="col">Sexo</td>
+            <td scope="col">Edad</td>
+            <td scope="col">Fecha de Egreso</td>
+            <td scope="col">Telefono</td>
+            <td scope="col" colspan="2">Acciones</td>
         </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ $egrensado->nombre }}</td>
                 <td>{{ $egrensado->no_control }}</td>
-                <td>{{ $egrensado->carrera }}</td>
+                <td>{{ $egrensado->carrera_id }}</td>
                 <td>{{ $egrensado->sexo }}</td>
                 <td>{{ \Illuminate\Support\Carbon::parse($egrensado->nacimiento)->age }}</td>
                 <td>{{ $egrensado->fecha_egreso }}</td>

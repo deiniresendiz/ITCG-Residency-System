@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Nueva Empresa</h1>
+    <div class="container">
     {!!
         Form::model(
             $empresa = new \App\Empresas(),
@@ -16,4 +17,5 @@
 
 
     {!! Form::close() !!}
+    </div>
 @endsection

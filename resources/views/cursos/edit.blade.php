@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Editar {{ $curso->nombre }}</h1>
+    <div class="container">
     {!!
         Form::model(
             $curso,
@@ -16,4 +17,5 @@
     @include('cursos.partials.form')
 
     {!! Form::close() !!}
+    </div>
 @endsection

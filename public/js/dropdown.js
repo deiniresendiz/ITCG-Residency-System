@@ -5,7 +5,6 @@ $("#stateEmpresa").change(event =>{
         $( "#townEmpresa" ).prop( "disabled", false );
         res.forEach(element => {
             $("#townEmpresa").append(`<option value=${element.id}> ${element.nombre} </option>`);
-            //$("#town").append("<option value='>" + element.id+"'>"+ element.nombre + "</option>")
         })
     });
 });
@@ -16,7 +15,6 @@ $("#stateEgresados").change(event =>{
         $( "#townEgresados" ).prop( "disabled", false );
         res.forEach(element => {
             $("#townEgresados").append(`<option value=${element.id}> ${element.nombre} </option>`);
-            //$("#town").append("<option value='>" + element.id+"'>"+ element.nombre + "</option>")
         })
     });
 });
@@ -27,7 +25,7 @@ $("#stateTraajos").change(event =>{
         $( "#townTrabajos" ).prop( "disabled", false );
         res.forEach(element => {
             $("#townTrabajos").append(`<option value=${element.id}> ${element.nombre} </option>`);
-            //$("#town").append("<option value='>" + element.id+"'>"+ element.nombre + "</option>")
         })
     });
 });
+

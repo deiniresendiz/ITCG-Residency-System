@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Nuevo Egresado</h1>
+    <div class="container">
     {!!
         Form::model(
             $egresado = new \App\Egresados(),
@@ -15,4 +16,5 @@
     @include('egresados.partials.form')
 
     {!! Form::close() !!}
+    </div>
 @endsection

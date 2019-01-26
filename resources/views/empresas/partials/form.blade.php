@@ -35,123 +35,122 @@
         </span>
     @endif
 </div>
+<div class="row">
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado_id') ? 'has-error': '' }}">
+        {!! Form::label('estado_id','Estado') !!}
 
-<div class="form-group {{$errors->has('estado_id') ? 'has-error': '' }}">
-    {!! Form::label('estado_id','Estado') !!}
+        {!!
+            Form::select('estado_id',
+                $state,
+                null,
+                [
+                    'placeholder' => 'Selecciona un estado',
+                    'required',
+                    'class' => 'form-control',
+                    'id' => 'stateEmpresa'
+                ]
+            )
+         !!}
 
-    {!!
-        Form::select('estado_id',
-            $state,
+        @if($errors->has('estado_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('estado_id') }}</strong>
+            </span>
+        @endif
+    </div>
+
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
+        {!! Form::label('ciudad_id','Ciudad') !!}
+
+        {!!
+            Form::select('ciudad_id',
+                ['placeholder' => 'Selecciona un estado'],
+                null,
+                [
+                    'required',
+                    'class' => 'form-control',
+                    'id' => 'townEmpresa',
+                ]
+            )
+         !!}
+
+        @if($errors->has('ciudad_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('ciudad_id') }}</strong>
+            </span>
+        @endif
+    </div>
+
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('domicilio')? 'has-error':'' }}">
+        {!! Form::label('domicilio','Domicilio') !!}
+        {!!
+            Form::text('domicilio',
             null,
             [
-                'placeholder' => 'Selecciona un estado',
                 'required',
-                'class' => 'form-control',
-                'id' => 'stateEmpresa'
-            ]
-        )
-     !!}
+                'class' => 'form-control'
+            ])
+         !!}
 
-    @if($errors->has('estado_id'))
-        <span class="help-block">
-            <strong>{{ $errors->first('estado_id') }}</strong>
-        </span>
-    @endif
-</div>
-
-<div class="form-group {{$errors->has('ciudad_id') ? 'has-error': '' }}">
-    {!! Form::label('ciudad_id','Ciudad') !!}
-
-    {!!
-        Form::select('ciudad_id',
-            ['placeholder' => 'Selecciona un estado'],
+        @if($errors->has('domicilio'))
+            <span class="help-block">
+                <strong>{{ $errors->first('domicilio') }}</strong>
+            </span>
+        @endif
+    </div>
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('telefono')? 'has-error':'' }}">
+        {!! Form::label('telefono','Telefono') !!}
+        {!!
+            Form::text('telefono',
             null,
             [
                 'required',
-                'class' => 'form-control',
-                'id' => 'townEmpresa',
-            ]
-        )
-     !!}
+                'class' => 'form-control'
+            ])
+         !!}
 
-    @if($errors->has('ciudad_id'))
-        <span class="help-block">
-            <strong>{{ $errors->first('ciudad_id') }}</strong>
-        </span>
-    @endif
-</div>
+        @if($errors->has('telefono'))
+            <span class="help-block">
+                <strong>{{ $errors->first('telefono') }}</strong>
+            </span>
+        @endif
+    </div>
 
-
-<div class="form-group {{ $errors->has('domicilio')? 'has-error':'' }}">
-    {!! Form::label('domicilio','Domicilio') !!}
-    {!!
-        Form::text('domicilio',
-        null,
-        [
-            'required',
-            'class' => 'form-control'
-        ])
-     !!}
-
-    @if($errors->has('domicilio'))
-        <span class="help-block">
-            <strong>{{ $errors->first('domicilio') }}</strong>
-        </span>
-    @endif
-</div>
-<div class="form-group {{ $errors->has('telefono')? 'has-error':'' }}">
-    {!! Form::label('telefono','Telefono') !!}
-    {!!
-        Form::text('telefono',
-        null,
-        [
-            'required',
-            'class' => 'form-control'
-        ])
-     !!}
-
-    @if($errors->has('telefono'))
-        <span class="help-block">
-            <strong>{{ $errors->first('telefono') }}</strong>
-        </span>
-    @endif
-</div>
-
-<div class="form-group {{ $errors->has('contacto')? 'has-error':'' }}">
-    {!! Form::label('contacto','Contracto') !!}
-    {!!
-        Form::text('contacto',
-        null,
-        [
-            'class' => 'form-control'
-        ])
-     !!}
-
-    @if($errors->has('contacto'))
-        <span class="help-block">
-            <strong>{{ $errors->first('contacto') }}</strong>
-        </span>
-    @endif
-</div>
-<div class="form-group {{$errors->has('imagen') ? 'has-error': '' }}">
-    {!! Form::label('imagen','Imagen') !!}
-
-    {!!
-        Form::file('imagen',
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('contacto')? 'has-error':'' }}">
+        {!! Form::label('contacto','Contracto') !!}
+        {!!
+            Form::text('contacto',
+            null,
             [
-                'class' => 'form-control',
-            ]
-        )
-     !!}
+                'class' => 'form-control'
+            ])
+         !!}
 
-    @if($errors->has('image'))
-        <span class="help-block">
-            <strong>{{ $errors->first('imagen') }}</strong>
-        </span>
-    @endif
+        @if($errors->has('contacto'))
+            <span class="help-block">
+                <strong>{{ $errors->first('contacto') }}</strong>
+            </span>
+        @endif
+    </div>
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('imagen') ? 'has-error': '' }}">
+        {!! Form::label('imagen','Imagen') !!}
 
+        {!!
+            Form::file('imagen',
+                [
+                    'class' => 'form-control-file',
+                ]
+            )
+         !!}
+
+        @if($errors->has('image'))
+            <span class="help-block">
+                <strong>{{ $errors->first('imagen') }}</strong>
+            </span>
+        @endif
+
+    </div>
 </div>
-
 <div class="form-group">
     <button type="submit" class="btn btn-primary">
         Guardar

@@ -115,12 +115,14 @@ class EgresadosController extends Controller
             $egresado->imagen = $file;
         }
 
-        User::create([
+        $user = User::create([
             'name' => $request->get('no_control'),
             'email' => $request->get('no_control'),
             'password' => Hash::make($request->get('no_control')),
             'isAdmin' => 0,
+            'isRoot' => 0,
         ]);
+        $egresado->user_id =  $user->id;
         $egresado->save();
         return redirect()->route('egresados.show',$egresado);
     }
