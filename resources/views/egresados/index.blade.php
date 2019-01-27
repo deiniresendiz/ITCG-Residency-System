@@ -2,9 +2,13 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    <table class="table">
-        <thead class="thead-dark">
+    <div class="container">
+
+
+    <table class="table table-light table-striped table-hover">
+        <thead class="thead-dark bg-danger">
         <tr>
+            <td scope="col" >#</td>
             <td scope="col" >Nombre</td>
             <td scope="col">No° Control</td>
             <td scope="col">Carrera</td>
@@ -18,7 +22,8 @@
         <tbody>
         @foreach($egresados as $egrensado)
             <tr>
-                <td>{{ $egrensado->nombre }}</td>
+                <td>{{ $x++ }}</td>
+                <td>{{ $egrensado->nombre }} </td>
                 <td>{{ $egrensado->no_control }}</td>
                 <td>{{ $egrensado->carrera_id }}</td>
                 <td>{{ $egrensado->sexo }}</td>
@@ -39,4 +44,5 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

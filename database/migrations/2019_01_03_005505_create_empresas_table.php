@@ -15,7 +15,7 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('ciudad_id');
+            $table->unsignedInteger('ciudad_id')->nullable();
             $table->string('nombre');
             $table->string('descripcion',5000)->nullable();
             $table->string('domicilio')->nullable();

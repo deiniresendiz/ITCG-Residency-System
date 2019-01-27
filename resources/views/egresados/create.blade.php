@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Nuevo Egresado</h1>
     <div class="container">
+    <h1>Nuevo Egresado</h1>
     {!!
         Form::model(
             $egresado = new \App\Egresados(),

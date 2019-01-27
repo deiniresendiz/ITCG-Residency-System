@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Carreras;
+use App\Http\Requests\storeCarerras;
 use Illuminate\Http\Request;
 
 class CarrerasController extends Controller
@@ -11,9 +13,18 @@ class CarrerasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+    }
+    public function index(Request $request)
+    {
+        $title = "Carraras";
+        $carreras = Carreras::all();
+        $carreras = $carreras->sortByDesc('nombre');
+        $x = 1;
+        //$cursos = $cursos->paginate();
+        return view('carreras.index',compact('carreras','title','x'));
     }
 
     /**
@@ -24,6 +35,7 @@ class CarrerasController extends Controller
     public function create()
     {
         //
+        return view('carreras.create');
     }
 
     /**
@@ -32,9 +44,13 @@ class CarrerasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeCarerras $request)
     {
-        //
+        $carrera = new Carreras($request->all());
+        $carrera->nombre = $request->get('nombre');
+        $carrera->clave = $request->get('clave');
+        $carrera->save();
+        return redirect()->route('carreras.show',$carrera);
     }
 
     /**
@@ -45,7 +61,8 @@ class CarrerasController extends Controller
      */
     public function show($id)
     {
-        //
+        $carrera = Carreras::where('id',$id)->first();
+        return view('carreras.show',compact('carrera'));
     }
 
     /**
@@ -56,7 +73,9 @@ class CarrerasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $carrera = Carreras::where('id',$id)->first();
+
+        return view('carreras.edit',compact('carrera','id'));
     }
 
     /**
@@ -68,7 +87,11 @@ class CarrerasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $carrera = Carreras::where('id',$id)->first();
+        $carrera->nombre = $request->get('nombre');
+        $carrera->clave = $request->get('clave');
+        $carrera->save();
+        return redirect()->route('carreras.show',$carrera);
     }
 
     /**

@@ -89,7 +89,8 @@
 
                     'required',
                     'class' => 'form-control',
-                    'id' => 'townEgresados'
+                    'id' => 'townEgresados',
+                    'min' => '4'
                 ]
             )
          !!}
@@ -284,7 +285,7 @@
 
 </div>
 <div class="form-group">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-danger">
         Guardar
     </button>
 </div>
@@ -297,7 +298,6 @@
                 placeholder:'Seleccione una ciudad',
                 tags:true,
                 tokenSeparators:[','],
-                disabled: true
             });
             $('#stateEgresados').select2({
                 placeholder:'Seleccione un Estado',

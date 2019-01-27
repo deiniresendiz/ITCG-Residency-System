@@ -173,7 +173,7 @@
 
 
 <div class="form-group">
-    <button type="submit" id="btnEnviar" class="btn btn-primary">
+    <button type="submit" id="btnEnviar" class="btn btn-danger">
         Guardar
     </button>
 </div>

@@ -32,6 +32,8 @@ class storeEgresados extends FormRequest
             'sexo'  => 'required',
             'estado_civil'  => 'required',
             'nacimiento'  => 'required',
+            'promedio'  => 'numeric',
+            'estado_id'  => 'required|min:1',
         ];
     }
 }

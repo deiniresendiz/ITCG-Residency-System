@@ -12,7 +12,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between" style="background-color: #e3f2fd;height:9%;">
@@ -54,59 +54,72 @@
 </nav>
 
 
-    <ul id="menuVertical" class="bg-dark navbar-nav  navbar-dark mr-auto">
-        @if(Auth::user()->isAdmin == 1)
-            <li class="list-group-item bg-primary  text-white font-weight-bold">
+
+    <div class="container-fluid">
+        <ul id="menuVertical" class="bg-dark navbar-nav  navbar-dark mr-auto">
+            @if(Auth::user()->isAdmin == 1)
+                <li class="list-group-item bg-primary  text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#egresados">
                  Egresados
             </span>
 
-                <div id="egresados" class="collapse">
-                    <a href="{{ Route('egresados.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                    <a href="{{ Route('egresados.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-                </div>
-            </li>
-            <li class="list-group-item bg-primary text-white font-weight-bold">
+                    <div id="egresados" class="collapse">
+                        <a href="{{ Route('egresados.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                        <a href="{{ Route('egresados.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                    </div>
+                </li>
+                <li class="list-group-item bg-primary text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#empresas">
                  Empresas
             </span>
 
-                <div id="empresas" class="collapse">
-                    <a href="{{ Route('empresas.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                    <a href="{{ Route('empresas.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-                </div>
-            </li>
-            <li class="list-group-item bg-primary text-white font-weight-bold">
+                    <div id="empresas" class="collapse">
+                        <a href="{{ Route('empresas.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                        <a href="{{ Route('empresas.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                    </div>
+                </li>
+                <li class="list-group-item bg-primary text-white font-weight-bold">
             <span data-toggle="collapse" data-target="#trabajos">
                  Trabajos
             </span>
 
-                <div id="trabajos" class="collapse">
-                    <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                    <a href="{{ Route('trabajos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
-                </div>
-            </li>
-            <li class="list-group-item bg-primary text-white font-weight-bold">
-            <span data-toggle="collapse" data-target="#cursos">
-                 Cursos/Telleres
-            </span>
+                    <div id="trabajos" class="collapse">
+                        <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                        <a href="{{ Route('trabajos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                    </div>
+                </li>
+                <li class="list-group-item bg-primary text-white font-weight-bold">
+                <span data-toggle="collapse" data-target="#cursos">
+                     Cursos/Telleres
+                </span>
 
-                <div id="cursos" class="collapse">
-                    <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
-                    <a href="{{ Route('cursos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                    <div id="cursos" class="collapse">
+                        <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                        <a href="{{ Route('cursos.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                    </div>
+                </li>
+            @else
+                <div class="list-group-item bg-primary text-white font-weight-bold">
+                    <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Cursos</a>
                 </div>
-            </li>
-        @else
-            <div class="list-group-item bg-primary text-white font-weight-bold">
-                <a href="{{ Route('cursos.index') }}" class="nav-link text-white font-weight-light ">Cursos</a>
-            </div>
-            <div class="list-group-item bg-primary text-white font-weight-bold">
-                <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Trabajos</a>
-            </div>
-        @endif
+                <div class="list-group-item bg-primary text-white font-weight-bold">
+                    <a href="{{ Route('trabajos.index') }}" class="nav-link text-white font-weight-light ">Trabajos</a>
+                </div>
+            @endif
+            @if(Auth::user()->isRoot == 1)
+                    <li class="list-group-item bg-primary text-white font-weight-bold">
+                <span data-toggle="collapse" data-target="#cursos">
+                     Carreras
+                </span>
 
-    </ul>
-    <div style="margin-left:15%;padding:1px 1em;height:90%; margin-top: 4%; " class="jumbotron jumbotron-fluid">
+                        <div id="cursos" class="collapse">
+                            <a href="{{ Route('carreras.index') }}" class="nav-link text-white font-weight-light ">Todos</a>
+                            <a href="{{ Route('carreras.create') }}" class="nav-link text-white font-weight-light ">Nuevo</a>
+                        </div>
+                    </li>
+                @endif
+
+        </ul>
 
                 @yield('content')
 

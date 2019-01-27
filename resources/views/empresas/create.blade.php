@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Nueva Empresa</h1>
     <div class="container">
+    <h1>Nueva Empresa</h1>
     {!!
         Form::model(
             $empresa = new \App\Empresas(),

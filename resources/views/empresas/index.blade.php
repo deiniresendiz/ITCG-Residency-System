@@ -2,15 +2,15 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    <table class="table table-border">
-        <thead>
+    <table class="table table-light table-striped table-hover">
+        <thead class="thead-dark bg-danger">
         <tr>
-            <td>Nombre</td>
-            <td>Ciudad</td>
-            <td>Domicilio</td>
-            <td>Telefono</td>
-            <td>Contacto</td>
-            <td colspan="2">Acciones</td>
+            <td scope="col">Nombre</td>
+            <td scope="col">Ciudad</td>
+            <td scope="col">Domicilio</td>
+            <td scope="col">Telefono</td>
+            <td scope="col">Contacto</td>
+            <td scope="col" colspan="2">Acciones</td>
         </tr>
         </thead>
         <tbody>

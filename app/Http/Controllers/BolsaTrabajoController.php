@@ -88,7 +88,9 @@ class BolsaTrabajoController extends Controller
 
         $city = $request->get('ciudad_id');
         if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+            $newCity = Ciudades::firstOrCreate(
+                ['estado_id' => $request->get('estado_id'),
+                    'nombre' => ucwords($city)]);
             $trabajo->ciudad_id = $newCity->id;
         }else{
             $trabajo->ciudad_id = $city;

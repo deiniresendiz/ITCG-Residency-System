@@ -2,8 +2,8 @@
 
 
 @section('content')
-    <h1>Nuevo Curso</h1>
     <div class="container">
+    <h1>Nuevo Curso</h1>
     {!!
         Form::model(
             $curso = new \App\Cursos(),

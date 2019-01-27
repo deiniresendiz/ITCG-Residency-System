@@ -26,13 +26,14 @@ class EgresadosController extends Controller
     {
         $egresados = Egresados::all();
         $title = "Egresados";
+        $x = 1;
         if($request->has('state')){
             $title = "Cursos/Talleres ".$request->has('opcion');
             $egresados = $egresados->where('estado', $request->has('opcion'));
         }
         $egresados = $egresados->sortByDesc('fecha_inicio');
         //$cursos = $cursos->paginate();
-        return view('egresados.index',compact('egresados','title'));
+        return view('egresados.index',compact('egresados','title','x'));
     }
 
     /**
@@ -44,6 +45,7 @@ class EgresadosController extends Controller
     {
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+
         return view('egresados.create', compact('carerras','state'));
     }
     public function getTowns(Request $request, $id){

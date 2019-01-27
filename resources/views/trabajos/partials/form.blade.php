@@ -80,7 +80,7 @@
         @endif
     </div>
 
-    <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
+    <div class="form-group col-12 col-sm-6 col-lg-4 py-2 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
         {!! Form::label('ciudad_id','Ciudad') !!}
 
         {!!
@@ -308,7 +308,7 @@
     </div>
 </div>
 <div class="form-group">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-danger">
         Guardar
     </button>
 </div>
@@ -328,9 +328,13 @@
             });
             $('#area_id').select2({
                 placeholder:'Seleccione el Area Profesional',
+                tags:true,
+                tokenSeparators:[','],
             });
             $('#empresa_id').select2({
                 placeholder:'Seleccione una empresa',
+                tags:true,
+                tokenSeparators:[','],
             });
         });
 

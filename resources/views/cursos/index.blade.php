@@ -2,16 +2,16 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    <table class="table table-border">
-        <thead>
+    <table class="table table-light table-striped table-hover">
+        <thead class="thead-dark bg-danger">
             <tr>
-                <td>Nombre</td>
-                <td>Instructor</td>
-                <td>Lugar</td>
-                <td>Fecha de Inicio</td>
-                <td>Precio</td>
-                <td>Estado</td>
-                <td colspan="2">Acciones</td>
+                <td scope="col">Nombre</td>
+                <td scope="col">Instructor</td>
+                <td scope="col">Lugar</td>
+                <td scope="col">Fecha de Inicio</td>
+                <td scope="col">Precio</td>
+                <td scope="col">Estado</td>
+                <td scope="col" colspan="2">Acciones</td>
             </tr>
         </thead>
         <tbody>

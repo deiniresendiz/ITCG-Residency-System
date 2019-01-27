@@ -24,14 +24,14 @@
     </nav>
     <div class="container " style="width: 50%;">
 
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs text-danger">
           <li class="active"><a data-toggle="tab" href="#home">Alumno</a></li>
           <li><a data-toggle="tab" href="#menu1">Personal del Instituto</a></li>
 
       </ul>
 
       <div class="tab-content">
-          <div id="home" class="tab-pane fade in active ">
+          <div id="home" class="tab-pane fade in text-danger active ">
               <h3>{{ __('Inicio de Sessión') }}</h3>
               <br>
 
@@ -80,7 +80,7 @@
 
                           <div class="form-group row mb-0">
                               <div class="col-md-8 offset-md-4">
-                                  <button type="submit" class="btn btn-primary">
+                                  <button type="submit" class="btn btn-danger ">
                                       {{ __('Iniciar ssesión') }}
                                   </button>
 
@@ -89,7 +89,7 @@
                       </form>
 
           </div>
-          <div id="menu1" class="tab-pane fade">
+          <div id="menu1" class="tab-pane text-danger fade">
               <h3>{{ __('Inicio de Sessión') }}</h3>
               <br>
 
@@ -138,7 +138,7 @@
 
                   <div class="form-group row mb-0">
                       <div class="col-md-8 offset-md-4">
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" class="btn btn-danger">
                               {{ __('Iniciar ssesión') }}
                           </button>
 
