@@ -36,4 +36,8 @@ class Egresados extends Model
         return $this->belongsTo(Carreras::class);
     }
 
+    public static function carreras($id){
+        return Carreras::where('id',$id)->first();
+    }
+
 }
