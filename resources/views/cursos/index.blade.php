@@ -37,4 +37,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $cursos->links() }}
 @endsection

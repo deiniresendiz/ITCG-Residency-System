@@ -21,5 +21,9 @@ class Cursos extends Model
     ];
 
     protected $dates = ['fecha_inicio','fecha_final'];
+    /**
+     *Metodo para actualizar el estado de los cursos
+     *
+     */
 
 }

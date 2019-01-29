@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cursos;
 use App\Http\Requests\storeCurso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @method paginate(int $int)
@@ -24,13 +25,21 @@ class CursosController extends Controller
     public function index(Request $request)
     {
         $title = "Cursos/Talleres";
-        $cursos = Cursos::all();
+
+        /**
+         * update of the state
+         */
+        $cursos = Cursos::where('fecha_final','<',date('y-m-d'))->update(['estado' => "'Terminado'"]);;
+
+
         if($request->has('state')){
             $title = "Cursos/Talleres ".$request->has('state');
-            $cursos = $cursos->where('estado', $request->has('state'));
+            $cursos = Cursos::where('estado','=',$request->has('state'))->paginate(15);
+        }else{
+            $cursos = Cursos::paginate(15);
         }
-        $cursos = $cursos->sortByDesc('fecha_inicio');
-        //$cursos = $cursos->paginate();
+
+
         return view('cursos.index',compact('cursos','title'));
     }
 
@@ -41,7 +50,12 @@ class CursosController extends Controller
      */
     public function create()
     {
-        return view('cursos.create');
+        if(Auth::user()->isAdmin == 1){
+            return view('cursos.create');
+        }else{
+            return view('home');
+        }
+
     }
 
     /**
@@ -53,15 +67,17 @@ class CursosController extends Controller
      */
     public function store(storeCurso $request)
     {
-        $curso = new Cursos($request->all());
-        $curso->nombre = $request->get('nombre');
-        $curso->descripcion = $request->get('descripcion');
-        $curso->instructor = $request->get('instructor');
-        $curso->lugar = $request->get('lugar');
-        $curso->fecha_inicio = $request->get('fecha_inicio');
-        $curso->fecha_final = $request->get('fecha_final');
-        $curso->precio = $request->get('precio');
-        $curso->estado = $request->get('estado');
+        if(Auth::user()->isAdmin == 1){
+
+            $curso = new Cursos($request->all());
+            $curso->nombre = $request->get('nombre');
+            $curso->descripcion = $request->get('descripcion');
+            $curso->instructor = $request->get('instructor');
+            $curso->lugar = $request->get('lugar');
+            $curso->fecha_inicio = $request->get('fecha_inicio');
+            $curso->fecha_final = $request->get('fecha_final');
+            $curso->precio = $request->get('precio');
+            $curso->estado = $request->get('estado');
 
         if($request->hasFile('imagen')){
             $imagen = $request->file('imagen');
@@ -70,6 +86,9 @@ class CursosController extends Controller
         }
         $curso->save();
         return redirect()->route('cursos.show',$curso);
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -92,9 +111,14 @@ class CursosController extends Controller
      */
     public function edit($id)
     {
-        $curso = Cursos::where('id',$id)->first();
+        if(Auth::user()->isAdmin == 1){
 
-        return view('cursos.edit',compact('curso','id'));
+            $curso = Cursos::where('id',$id)->first();
+
+            return view('cursos.edit',compact('curso','id'));
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -106,23 +130,27 @@ class CursosController extends Controller
      */
     public function update(storeCurso $request, $id)
     {
-        $curso = Cursos::where('id',$id)->first();
-        $curso->nombre = $request->get('nombre');
-        $curso->descripcion = $request->get('descripcion');
-        $curso->instructor = $request->get('instructor');
-        $curso->lugar = $request->get('lugar');
-        $curso->fecha_inicio = $request->get('fecha_inicio');
-        $curso->fecha_final = $request->get('fecha_final');
-        $curso->precio = $request->get('precio');
-        $curso->estado = $request->get('estado');
+        if(Auth::user()->isAdmin == 1){
+            $curso = Cursos::where('id',$id)->first();
+            $curso->nombre = $request->get('nombre');
+            $curso->descripcion = $request->get('descripcion');
+            $curso->instructor = $request->get('instructor');
+            $curso->lugar = $request->get('lugar');
+            $curso->fecha_inicio = $request->get('fecha_inicio');
+            $curso->fecha_final = $request->get('fecha_final');
+            $curso->precio = $request->get('precio');
+            $curso->estado = $request->get('estado');
 
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/cursos');
-            $curso->imagen = $file;
-        }
-        $curso->save();
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/cursos');
+                $curso->imagen = $file;
+            }
+            $curso->save();
         return redirect()->route('cursos.show',$curso);
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -135,11 +163,5 @@ class CursosController extends Controller
     {
         //
     }
-    /**
-     *Metodo para actualizar el estado de los cursos
-     *
-     */
-    public function cursoStateUpdate(Cursos $cursos){
 
-    }
 }
