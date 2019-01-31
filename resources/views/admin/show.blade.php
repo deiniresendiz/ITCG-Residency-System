@@ -1,17 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Detalles de {{ $carrera->nombre }} </h1>
+    <h1>Detalles de {{ $user->name }} </h1>
     <table class="table table-border">
         <tr>
-            <th>Clave</th>
-            <td>{{ $carrera->clave }}</td>
+            <th>Nombre</th>
+            <td>{{ $user->name }}</td>
         </tr>
         <tr>
-            <th>Nombre</th>
-            <td>{{ $carrera->nombre }}</td>
+            <th>Correo</th>
+            <td>{{ $user->email }}</td>
         </tr>
-
 
     </table>
 @endsection

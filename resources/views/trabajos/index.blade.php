@@ -3,7 +3,7 @@
 @section('content')
     <h1>{{ $title }}</h1>
     <table class="table table-light table-striped table-hover">
-        <thead class="thead-dark bg-danger">
+        <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
             <td scope="col">Empresa</td>
             <td scope="col">Puesto</td>

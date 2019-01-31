@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Editar {{ $user->name }}</h1>
-    <div class="container">
+    <h1>{{ $user->name }}</h1>
+    <div class="container border">
         {!!
             Form::model(
                 $user,
@@ -59,7 +59,6 @@
                     null,
                     [
                         'class' => 'form-control',
-                        'disabled',
                         'placeholder' => '*********'
                     ])
                  !!}
@@ -106,9 +105,9 @@
     <script type="text/javascript" >
         jQuery(function ($) {
             $('#btnPass').click( () =>{
-               let passText = "";
-               for (let i = 0; i <5; i ++){
-                   passText += Math.floor((Math.random() * 9) +1);
+                let passText = "";
+                for (let i = 0; i <5; i ++){
+                    passText += Math.floor((Math.random() * 9) +1);
                 }
                 Swal.fire({
                     title: 'Esta Seguro de Cambiar La Contaseña?',

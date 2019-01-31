@@ -29,7 +29,10 @@ Route::resource('/egresados','EgresadosController');
 Route::resource('/empresas','EmpresasController');
 Route::resource('/carreras','CarrerasController');
 Route::resource('/admin','AdministradoresController');
+Route::resource('/account','MyCountAdminController');
+Route::get('admin/{id}/pass/{pass}','AdministradoresController@updatePass');
 Route::get('empresas/towns/{id}','EmpresasController@getTowns');
 Route::get('egresados/towns/{id}','EgresadosController@getTowns');
 Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
+
 

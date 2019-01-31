@@ -18,7 +18,6 @@
 <body>
 <nav class="navbar navbar-light fixed-top bg-danger flex-md-nowrap p-0 shadow  ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">ITCG</a>
-    <input class="form-control form-control w-100" type="text" placeholder="Buscar" aria-label="Buscar">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link text-white" href="{{ route('logout') }}"
@@ -47,7 +46,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ Route('account.index') }}">
                             Mis Datos
                         </a>
                     </li>

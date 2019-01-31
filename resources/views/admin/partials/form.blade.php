@@ -1,9 +1,9 @@
 <div class="row">
 
-    <div class="form-group col-md-6 col-12 {{ $errors->has('clave')? 'has-error':'' }}">
-        {!! Form::label('nombre','Nombre') !!}
+    <div class="form-group col-md-6 col-12 {{ $errors->has('name')? 'has-error':'' }}">
+        {!! Form::label('name','Nombre') !!}
         {!!
-            Form::text('nombre',
+            Form::text('name',
             null,
             [
                 'required',
@@ -12,9 +12,9 @@
             ])
          !!}
 
-        @if($errors->has('nombre'))
+        @if($errors->has('name'))
             <span class="help-block">
-                <strong>{{ $errors->first('nombre') }}</strong>
+                <strong>{{ $errors->first('name') }}</strong>
             </span>
         @endif
     </div>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeAdmin;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function Sodium\add;
 
 class AdministradoresController extends Controller
 {
@@ -20,7 +22,12 @@ class AdministradoresController extends Controller
      */
     public function index()
     {
-        //
+
+        $title = "Administradores";
+        $users = User::where('isAdmin','=','1')->paginate(15);
+        $users = $users->sortByDesc('nombre');
+        $x = 1;
+        return view('admin.index',compact('users','title','x'));
     }
 
     /**
@@ -45,13 +52,13 @@ class AdministradoresController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->all());
-        $user->name = $request->get('nombre');
-        $user->email = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
-        $user->isAdmin = 1;
-        $user->isRoot = $request->get('root');
-        $user->save();
+        $user = User::create([
+            'name' => $request->get('nombre'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),
+            'isAdmin' => 1,
+            'isRoot' => ($request->get('root') != 1? 0 : 1),
+        ]);
         return redirect()->route('admin.show',$user);
     }
 
@@ -63,7 +70,8 @@ class AdministradoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('id',$id)->first();
+        return view('admin.show',compact('user'));
     }
 
     /**
@@ -74,7 +82,8 @@ class AdministradoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('id',$id)->first();
+        return view('admin.edit',compact('user','id'));
     }
 
     /**
@@ -86,7 +95,12 @@ class AdministradoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::where('id',$id)->first();
+        $user->email = $request->get('email');
+        $user->name = $request->get('name');
+        $user->isRoot ($request->get('isRoot') != 1? 0 : 1);
+        $user->save();
+        return view('admin.show',compact('user'));
     }
 
     /**
@@ -99,4 +113,15 @@ class AdministradoresController extends Controller
     {
         //
     }
+
+    public function updatePass(Request $request, $id, $pass){
+        if($request->ajax()){
+            $user = User::where('id',$id)->first();
+
+            $user->password = Hash::make($pass);
+
+            $user->save();
+        }
+    }
+
 }

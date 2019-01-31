@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <th>Carrera</th>
-            <td>{{ $egresado->carraras }}</td>
+            <td>{{ $egresado->carreras($egresado->carrera_id)->nombre }}</td>
         </tr>
         <tr>
             <th>Curp</th>
@@ -41,6 +41,10 @@
         <tr>
             <th>Fecha de Egresado</th>
             <td>{{ date_format($egresado->fecha_egreso,'d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Ciudad</th>
+            <td>{{ $egresado->ciudad->nombre }}</td>
         </tr>
         <tr>
             <th>Telefono</th>
