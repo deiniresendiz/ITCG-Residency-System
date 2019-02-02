@@ -14,10 +14,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 </head>
 <body>
 <nav class="navbar navbar-light fixed-top bg-danger flex-md-nowrap p-0 shadow  ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">ITCG</a>
+    <span class="text-white"> {{ Auth::user()->name }}</span>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link text-white" href="{{ route('logout') }}"
@@ -161,12 +163,12 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
                 </div>
-            </div>
+            </div>-->
 
             <div class="container">
                 @yield('content')
@@ -185,6 +187,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 {!! Html::script('js/dropdown.js') !!}
+
 
 
 @yield('script')

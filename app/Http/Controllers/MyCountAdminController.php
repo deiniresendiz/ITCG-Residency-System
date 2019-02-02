@@ -89,4 +89,16 @@ class MyCountAdminController extends Controller
     {
         //
     }
+
+    public function updatePass(Request $request, $id){
+
+
+        if($request->ajax()){
+            $user = User::where('id',$id)->first();
+
+            $user->password = Hash::make($id);
+
+            $user->save();
+        }
+    }
 }

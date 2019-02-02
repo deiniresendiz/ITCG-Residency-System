@@ -3,6 +3,7 @@
 
 @section('content')
     <h1>Nuevo Trabajo</h1>
+    <hr>
     {!!
         Form::model(
             $trabajo= new \App\BolsaTrabajo(),

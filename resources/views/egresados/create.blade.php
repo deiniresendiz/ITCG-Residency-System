@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
     <h1>Nuevo Egresado</h1>
+        <hr>
     {!!
         Form::model(
             $egresado = new \App\Egresados(),

@@ -236,7 +236,8 @@
                 'class' => 'form-control',
                 'placeholder' => 'Descripcion',
                 'maxlength' => 5000,
-                'autocomplete' => 'off'
+                'autocomplete' => 'off',
+                'rows' => '3'
             ])
          !!}
 
@@ -255,7 +256,8 @@
                 'class' => 'form-control',
                 'placeholder' => 'Requisitos',
                 'maxlength' => 5000,
-                'autocomplete' => 'off'
+                'autocomplete' => 'off',
+                'rows' => '3'
             ])
          !!}
 

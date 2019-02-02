@@ -25,7 +25,8 @@
             'class' => 'form-control',
             'placeholder' => 'Descripcion',
             'maxlength' => 5000,
-            'autocomplete' => 'off'
+            'autocomplete' => 'off',
+            'rows' => '3'
         ])
      !!}
 

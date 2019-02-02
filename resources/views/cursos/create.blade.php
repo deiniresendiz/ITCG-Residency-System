@@ -4,6 +4,7 @@
 @section('content')
     <div class="container">
     <h1>Nuevo Curso</h1>
+        <hr>
     {!!
         Form::model(
             $curso = new \App\Cursos(),

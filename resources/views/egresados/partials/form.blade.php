@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('no_control')? 'has-error':'' }}">
+    <div class="form-group col-12 col-sm-4 col-lg-2 {{ $errors->has('no_control')? 'has-error':'' }}">
         {!! Form::label('no_control','Numero de control') !!}
         {!!
             Form::text('no_control',
@@ -16,7 +16,7 @@
             </span>
         @endif
     </div>
-    <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('nombre')? 'has-error':'' }}">
+    <div class="form-group col-12 col-sm-7 col-lg-6 {{ $errors->has('nombre')? 'has-error':'' }}">
         {!! Form::label('nombre','Nombre') !!}
         {!!
             Form::text('nombre',

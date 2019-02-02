@@ -5,6 +5,7 @@
 
     <div class="container">
         <h1>Nueva Carrera</h1>
+        <hr>
         {!!
             Form::model(
                 $carrera = new \App\Carreras(),

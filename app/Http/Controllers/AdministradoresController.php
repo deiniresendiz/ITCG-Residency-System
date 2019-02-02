@@ -115,7 +115,7 @@ class AdministradoresController extends Controller
     }
 
     public function updatePass(Request $request, $id, $pass){
-        if($request->ajax()){
+        if($request->ajax() and  (Auth::user()->isRoot == 1)){
             $user = User::where('id',$id)->first();
 
             $user->password = Hash::make($pass);
