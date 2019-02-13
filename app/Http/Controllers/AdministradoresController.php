@@ -111,7 +111,8 @@ class AdministradoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('admin.index');
     }
 
     public function updatePass(Request $request, $id, $pass){

@@ -23,14 +23,14 @@ class EmpresasController extends Controller
     public function index(Request $request)
     {
         $title = "Empresas";
-        $empresas = Empresas::all();
-        if($request->has('state')){
-            $title = "Cursos/Talleres ".$request->has('state');
-            $empresas = $empresas->where('ciudad_id', $request->has('state'));
+        if($request->has('estado')){
+            $empresas = Empresas::where('ciudad_id', $request->get('estado'))->orderBy('nombre')->paginate();
+            //$title = "Empresas de ".$request->has('estado');
+        }else{
+            $empresas = Empresas::orderBy('nombre')->paginate();
         }
-        $empresas = $empresas->sortByDesc('fecha_inicio');
-        //$cursos = $cursos->paginate();
-        return view('empresas.index',compact('empresas','title'));
+        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        return view('empresas.index',compact('empresas','title','citys'));
     }
 
     /**
@@ -82,6 +82,7 @@ class EmpresasController extends Controller
             $empresa->imagen = $file;
         }
         $empresa->save();
+
         return view('empresas.show',compact('empresa'));
     }
 

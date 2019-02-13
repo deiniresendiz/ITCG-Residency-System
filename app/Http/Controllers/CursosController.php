@@ -29,14 +29,14 @@ class CursosController extends Controller
         /**
          * update of the state
          */
-        $cursos = Cursos::where('fecha_final','<',date('y-m-d'))->where('estado','=','Activo')->update(['estado' => "Terminado"]);;
+        Cursos::where('fecha_final','<',date('y-m-d'))->where('estado','=','Activo')->update(['estado' => "Terminado"]);
 
 
         if($request->has('state')){
             $title = "Cursos/Talleres ".$request->has('state');
-            $cursos = Cursos::where('estado','=',$request->has('state'))->paginate(15);
+            $cursos = Cursos::where('estado','=',$request->has('state'))->paginate();
         }else{
-            $cursos = Cursos::paginate(15);
+            $cursos = Cursos::paginate();
         }
 
 

@@ -9,7 +9,7 @@
             <td scope="col">Nombre</td>
             <td scope="col">Correo</td>
             <td scope="col">Tipo</td>
-            <td scope="col" colspan="2">Acciones</td>
+            <td scope="col" colspan="3">Acciones</td>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +31,11 @@
                 <td>
                     <a href="{{ route('admin.edit',$user) }}">
                         Editar
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ route('admin.destroy',$user) }}/destroy">
+                        Eliminar
                     </a>
                 </td>
             </tr>

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Carreras;
+use App\Ciudades;
+use App\Egresados;
+use App\Estados;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +25,10 @@ class MyCountAdminController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::where('id',$id)->first();
-        return view('account.index',compact('user', 'id'));
+        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
+        $state = Estados::orderBy('nombre')->pluck('nombre','id');
+        $egresado = Egresados::where('user_id',$id)->first();
+        return view('account.index',compact('user', 'id','egresado','carerras','state'));
     }
 
     /**
@@ -76,7 +83,54 @@ class MyCountAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $egresado = Egresados::where('user_id',$id)->first();
+        if($egresado != null) {
+            $egresado->no_control = $request->get('no_control');
+            $egresado->nombre = $request->get('nombre');
+            $egresado->sexo = $request->get('sexo');
+            $egresado->estado_civil = $request->get('estado_civil');
+            $egresado->nacimiento = $request->get('nacimiento');
+            $egresado->curp = $request->get('curp');
+            $egresado->telefono = $request->get('telefono');
+            $egresado->celular = $request->get('celular');
+            $egresado->email = $request->get('email');
+            $egresado->fecha_egreso = $request->get('fecha_egreso');
+            $egresado->promedio = $request->get('promedio');
+            $egresado->password = $request->get('no_control');
+
+            $city=$request->get('ciudad_id');
+
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(
+                    ['estado_id' => $request->get('estado_id'),
+                        'nombre' => ucwords($city)]);
+                $egresado->ciudad_id = $newCity->id;
+            }else{
+                $egresado->ciudad_id = $city;
+            }
+
+            $carrera = $request->get('carrera_id');
+
+            if (!is_numeric($carrera)) {
+                $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
+                $egresado->carrera_id = $newCarrera->id;
+            } else {
+                $egresado->carrera_id = $carrera;
+            }
+
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/cursos');
+                $egresado->imagen = $file;
+            }
+
+            $egresado->save();
+        }
+        $user = User::where('id',$id)->first();
+        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
+        $state = Estados::orderBy('nombre')->pluck('nombre','id');
+        return view('account.index',compact('user', 'id','egresado','carerras','state'));
     }
 
     /**
@@ -85,6 +139,7 @@ class MyCountAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         //

@@ -265,3 +265,26 @@
 </body>
 </html>
 
+
+{!!
+        Form::model(
+            $title,
+            [
+                'route' => 'egresados.index',
+                'files' => 'true',
+                'class' => 'form-inline ml-2'
+            ]
+        )
+     !!}
+{!!
+    Form::text('buscar',
+    null,
+    [
+        'class' => 'form-control mr-sm-2',
+        'placeholder' => 'Buscar'
+    ])
+ !!}
+<button class="btn my-2 my-sm-0 bg-danger text-white" type="submit">Buscar</button>
+
+{!! Form::close() !!}
+

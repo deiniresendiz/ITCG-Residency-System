@@ -31,9 +31,11 @@ Route::resource('/carreras','CarrerasController');
 Route::resource('/admin','AdministradoresController');
 Route::resource('/account','MyCountAdminController');
 Route::get('admin/{id}/pass/{pass}','AdministradoresController@updatePass');
-Route::get('account/pass/{pass}','MyCountAdminController@updatePass');
+Route::get('admin/{id}/destroy','AdministradoresController@destroy');
 Route::get('empresas/towns/{id}','EmpresasController@getTowns');
 Route::get('egresados/towns/{id}','EgresadosController@getTowns');
 Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
+
+
 
 

@@ -1,6 +1,30 @@
 @extends('layouts.admin')
 
 @section('content')
+    <br>
+    <div class="container row">
+                <span class="mr-3 ">Ordenar Por: </span>
+                {!!
+                    Form::select('carrera_id',
+                        $carerras,
+                        null,
+                        [
+                            'placeholder' => 'Carreras',
+                            'class' => 'p-auto form-control col-2',
+                            'id' => 'carrera'
+
+                        ]
+                    )
+                 !!}
+        <select id="inputPromedio" class="ml-2 p-auto form-control col-2">
+            <option selected>PROMEDIO</option>
+            <option value="0" >Mayor a Menor</option>
+            <option value="1" >Menor a Mayor</option>
+        </select>
+
+
+    </div>
+    <hr>
     <h1>{{ $title }}</h1>
     <div class="container">
 
@@ -46,5 +70,39 @@
         @endforeach
         </tbody>
     </table>
+        <div class="text-center">
+            @if(Request::get('carrera'))
+                {!! $egresados->appends('carrera', Request::get('carrera'))->links() !!}
+            @elseif(Request::get('promedio'))
+                {!! $egresados->appends('promedio', Request::get('promedio'))->links() !!}
+            @else
+                {!! $egresados->links() !!}
+            @endif
+        </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $("#carrera").change(event =>{
+                url();
+            });
+            $("#inputPromedio").change(event =>{
+                url();
+            });
+            function url () {
+                var url = "{{ Route('egresados.index') }}";
+                if($.isNumeric($("#carrera").val()) && $.isNumeric($("#inputPromedio").val())){
+                    url += "?carrera="+$("#carrera").val()+"&promedio="+$("#inputPromedio").val();
+                }else if($.isNumeric($("#carrera").val())){
+                    url += "?carrera="+$("#carrera").val();
+                }else{
+                    url += "?promedio="+ $("#inputPromedio").val();
+                }
+                window.location.replace(url);
+            }
+        });
+
+    </script>
 @endsection

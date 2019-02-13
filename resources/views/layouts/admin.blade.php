@@ -19,7 +19,7 @@
 <body>
 <nav class="navbar navbar-light fixed-top bg-danger flex-md-nowrap p-0 shadow  ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">ITCG</a>
-    <span class="text-white"> {{ Auth::user()->name }}</span>
+    <span class="text-white ml-auto"> {{ Auth::user()->name }}</span>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link text-white" href="{{ route('logout') }}"
@@ -36,8 +36,8 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="row ">
+        <nav class="col-md-2 col-sm-2 d-none d-md-block bg-light sidebar ">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">

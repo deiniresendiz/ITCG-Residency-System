@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class EgresadosController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,16 +25,28 @@ class EgresadosController extends Controller
      */
     public function index(Request $request)
     {
-        $egresados = Egresados::all();
+        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $title = "Egresados";
         $x = 1;
-        if($request->has('state')){
-            $title = "Cursos/Talleres ".$request->has('opcion');
-            $egresados = $egresados->where('estado', $request->has('opcion'));
+        if($request->has('carrera') || $request->has('promedio')){
+            if($request->has('carrera')){
+                $title = "Egresados por carrera";
+                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate();
+            }
+            if($request->has('promedio')){
+                $title = "Egresados por promedio ";
+                if($request->get('promedio') == 0){
+                    $egresados = Egresados::orderBy('promedio','desc')->paginate();
+                }else{
+                    $egresados = Egresados::orderBy('promedio','asc')->paginate();
+                }
+            }
+        }else{
+            $egresados = Egresados::orderBy('nombre')->paginate();
         }
-        $egresados = $egresados->sortByDesc('fecha_inicio');
-        //$cursos = $cursos->paginate();
-        return view('egresados.index',compact('egresados','title','x'));
+
+        
+        return view('egresados.index',compact('egresados','title','x','carerras'));
     }
 
     /**
@@ -75,6 +88,7 @@ class EgresadosController extends Controller
     'promedio',
     'imagen'
      */
+
     public function store(storeEgresados $request)
     {
         $egresado = new Egresados($request->all());
