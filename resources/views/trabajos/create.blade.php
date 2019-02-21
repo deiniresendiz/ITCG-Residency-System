@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <h1>Nuevo Trabajo</h1>
+    <h1>Publicar Nuevo Empleo</h1>
     <hr>
     {!!
         Form::model(

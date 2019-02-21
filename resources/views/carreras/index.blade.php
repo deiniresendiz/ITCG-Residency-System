@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>{{ $title }}</h1>
+    <br>
+    <h1>Carreras</h1>
+    <hr>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -19,12 +21,12 @@
                 <td>{{ $carrera->nombre }}</td>
                 <td>
                     <a href="{{ route('carreras.show',$carrera) }}">
-                        Mostrar
+                        <i class="fas fa-search"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('carreras.edit',$carrera) }}">
-                        Editar
+                        <i class="fas fa-edit"></i>
                     </a>
                 </td>
             </tr>

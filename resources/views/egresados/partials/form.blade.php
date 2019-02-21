@@ -1,6 +1,7 @@
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="row">
     <div class="form-group col-12 col-sm-4 col-lg-2 {{ $errors->has('no_control')? 'has-error':'' }}">
-        {!! Form::label('no_control','Numero de control') !!}
+        {!! Form::label('no_control','Numero de control *') !!}
         {!!
             Form::text('no_control',
             null,
@@ -17,7 +18,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-7 col-lg-6 {{ $errors->has('nombre')? 'has-error':'' }}">
-        {!! Form::label('nombre','Nombre') !!}
+        {!! Form::label('nombre','Nombre *') !!}
         {!!
             Form::text('nombre',
             null,
@@ -34,7 +35,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('carrera_id') ? 'has-error': '' }}">
-        {!! Form::label('carrera_id','Carerra') !!}
+        {!! Form::label('carrera_id','Carerra *') !!}
 
         {!!
             Form::select('carrera_id',
@@ -56,7 +57,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado_id') ? 'has-error': '' }}">
-        {!! Form::label('estado_id','Estado') !!}
+        {!! Form::label('estado_id','Estado *') !!}
 
         {!!
             Form::select('estado_id',
@@ -79,7 +80,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
-        {!! Form::label('ciudad_id','Ciudad') !!}
+        {!! Form::label('ciudad_id','Ciudad *') !!}
 
         {!!
             Form::select('ciudad_id',

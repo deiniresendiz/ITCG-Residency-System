@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+    <br>
     <h1>{{ $title }}</h1>
+    <hr>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -25,17 +27,17 @@
                 @endif
                 <td>
                     <a href="{{ route('admin.show',$user) }}">
-                        Mostrar
+                        <i class="fas fa-search"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('admin.edit',$user) }}">
-                        Editar
+                        <i class="fas fa-user-edit"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('admin.destroy',$user) }}/destroy">
-                        Eliminar
+                        <i class="fas fa-user-minus"></i>
                     </a>
                 </td>
             </tr>

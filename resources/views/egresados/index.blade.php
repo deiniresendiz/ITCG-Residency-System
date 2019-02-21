@@ -58,12 +58,12 @@
                 <td>{{ $egresado->telefono }}</td>
                 <td>
                     <a href="{{ route('egresados.show',$egresado) }}">
-                        Mostrar
+                        <i class="fas fa-search"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('egresados.edit',$egresado) }}">
-                        Editar
+                        <i class="fas fa-user-edit"></i>
                     </a>
                 </td>
             </tr>

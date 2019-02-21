@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+    <br>
     <h1>{{ $title }}</h1>
+    <hr>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
             <tr>
@@ -25,12 +27,12 @@
                 <td>{{ $curso->estado }}</td>
                 <td>
                     <a href="{{ route('cursos.show',$curso) }}">
-                        Mostrar
+                        <i class="fas fa-search"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('cursos.edit',$curso) }}">
-                        Editar
+                        <i class="fas fa-edit"></i>
                     </a>
                 </td>
             </tr>

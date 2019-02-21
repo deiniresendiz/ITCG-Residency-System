@@ -40,12 +40,12 @@
                 <td>{{ $empresa->contacto }}</td>
                 <td>
                     <a href="{{ route('empresas.show',$empresa) }}">
-                        Mostrar
+                        <i class="fas fa-search"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ route('empresas.edit',$empresa) }}">
-                        Editar
+                        <i class="fas fa-edit"></i>
                     </a>
                 </td>
             </tr>

@@ -31,18 +31,18 @@ class EgresadosController extends Controller
         if($request->has('carrera') || $request->has('promedio')){
             if($request->has('carrera')){
                 $title = "Egresados por carrera";
-                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate();
+                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate(2);
             }
             if($request->has('promedio')){
                 $title = "Egresados por promedio ";
                 if($request->get('promedio') == 0){
-                    $egresados = Egresados::orderBy('promedio','desc')->paginate();
+                    $egresados = Egresados::orderBy('promedio','desc')->paginate(2);
                 }else{
-                    $egresados = Egresados::orderBy('promedio','asc')->paginate();
+                    $egresados = Egresados::orderBy('promedio','asc')->paginate(2);
                 }
             }
         }else{
-            $egresados = Egresados::orderBy('nombre')->paginate();
+            $egresados = Egresados::orderBy('nombre')->paginate(2);
         }
 
         

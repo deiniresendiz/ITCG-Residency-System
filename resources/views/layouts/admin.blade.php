@@ -14,11 +14,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 </head>
 <body>
 <nav class="navbar navbar-light fixed-top bg-danger flex-md-nowrap p-0 shadow  ">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">ITCG</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
+        <i class="fas fa-university"></i> ITCG
+    </a>
     <span class="text-white ml-auto"> {{ Auth::user()->name }}</span>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -26,6 +29,7 @@
                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 {{ __('Cerrar Sessión') }}
+                <i class="fas fa-sign-out-alt"></i>
             </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -42,20 +46,25 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
+                            <span data-feather="home">
+                                <a href="{{ Route('home') }}" class="nav-link ">
+                                    <i class="fas fa-home"></i> Inicio
+                                </a>
+                            </span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('account.index') }}">
-                            Mis Datos
+                            <i class="fas fa-user-circle"></i> Mis Datos
                         </a>
                     </li>
                     @if(Auth::user()->isAdmin == 1)
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#egresados">Egresados</span>
+                            <span data-toggle="collapse" data-target="#egresados">
+                                <i class="fas fa-user-graduate"></i> Egresados
+                            </span>
                         </span>
                             <div id="egresados" class="collapse">
                                 <a href="{{ Route('egresados.index') }}" class="nav-link font-weight-light ">Todos</a>
@@ -64,7 +73,9 @@
                         </li>
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#empresas">Empresas</span>
+                            <span data-toggle="collapse" data-target="#empresas">
+                                <i class="fas fa-building"></i> Empresas
+                            </span>
                         </span>
                             <div id="empresas" class="collapse">
                                 <a href="{{ Route('empresas.index') }}" class="nav-link font-weight-light ">Todos</a>
@@ -73,7 +84,9 @@
                         </li>
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#trabajos">Trabajos</span>
+                            <span data-toggle="collapse" data-target="#trabajos">
+                                <i class="fas fa-briefcase"></i> Trabajos
+                            </span>
                         </span>
                             <div id="trabajos" class="collapse">
                                 <a href="{{ Route('trabajos.index') }}" class="nav-link  font-weight-light ">Todos</a>
@@ -82,7 +95,9 @@
                         </li>
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#cursos">Cursos/Telleres</span>
+                            <span data-toggle="collapse" data-target="#cursos">
+                                <i class="fas fa-chalkboard-teacher"></i> Cursos/Telleres
+                            </span>
                         </span>
                             <div id="cursos" class="collapse">
                                 <a href="{{ Route('cursos.index') }}" class="nav-link font-weight-light ">Todos</a>
@@ -92,48 +107,21 @@
                         @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ Route('cursos.index') }}">
-                                Cursos/Talleres
+                                <i class="fas fa-chalkboard-teacher"></i> Cursos/Talleres
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ Route('trabajos.index') }}">
-                                Bolsa de Trabajos
+                                <i class="fas fa-briefcase"></i> Bolsa de Trabajos
                             </a>
                         </li>
                     @endif
                 </ul>
-
-                @if(Auth::user()->isAdmin == 1)
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Reportes</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-                            <span data-feather="plus-circle"></span>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Egresados
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Empresas
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Cursos
-                            </a>
-                        </li>
-                    </ul>
-                @endif
                 @if(Auth::user()->isRoot == 1)
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Area Administrativa</span>
+                        <span>
+                            <i class="fas fa-tools"></i> Area Administrativa
+                        </span>
                         <a class="d-flex align-items-center text-muted" href="#">
                             <span data-feather="plus-circle"></span>
                         </a>
@@ -141,7 +129,9 @@
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#administradoresAdmi">Administradores</span>
+                            <span data-toggle="collapse" data-target="#administradoresAdmi">
+                                <i class="fas fa-users-cog"></i> Administradores
+                            </span>
                         </span>
                             <div id="administradoresAdmi" class="collapse">
                                 <a href="{{ Route('admin.index') }}" class="nav-link font-weight-light ">Todos</a>
@@ -150,7 +140,9 @@
                         </li>
                         <li class="nav-item">
                         <span class="nav-link" href="#">
-                            <span data-toggle="collapse" data-target="#carrerasAdm">Carreras</span>
+                            <span data-toggle="collapse" data-target="#carrerasAdm">
+                                <i class="fas fa-university"></i> Carreras
+                            </span>
                         </span>
                             <div id="carrerasAdm" class="collapse">
                                 <a href="{{ Route('carreras.index') }}" class="nav-link font-weight-light ">Todos</a>
