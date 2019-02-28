@@ -1,33 +1,73 @@
 @extends('layouts.admin')
 
 @section('content')
-    <br>
-    <div class="container row">
-                <span class="mr-3 ">Ordenar Por: </span>
-                {!!
-                    Form::select('carrera_id',
-                        $carerras,
-                        null,
-                        [
-                            'placeholder' => 'Carreras',
-                            'class' => 'p-auto form-control col-2',
-                            'id' => 'carrera'
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    {!! Form::open([ 'route' => 'egresados.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    <div class="form-group">
+                        {!!
+                            Form::select('carrera_id',
+                                $carerras,
+                                null,
+                                [
+                                    'class' => 'form-control mx-1',
+                                    'id' => 'carrera',
+                                    'placeholder'=>'Seleccione una Carrera'
 
-                        ]
-                    )
-                 !!}
-        <select id="inputPromedio" class="ml-2 p-auto form-control col-2">
-            <option selected>PROMEDIO</option>
-            <option value="0" >Mayor a Menor</option>
-            <option value="1" >Menor a Mayor</option>
-        </select>
+                                ]
+                            )
+                         !!}
+                    </div>
+                    <div class="form-group">
+                        {!!
+                            Form::select('sexo',
+                                ['Masculino'=>'Masculino','Femenino'=>'Femenino','Indefinido'=>'Indefinido'],
+                                null,
+                                [
+                                    'class' => ' form-control mx-1',
+                                    'id' => 'sexo',
+                                    'placeholder'=>'Sexo'
 
+                                ]
+                            )
+                         !!}
+                    </div>
+                    <div class="form-group">
+                        {!!
+                            Form::select('promedio',
+                                ['1'=>'Mayor a Menor','0'=>'Menor a Mayor'],
+                                null,
+                                [
+                                    'class' => ' form-control mx-1',
+                                    'id' => 'sexo',
+                                    'placeholder'=>'Promedio'
 
+                                ]
+                            )
+                         !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control']) !!}
+
+                    </div>
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
     </div>
-    <hr>
-    <h1>{{ $title }}</h1>
-    <div class="container">
 
+    <br>
+    <hr>
+
+    <div class="container">
+        <h1>{{ $title }}</h1>
 
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
@@ -37,7 +77,6 @@
             <td scope="col" >Nombre</td>
             <td scope="col">Carrera</td>
             <td scope="col">Sexo</td>
-            <td scope="col">Edad</td>
             <td scope="col">Fecha de Egreso</td>
             <td scope="col">Promedio</td>
             <td scope="col">Telefono</td>
@@ -52,7 +91,6 @@
                 <td>{{ $egresado->nombre }} </td>
                 <td>{{ $egresado->carreras($egresado->carrera_id)->nombre }}</td>
                 <td>{{ $egresado->sexo }}</td>
-                <td>{{ \Illuminate\Support\Carbon::parse($egresado->nacimiento)->age }}</td>
                 <td>{{ date_format($egresado->fecha_egreso,'d/m/Y') }}</td>
                 <td>{{ $egresado->promedio }}</td>
                 <td>{{ $egresado->telefono }}</td>
@@ -71,20 +109,14 @@
         </tbody>
     </table>
         <div class="text-center">
-            @if(Request::get('carrera'))
-                {!! $egresados->appends('carrera', Request::get('carrera'))->links() !!}
-            @elseif(Request::get('promedio'))
-                {!! $egresados->appends('promedio', Request::get('promedio'))->links() !!}
-            @else
-                {!! $egresados->links() !!}
-            @endif
+                {!! $egresados->render() !!}
         </div>
     </div>
 @endsection
 
 @section('script')
     <script type="text/javascript" >
-        jQuery(function ($) {
+        /*jQuery(function ($) {
             $("#carrera").change(event =>{
                 url();
             });
@@ -102,7 +134,7 @@
                 }
                 window.location.replace(url);
             }
-        });
+        });*/
 
     </script>
 @endsection

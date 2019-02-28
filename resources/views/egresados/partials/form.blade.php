@@ -108,7 +108,7 @@
 
         {!!
             Form::select('sexo',
-                ['Hombre' => 'Hombre', 'Mujer' => 'Mujer', 'No Binario' => 'No Binario'],
+                ['Masculino' => 'Masculino', 'Femenino' => 'Femenino', 'Indefinido' => 'Indefinido'],
                 null,
                 [
                     'required',

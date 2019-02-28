@@ -1,6 +1,7 @@
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="row">
     <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
-        {!! Form::label('nombre','Nombre') !!}
+        {!! Form::label('nombre','Nombre *') !!}
         {!!
             Form::text('nombre',
             null,
@@ -19,7 +20,7 @@
     </div>
 
     <div class="form-group col-md-6 col-12 {{ $errors->has('instructor')? 'has-error':'' }}">
-        {!! Form::label('instructor','Instructor') !!}
+        {!! Form::label('instructor','Instructor *') !!}
         {!!
             Form::text('instructor',
             null,
@@ -37,7 +38,7 @@
     </div>
 </div>
 <div class="form-group {{ $errors->has('descripcion')? 'has-error':'' }}">
-    {!! Form::label('descripcion','Descripcion') !!}
+    {!! Form::label('descripcion','Descripcion *') !!}
     {!!
         Form::textarea('descripcion',
         null,
@@ -57,7 +58,7 @@
 </div>
 <div class="row">
     <div class="form-group col-md-6 col-12 col-xl-4 {{ $errors->has('lugar')? 'has-error':'' }}">
-        {!! Form::label('lugar','Lugar') !!}
+        {!! Form::label('lugar','Lugar *') !!}
         {!!
             Form::text('lugar',
             null,
@@ -75,7 +76,7 @@
     </div>
 
     <div class="form-group col-md-6 col-12 col-xl-4 {{ $errors->has('precio')? 'has-error':'' }}">
-        {!! Form::label('precio','Precio') !!}
+        {!! Form::label('precio','Precio *') !!}
         {!!
             Form::text('precio',
             null,
@@ -93,7 +94,7 @@
     </div>
 
     <div class="form-group col-md-6 col-12 col-xl-4 {{$errors->has('fecha_inicio') ? 'has-error': '' }}">
-        {!! Form::label('fecha_inicio','Fecha de Inicio') !!}
+        {!! Form::label('fecha_inicio','Fecha de Inicio *') !!}
         {!!
             Form::date('fecha_inicio',
                 ($curso->fecha_inicio? $curso->fecha_inicio : date('Y-m-d')),
@@ -112,7 +113,7 @@
 
     </div>
     <div class="form-group col-md-6 col-12  col-xl-4 {{$errors->has('fecha_final') ? 'has-error': '' }}">
-        {!! Form::label('fecha_final','Fecha de Terminacion') !!}
+        {!! Form::label('fecha_final','Fecha de Terminacion *') !!}
         {!!
             Form::date('fecha_final',
                 ($curso->fecha_final? $curso->fecha_final : date('Y-m-d')),
@@ -131,7 +132,7 @@
     </div>
 
     <div class="form-group col-md-6 col-12 col-xl-4 {{$errors->has('estado') ? 'has-error': '' }}">
-        {!! Form::label('estado','Estado del curso') !!}
+        {!! Form::label('estado','Estado del curso *') !!}
 
         {!!
             Form::select('estado',

@@ -1,67 +1,49 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Detalles de {{ $egresado->nombre }} </h1>
-    @if($egresado->imagen)
-        <div class="d-flex justify-content-center">
-            <a href="{{ asset($egresado->imagen) }}" class="img-thumbnail align-content-center" target="_blank" >
-                <img src="{{ asset($egresado->imagen) }}" alt="cartel del curso">
-            </a>
-        </div>
-    @endif
-    <table class="table table-border">
-        <tr>
-            <th>Nombre</th>
-            <td>{{ $egresado->nombre }}</td>
-        </tr>
-        <tr>
-            <th>No° Control</th>
-            <td>{{ $egresado->no_control }}</td>
-        </tr>
-        <tr>
-            <th>Carrera</th>
-            <td>{{ $egresado->carreras($egresado->carrera_id)->nombre }}</td>
-        </tr>
-        <tr>
-            <th>Curp</th>
-            <td>{{ $egresado->curp }}</td>
-        </tr>
-        <tr>
-            <th>Sexo</th>
-            <td>{{ $egresado->sexo }}</td>
-        </tr>
-        <tr>
-            <th>Fecha de Nacimiento</th>
-            <td>{{ date_format($egresado->nacimiento,'d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Estado Civil</th>
-            <td>{{ $egresado->estado_civil }}</td>
-        </tr>
-        <tr>
-            <th>Fecha de Egresado</th>
-            <td>{{ date_format($egresado->fecha_egreso,'d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Ciudad</th>
-            <td>{{ $egresado->ciudad->nombre }}</td>
-        </tr>
-        <tr>
-            <th>Telefono</th>
-            <td>{{ $egresado->telefono }}</td>
-        </tr>
-        <tr>
-            <th>Celular</th>
-            <td>{{ $egresado->celular }}</td>
-        </tr>
-        <tr>
-            <th>Correo</th>
-            <td>{{ $egresado->email }}</td>
-        </tr>
-        <tr>
-            <th>Promedio</th>
-            <td>{{ $egresado->promedio }}</td>
-        </tr>
-    </table>
+    <br>
+        <h1>
+            <i class="fas fa-user-graduate"></i> Egresado
+        </h1>
+    <hr>
+    <div class="container">
+        @if($egresado->imagen)
+            <div class="d-flex justify-content-center">
+                <a href="{{ asset($egresado->imagen) }}" class="img-thumbnail align-content-center w-25" target="_blank" >
+                    <img src="{{ asset($egresado->imagen) }}" alt="cartel del curso">
+                </a>
+            </div>
+        @endif
+        <dl class="row">
+            <dt class="col-sm-2">No° Control:</dt>
+            <dd class="col-sm-3">{{ $egresado->no_control }}</dd>
+            <dt class="col-sm-2">Nombre:</dt>
+            <dd class="col-sm-5">{{ $egresado->nombre }}</dd>
+            <dt class="col-sm-2">Carrera:</dt>
+            <dd class="col-sm-3">{{ $egresado->carreras($egresado->carrera_id)->nombre }}</dd>
+            <dt class="col-sm-2">Curp:</dt>
+            <dd class="col-sm-5">{{ $egresado->curp }}</dd>
+            <dt class="col-sm-2">Sexo:</dt>
+            <dd class="col-sm-3">{{ $egresado->sexo }}</dd>
+            <dt class="col-sm-2">Fecha de Nacimiento:</dt>
+            <dd class="col-sm-5">{{ date_format($egresado->nacimiento,'d/m/Y') }}</dd>
+            <dt class="col-sm-2">Estado Civil:</dt>
+            <dd class="col-sm-3">{{ $egresado->estado_civil }}</dd>
+            <dt class="col-sm-2">Fecha de Egresado:</dt>
+            <dd class="col-sm-5">{{ date_format($egresado->fecha_egreso,'d/m/Y') }}</dd>
+            <dt class="col-sm-2">Ciudad:</dt>
+            <dd class="col-sm-3">{{ $egresado->ciudad->nombre }}</dd>
+            <dt class="col-sm-2">Curp:</dt>
+            <dd class="col-sm-5">{{ $egresado->telefono }}</dd>
+            <dt class="col-sm-2">Celular:</dt>
+            <dd class="col-sm-3">{{ $egresado->celular }}</dd>
+            <dt class="col-sm-2">Correo:</dt>
+            <dd class="col-sm-5">{{ $egresado->email }}</dd>
+            <dt class="col-sm-2">Promedio:</dt>
+            <dd class="col-sm-3">{{ $egresado->promedio }}</dd>
+        </dl>
+    </div>
+
+
 @endsection
 

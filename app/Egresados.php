@@ -37,4 +37,34 @@ class Egresados extends Model
         return Carreras::where('id',$id)->first();
     }
 
+
+    //Scope
+
+    public function scopeCarrera($query, $carrera){
+        if ($carrera)
+            return $query->where('carrera_id', $carrera);
+    }
+
+    public function scopeNombre($query, $nombre){
+        if ($nombre)
+            return $query->orWhere('nombre', 'LIKE' ,"%$nombre%")->orWhere('no_control', 'LIKE' ,"%$nombre%");
+
+    }
+
+    public function scopeSexo($query, $sexo){
+        if ($sexo)
+            return $query->where('sexo', $sexo);
+
+    }
+    public function scopePromedio($query, $promedio){
+        if ($promedio){
+            if($promedio == 0){
+                return $query->orderBy('promedio','asc');
+            }else{
+                return $query->orderBy('promedio','desc');
+            }
+        }
+
+    }
+
 }

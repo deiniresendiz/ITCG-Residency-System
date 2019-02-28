@@ -1,7 +1,8 @@
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="row">
 
     <div class="form-group col-md-6 col-12 {{ $errors->has('name')? 'has-error':'' }}">
-        {!! Form::label('name','Nombre') !!}
+        {!! Form::label('name','Nombre *') !!}
         {!!
             Form::text('name',
             null,
@@ -19,7 +20,7 @@
         @endif
     </div>
     <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
-        {!! Form::label('email','Correo') !!}
+        {!! Form::label('email','Correo *') !!}
         {!!
             Form::text('email',
             null,
@@ -37,7 +38,7 @@
         @endif
     </div>
     <div class="form-group col-md-6 col-12 {{ $errors->has('clave')? 'has-error':'' }}">
-        {!! Form::label('password','Password') !!}
+        {!! Form::label('password','Password *') !!}
         {!!
             Form::text('password',
             null,

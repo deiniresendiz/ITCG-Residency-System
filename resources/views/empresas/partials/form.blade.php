@@ -1,6 +1,6 @@
-
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="form-group {{ $errors->has('nombre')? 'has-error':'' }}">
-    {!! Form::label('nombre','Nombre') !!}
+    {!! Form::label('nombre','Nombre *') !!}
     {!!
         Form::text('nombre',
         null,
@@ -17,7 +17,7 @@
     @endif
 </div>
 <div class="form-group {{ $errors->has('descripcion')? 'has-error':'' }}">
-    {!! Form::label('descripcion','Descripcion') !!}
+    {!! Form::label('descripcion','Descripcion *') !!}
     {!!
         Form::textarea('descripcion',
         null,
@@ -38,7 +38,7 @@
 </div>
 <div class="row">
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado_id') ? 'has-error': '' }}">
-        {!! Form::label('estado_id','Estado') !!}
+        {!! Form::label('estado_id','Estado *') !!}
 
         {!!
             Form::select('estado_id',
@@ -61,7 +61,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
-        {!! Form::label('ciudad_id','Ciudad') !!}
+        {!! Form::label('ciudad_id','Ciudad *') !!}
 
         {!!
             Form::select('ciudad_id',
@@ -83,7 +83,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('domicilio')? 'has-error':'' }}">
-        {!! Form::label('domicilio','Domicilio') !!}
+        {!! Form::label('domicilio','Domicilio *') !!}
         {!!
             Form::text('domicilio',
             null,
@@ -100,7 +100,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('telefono')? 'has-error':'' }}">
-        {!! Form::label('telefono','Telefono') !!}
+        {!! Form::label('telefono','Telefono *') !!}
         {!!
             Form::text('telefono',
             null,
@@ -118,7 +118,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('contacto')? 'has-error':'' }}">
-        {!! Form::label('contacto','Contracto') !!}
+        {!! Form::label('contacto','Contracto *') !!}
         {!!
             Form::text('contacto',
             null,

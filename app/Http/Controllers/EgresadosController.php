@@ -28,23 +28,28 @@ class EgresadosController extends Controller
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $title = "Egresados";
         $x = 1;
-        if($request->has('carrera') || $request->has('promedio')){
+        /*if($request->has('carrera') || $request->has('promedio')){
             if($request->has('carrera')){
                 $title = "Egresados por carrera";
-                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate(2);
+                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate();
             }
             if($request->has('promedio')){
                 $title = "Egresados por promedio ";
                 if($request->get('promedio') == 0){
-                    $egresados = Egresados::orderBy('promedio','desc')->paginate(2);
+                    $egresados = Egresados::orderBy('promedio','desc')->paginate();
                 }else{
-                    $egresados = Egresados::orderBy('promedio','asc')->paginate(2);
+                    $egresados = Egresados::orderBy('promedio','asc')->paginate();
                 }
             }
         }else{
-            $egresados = Egresados::orderBy('nombre')->paginate(2);
-        }
+            $egresados = Egresados::orderBy('nombre')->paginate();
+        }*/
 
+        $nombre = $request->get('name');
+        $carrera = $request->get('carrera_id');
+        $sexo = $request->get('sexo');
+        $promedio = $request->get('promedio');
+        $egresados = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->paginate();
         
         return view('egresados.index',compact('egresados','title','x','carerras'));
     }

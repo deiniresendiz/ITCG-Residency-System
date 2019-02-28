@@ -1,6 +1,7 @@
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="row">
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('puesto')? 'has-error':'' }}">
-        {!! Form::label('puesto','Puesto') !!}
+        {!! Form::label('puesto','Puesto *') !!}
         {!!
             Form::text('puesto',
             null,
@@ -17,7 +18,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('empresa_id') ? 'has-error': '' }}">
-        {!! Form::label('empresa_id','Empresa') !!}
+        {!! Form::label('empresa_id','Empresa *') !!}
 
         {!!
             Form::select('empresa_id',
@@ -37,7 +38,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('area_id') ? 'has-error': '' }}">
-        {!! Form::label('area_id','Area Profesional') !!}
+        {!! Form::label('area_id','Area Profesional *') !!}
 
         {!!
             Form::select('area_id',
@@ -58,7 +59,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado_id') ? 'has-error': '' }}">
-        {!! Form::label('estado_id','Estado') !!}
+        {!! Form::label('estado_id','Estado *') !!}
 
         {!!
             Form::select('estado_id',
@@ -81,7 +82,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 py-2 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
-        {!! Form::label('ciudad_id','Ciudad') !!}
+        {!! Form::label('ciudad_id','Ciudad *') !!}
 
         {!!
             Form::select('ciudad_id',
@@ -104,7 +105,7 @@
     </div>
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('domicilio')? 'has-error':'' }}">
-        {!! Form::label('domicilio','Domiclio') !!}
+        {!! Form::label('domicilio','Domiclio *') !!}
         {!!
             Form::text('domicilio',
             null,
@@ -136,7 +137,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('contracto')? 'has-error':'' }}">
-        {!! Form::label('contracto','Contracto') !!}
+        {!! Form::label('contracto','Contracto *') !!}
         {!!
             Form::text('contracto',
             null,
@@ -153,7 +154,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('telefono')? 'has-error':'' }}">
-        {!! Form::label('telefono','Telefono') !!}
+        {!! Form::label('telefono','Telefono *') !!}
         {!!
             Form::text('telefono',
             null,
@@ -203,7 +204,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado') ? 'has-error': '' }}">
-        {!! Form::label('estado','Estado del curso') !!}
+        {!! Form::label('estado','Estado del Empleao *') !!}
 
         {!!
             Form::select('estado',
@@ -228,7 +229,7 @@
 
 <div class="row">
     <div class="form-group col-12 col-sm-6 {{ $errors->has('descripcion')? 'has-error':'' }}">
-        {!! Form::label('descripcion','Descripcion') !!}
+        {!! Form::label('descripcion','Descripcion *') !!}
         {!!
             Form::textarea('descripcion',
             null,
@@ -248,7 +249,7 @@
         @endif
     </div>
     <div class="form-group col-12 col-sm-6 {{ $errors->has('requisitos')? 'has-error':'' }}">
-        {!! Form::label('requisitos','Requisitos') !!}
+        {!! Form::label('requisitos','Requisitos *') !!}
         {!!
             Form::textarea('requisitos',
             null,

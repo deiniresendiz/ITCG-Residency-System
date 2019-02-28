@@ -67,8 +67,8 @@
                             </span>
                         </span>
                             <div id="egresados" class="collapse">
-                                <a href="{{ Route('egresados.index') }}" class="nav-link font-weight-light ">Todos</a>
-                                <a href="{{ Route('egresados.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('egresados.index') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('egresados.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -78,8 +78,8 @@
                             </span>
                         </span>
                             <div id="empresas" class="collapse">
-                                <a href="{{ Route('empresas.index') }}" class="nav-link font-weight-light ">Todos</a>
-                                <a href="{{ Route('empresas.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('empresas.index') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('empresas.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -89,8 +89,8 @@
                             </span>
                         </span>
                             <div id="trabajos" class="collapse">
-                                <a href="{{ Route('trabajos.index') }}" class="nav-link  font-weight-light ">Todos</a>
-                                <a href="{{ Route('trabajos.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('trabajos.index') }}" class="nav-link  font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('trabajos.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -100,8 +100,8 @@
                             </span>
                         </span>
                             <div id="cursos" class="collapse">
-                                <a href="{{ Route('cursos.index') }}" class="nav-link font-weight-light ">Todos</a>
-                                <a href="{{ Route('cursos.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('cursos.index') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('cursos.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                         @else
@@ -134,8 +134,8 @@
                             </span>
                         </span>
                             <div id="administradoresAdmi" class="collapse">
-                                <a href="{{ Route('admin.index') }}" class="nav-link font-weight-light ">Todos</a>
-                                <a href="{{ Route('admin.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('admin.index') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('admin.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -145,8 +145,8 @@
                             </span>
                         </span>
                             <div id="carrerasAdm" class="collapse">
-                                <a href="{{ Route('carreras.index') }}" class="nav-link font-weight-light ">Todos</a>
-                                <a href="{{ Route('carreras.create') }}" class="nav-link font-weight-light ">Nuevo</a>
+                                <a href="{{ Route('carreras.index') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Todos</a>
+                                <a href="{{ Route('carreras.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
                     </ul>

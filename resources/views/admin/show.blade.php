@@ -1,16 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Detalles de {{ $user->name }} </h1>
-    <table class="table table-border">
-        <tr>
-            <th>Nombre</th>
-            <td>{{ $user->name }}</td>
-        </tr>
-        <tr>
-            <th>Correo</th>
-            <td>{{ $user->email }}</td>
-        </tr>
+    <br>
+    <h1>
+        <i class="fas fa-users-cog"></i>  Administrador
+    </h1>
+    <hr>
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Nombré</dt>
+            <dd class="col-sm-9">{{ $user->name }}</dd>
 
-    </table>
+            <dt class="col-sm-3 text-truncate">Correo</dt>
+            <dd class="col-sm-9">
+                {{ $user->email }}
+            </dd>
+
+        </dl>
+    </div>
 @endsection

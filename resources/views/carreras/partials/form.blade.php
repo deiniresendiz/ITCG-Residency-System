@@ -1,7 +1,8 @@
+<span class="mr-3 text-danger ">Campos requeridos *</span>
 <div class="row">
 
     <div class="form-group col-md-6 col-12 {{ $errors->has('clave')? 'has-error':'' }}">
-        {!! Form::label('clave','Clave') !!}
+        {!! Form::label('clave','Clave *') !!}
         {!!
             Form::text('clave',
             null,
@@ -18,7 +19,7 @@
         @endif
     </div>
     <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
-        {!! Form::label('nombre','Nombre') !!}
+        {!! Form::label('nombre','Nombre *') !!}
         {!!
             Form::text('nombre',
             null,
