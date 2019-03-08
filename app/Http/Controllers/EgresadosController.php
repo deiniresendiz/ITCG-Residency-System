@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
 class EgresadosController extends Controller
 {
 
@@ -27,31 +28,17 @@ class EgresadosController extends Controller
     {
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $title = "Egresados";
-        $x = 1;
-        /*if($request->has('carrera') || $request->has('promedio')){
-            if($request->has('carrera')){
-                $title = "Egresados por carrera";
-                $egresados = Egresados::where('carrera_id', $request->get('carrera'))->paginate();
-            }
-            if($request->has('promedio')){
-                $title = "Egresados por promedio ";
-                if($request->get('promedio') == 0){
-                    $egresados = Egresados::orderBy('promedio','desc')->paginate();
-                }else{
-                    $egresados = Egresados::orderBy('promedio','asc')->paginate();
-                }
-            }
-        }else{
-            $egresados = Egresados::orderBy('nombre')->paginate();
-        }*/
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
 
         $nombre = $request->get('name');
         $carrera = $request->get('carrera_id');
         $sexo = $request->get('sexo');
         $promedio = $request->get('promedio');
         $egresados = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->paginate();
-        
-        return view('egresados.index',compact('egresados','title','x','carerras'));
+        $y = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->count();
+        return view('egresados.index',compact('egresados','title','x','carerras','y'));
     }
 
     /**
@@ -170,9 +157,9 @@ class EgresadosController extends Controller
     {
 
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
-        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        $state = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
         $egresado = Egresados::where('id',$id)->first();
-        return view('egresados.edit', compact('egresado','id','carerras','ciudades'));
+        return view('egresados.edit',compact('egresado','id','carerras','state'));
     }
 
     /**

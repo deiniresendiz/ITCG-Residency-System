@@ -24,8 +24,7 @@ class AdministradoresController extends Controller
     {
 
         $title = "Administradores";
-        $users = User::where('isAdmin','=','1')->paginate(15);
-        $users = $users->sortByDesc('nombre');
+        $users = User::where('isAdmin','=','1')->orderBy('name')->paginate();
         $x = 1;
         return view('admin.index',compact('users','title','x'));
     }
@@ -53,11 +52,11 @@ class AdministradoresController extends Controller
     public function store(Request $request)
     {
         $user = User::create([
-            'name' => $request->get('nombre'),
+            'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
             'isAdmin' => 1,
-            'isRoot' => ($request->get('root') != 1? 0 : 1),
+            'isRoot' => $request->get('root'),
         ]);
         return redirect()->route('admin.show',$user);
     }

@@ -24,14 +24,16 @@ class BolsaTrabajoController extends Controller
     public function index(Request $request)
     {
         $title = "Trabajos";
-        $trabajos = BolsaTrabajo::all();
-        if($request->has('state')){
-            $title = "Trabajos ".$request->has('state');
-            $trabajos = $trabajos->where('estado', $request->has('state'));
-        }
-        $trabajos = $trabajos->sortByDesc('fecha');
-        //$cursos = $cursos->paginate();
-        return view('trabajos.index',compact('trabajos','title'));
+        $area = $request->get('are');
+        $pusto = $request->getBaseUrl('puesto');
+        $empresa = $request->get('company');
+        $ciudad = $request->get('town');
+
+        $trabajos = BolsaTrabajo::areat($area)->name($pusto)->empresas($empresa)->town($ciudad)->orderBy('puesto')->paginate();
+        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+        $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
+        return view('trabajos.index',compact('trabajos','title','citys','empresas','areas'));
     }
 
     /**

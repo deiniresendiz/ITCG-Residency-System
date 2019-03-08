@@ -1,22 +1,43 @@
 @extends('layouts.admin')
 
 @section('content')
-    <br>
-    <div class="container row">
-        <span class="mr-3 ">Ordenar Por: </span>
-        {!!
-            Form::select('city_id',
-                $citys,
-                null,
-                [
-                    'placeholder' => 'Estado',
-                    'class' => 'p-auto form-control col-2',
-                    'id' => 'estado'
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    {!! Form::open([ 'route' => 'empresas.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    <div class="form-group">
+                        {!!
+                            Form::select('ciudad',
+                                $citys,
+                                null,
+                                [
+                                    'class' => 'form-control mx-1',
+                                    'id' => 'ciudad',
+                                    'placeholder'=>'Seleccione una Ciudad'
 
-                ]
-            )
-         !!}
+                                ]
+                            )
+                         !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre de la Empresa']) !!}
+
+                    </div>
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
     </div>
+
+    <br>
+    <div class="container">
     <hr>
     <h1>{{ $title }}</h1>
     <table class="table table-light table-striped table-hover">
@@ -51,14 +72,13 @@
             </tr>
         @endforeach
         </tbody>
-        <div class="text-center">
-            @if(Request::get('estado'))
-                {!! $empresas->appends('estado', Request::get('estado'))->links() !!}
-            @else
-                {!! $empresas->links() !!}
-            @endif
-        </div>
+
     </table>
+        <div class="text-center">
+                {!! $empresas->render() !!}
+
+        </div>
+    </div>
 @endsection
 
 @section('script')

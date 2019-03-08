@@ -39,6 +39,28 @@ class BolsaTrabajo extends Model
     public function ciudad(){
         return $this->belongsTo(Ciudades::class);
     }
+
+    //scope
+
+    public function scopeName($query, $puesto){
+        if ($puesto)
+            return $query->where('puesto', 'LIKE' ,"%$puesto%");
+
+    }
+
+    public function scopeTown($query, $ciudad){
+        if ($ciudad)
+            return $query->where('ciudad_id', $ciudad);
+    }
+
+    public function scopeAreat($query, $area){
+        if ($area)
+            return $query->where('area_id', $area);
+    }
+    public function scopeEmpresas($query, $empresa){
+        if ($empresa)
+            return $query->where('empresa_id', $empresa);
+    }
 }
 
 

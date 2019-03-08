@@ -2,10 +2,24 @@
 
 @section('content')
     <br>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/egresados">Egresados</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mostar Egresado</li>
+            </ol>
+        </nav>
+        <br>
         <h1>
             <i class="fas fa-user-graduate"></i> Egresado
+            <a href="{{ route('egresados.edit',$egresado) }}">
+                <i class="fas fa-user-edit"></i>
+            </a>
         </h1>
-    <hr>
+        <hr>
+    </div>
+
     <div class="container">
         @if($egresado->imagen)
             <div class="d-flex justify-content-center">

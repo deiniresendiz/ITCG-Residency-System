@@ -31,13 +31,9 @@ class CursosController extends Controller
          */
         Cursos::where('fecha_final','<',date('y-m-d'))->where('estado','=','Activo')->update(['estado' => "Terminado"]);
 
-
-        if($request->has('state')){
-            $title = "Cursos/Talleres ".$request->has('state');
-            $cursos = Cursos::where('estado','=',$request->has('state'))->paginate();
-        }else{
-            $cursos = Cursos::paginate();
-        }
+        $state = $request->get('state');
+        $name = $request->get('name');
+        $cursos = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->paginate();
 
 
         return view('cursos.index',compact('cursos','title'));

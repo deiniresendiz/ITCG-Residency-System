@@ -145,15 +145,31 @@ class MyCountAdminController extends Controller
         //
     }
 
-    public function updatePass(Request $request, $id){
+    public function updatePass(Request $request)
+    {
 
+        $this->validate($request, [
+            'old' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+        $id = Auth::user()->id;
+        $user = User::where('id',$id)->first();
+        $hashedPassword = $user->password;
 
-        if($request->ajax()){
-            $user = User::where('id',$id)->first();
-
-            $user->password = Hash::make($id);
-
+        if (Hash::check($request->old, $hashedPassword)) {
+            //Change the password
+            $user->password = Hash::make($request->password);
             $user->save();
+
+            $request->session()->flash('success', 'La Contaseña se cambio.');
+
+            return back();
         }
+
+        $request->session()->flash('failure', 'No se Cambio la contaseña. ');
+
+        return back();
+
     }
+
 }

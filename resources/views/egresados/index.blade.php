@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+    <br>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Egresados</li>
+            </ol>
+        </nav>
+    </div>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
@@ -62,13 +71,11 @@
             </div>
         </div>
     </div>
-
     <br>
-    <hr>
-
     <div class="container">
-        <h1>{{ $title }}</h1>
 
+        <h1>{{ $title }}</h1>
+        <span class="float-right">Resultados: {{ $y }}</span>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -109,7 +116,7 @@
         </tbody>
     </table>
         <div class="text-center">
-                {!! $egresados->render() !!}
+            {!! $egresados->appends(['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')])->render() !!}
         </div>
     </div>
 @endsection

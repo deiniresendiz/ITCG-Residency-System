@@ -26,4 +26,13 @@ class Cursos extends Model
      *
      */
 
+    public function scopeNombre($query, $nombre){
+        if ($nombre)
+            return $query->where('nombre', $nombre);
+    }
+    public function scopeEstado($query, $estado){
+        if ($estado)
+            return $query->where('estado', $estado);
+    }
+
 }

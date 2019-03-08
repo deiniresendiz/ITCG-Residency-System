@@ -23,4 +23,15 @@ class Empresas extends Model
         return $this->belongsTo(Ciudades::class);
     }
 
+    public function scopeNombre($query, $nombre){
+        if ($nombre)
+            return $query->orWhere('nombre', 'LIKE' ,"%$nombre%");
+
+    }
+
+    public function scopeCiudad($query, $ciudad){
+        if ($ciudad)
+            return $query->where('ciudad_id', $ciudad);
+    }
+
 }

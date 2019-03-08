@@ -2,6 +2,7 @@
 
 @section('content')
     <br>
+    <div class="container">
     <h1>{{ $title }}</h1>
     <hr>
     <table class="table table-light table-striped table-hover">
@@ -44,4 +45,8 @@
         @endforeach
         </tbody>
     </table>
+        <div class="text-center">
+            {!! $users->render() !!}
+        </div>
+    </div>
 @endsection

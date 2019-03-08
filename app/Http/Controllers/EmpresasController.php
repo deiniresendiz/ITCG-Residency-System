@@ -23,12 +23,9 @@ class EmpresasController extends Controller
     public function index(Request $request)
     {
         $title = "Empresas";
-        if($request->has('estado')){
-            $empresas = Empresas::where('ciudad_id', $request->get('estado'))->orderBy('nombre')->paginate();
-            //$title = "Empresas de ".$request->has('estado');
-        }else{
-            $empresas = Empresas::orderBy('nombre')->paginate();
-        }
+        $ciudad = $request->get('ciudad');
+        $nombre = $request->get('name');
+        $empresas = Empresas::nombre($nombre)->ciudad($ciudad)->orderBy('nombre')->paginate();
         $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
         return view('empresas.index',compact('empresas','title','citys'));
     }

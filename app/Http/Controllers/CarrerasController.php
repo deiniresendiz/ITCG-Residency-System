@@ -20,8 +20,7 @@ class CarrerasController extends Controller
     public function index(Request $request)
     {
         $title = "Carraras";
-        $carreras = Carreras::all();
-        $carreras = $carreras->sortByDesc('nombre');
+        $carreras = Carreras::orderBy('nombre')->paginate();
         $x = 1;
         return view('carreras.index',compact('carreras','title','x'));
     }

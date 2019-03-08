@@ -2,6 +2,7 @@
 
 @section('content')
     <br>
+    <div class="container" >
     <h1>Carreras</h1>
     <hr>
     <table class="table table-light table-striped table-hover">
@@ -33,4 +34,8 @@
         @endforeach
         </tbody>
     </table>
+        <div class="text-center">
+            {!! $carreras->render() !!}
+        </div>
+    </div>
 @endsection

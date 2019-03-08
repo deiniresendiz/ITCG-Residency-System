@@ -11,6 +11,8 @@
 |
 */
 
+use Barryvdh\DomPDF\PDF;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,6 +37,9 @@ Route::get('admin/{id}/destroy','AdministradoresController@destroy');
 Route::get('empresas/towns/{id}','EmpresasController@getTowns');
 Route::get('egresados/towns/{id}','EgresadosController@getTowns');
 Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
+
+
+Route::post('change-password', 'MyCountAdminController@updatePass')->name('password.update');
 
 
 

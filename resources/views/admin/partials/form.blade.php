@@ -19,7 +19,7 @@
             </span>
         @endif
     </div>
-    <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
+    <div class="form-group  col-md-6 col-12 {{ $errors->has('email')? 'has-error':'' }}">
         {!! Form::label('email','Correo *') !!}
         {!!
             Form::text('email',
@@ -37,7 +37,7 @@
             </span>
         @endif
     </div>
-    <div class="form-group col-md-6 col-12 {{ $errors->has('clave')? 'has-error':'' }}">
+    <div class="form-group col-md-6 col-12 {{ $errors->has('password')? 'has-error':'' }}">
         {!! Form::label('password','Password *') !!}
         {!!
             Form::text('password',
@@ -54,14 +54,21 @@
             </span>
         @endif
     </div>
-    <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
-        {!! Form::label('root','Super Usuario') !!}
+    <div class="form-group col-md-6 col-12 {{ $errors->has('root')? 'has-error':'' }}">
+        {!! Form::label('root','Super Usuario *') !!}
         {!!
-            Form::checkbox('root',
-            '1')
-         !!}
+            Form::select('root',
+                ['0'=>'Administrador','1'=>'Super Usuario'],
+                null,
+                [
+                    'class' => ' form-control mx-1',
+                    'id' => 'sexo',
+                    'placeholder'=>'Eliga el tipo de usuario'
 
-        @if($errors->has('email'))
+                ]
+            )
+         !!}
+        @if($errors->has('root'))
             <span class="help-block">
                 <strong>{{ $errors->first('root') }}</strong>
             </span>

@@ -20,7 +20,7 @@
 <body>
 <nav class="navbar navbar-light fixed-top bg-danger flex-md-nowrap p-0 shadow  ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
-        <i class="fas fa-university"></i> ITCG
+        <img src="{{ asset('img/logo.png') }}" width="30" height="30"/> ITCG
     </a>
     <span class="text-white ml-auto"> {{ Auth::user()->name }}</span>
     <ul class="navbar-nav px-3">
@@ -183,5 +183,9 @@
 
 
 @yield('script')
+
+@if(!Auth::check())
+    <script>window.location = "/login";</script>
+@endif
 </body>
 </html>

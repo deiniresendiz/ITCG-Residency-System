@@ -2,6 +2,42 @@
 
 @section('content')
     <br>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    {!! Form::open([ 'route' => 'cursos.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    <div class="form-group">
+                        {!!
+                            Form::select('state',
+                                ['Activo'=>'Activo','Terminado'=>'Terminado'],
+                                null,
+                                [
+                                    'class' => ' form-control mx-1',
+                                    'id' => 'sexo',
+                                    'placeholder'=>'Estado del curso'
+
+                                ]
+                            )
+                         !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre de la Empresa']) !!}
+
+                    </div>
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
     <h1>{{ $title }}</h1>
     <hr>
     <table class="table table-light table-striped table-hover">
@@ -40,5 +76,6 @@
         </tbody>
     </table>
 
-    {{ $cursos->links() }}
+    {{ $cursos->render() }}
+    </div>
 @endsection

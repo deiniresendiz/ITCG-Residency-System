@@ -149,5 +149,8 @@
 
       </div>
     </div>
+    @if(Auth::check())
+        <script>window.location = "/home";</script>
+    @endif
     </body>
 </html>
