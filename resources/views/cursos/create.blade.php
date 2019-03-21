@@ -2,8 +2,10 @@
 
 
 @section('content')
+    <br>
     <div class="container">
-    <h1>Nuevo Curso</h1>
+    <h1>
+        <i class="fas fa-chalkboard-teacher"></i> Nuevo Curso/Taller</h1>
         <hr>
     {!!
         Form::model(

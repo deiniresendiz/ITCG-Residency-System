@@ -149,6 +149,11 @@
                                 <a href="{{ Route('carreras.create') }}" class="nav-link font-weight-light "><i class="fas fa-angle-right"></i>Nuevo</a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ Route('adminegresado.index') }}">
+                                <i class="fas fa-user-graduate"></i> Egresados
+                            </a>
+                        </li>
                     </ul>
                 @endif
             </div>

@@ -74,8 +74,15 @@
     <br>
     <div class="container">
 
-        <h1>{{ $title }}</h1>
+        <h1>{{ $title }}
+            <a href="{{ route('egresados.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
+            <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+
+        </h1>
         <span class="float-right">Resultados: {{ $y }}</span>
+
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -123,25 +130,15 @@
 
 @section('script')
     <script type="text/javascript" >
-        /*jQuery(function ($) {
-            $("#carrera").change(event =>{
-                url();
+        jQuery(function ($) {
+            $('#carrera').select2({
+                placeholder:'Seleccione una Carrera',
+                tags:true,
+                tokenSeparators:[','],
             });
-            $("#inputPromedio").change(event =>{
-                url();
-            });
-            function url () {
-                var url = "{{ Route('egresados.index') }}";
-                if($.isNumeric($("#carrera").val()) && $.isNumeric($("#inputPromedio").val())){
-                    url += "?carrera="+$("#carrera").val()+"&promedio="+$("#inputPromedio").val();
-                }else if($.isNumeric($("#carrera").val())){
-                    url += "?carrera="+$("#carrera").val();
-                }else{
-                    url += "?promedio="+ $("#inputPromedio").val();
-                }
-                window.location.replace(url);
-            }
-        });*/
+
+        });
 
     </script>
 @endsection
+

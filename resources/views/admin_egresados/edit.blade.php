@@ -2,14 +2,14 @@
 
 @section('content')
     <br>
-
     <div class="container">
         <h1><i class="fas fa-user-edit"></i> {{ $user->name }}</h1>
+
         {!!
             Form::model(
                 $user,
                 [
-                    'route' => ['admin.update', $user,$id],
+                    'route' => ['adminegresado.update', $user,$id],
                     'files' => 'true',
                     'method' => 'PUT',
                 ]
@@ -37,14 +37,14 @@
                 @endif
             </div>
             <div class="form-group  col-md-6 col-12 {{ $errors->has('nombre')? 'has-error':'' }}">
-                {!! Form::label('email','Correo') !!}
+                {!! Form::label('email','No° Control') !!}
                 {!!
                     Form::text('email',
                     null,
                     [
                         'required',
                         'class' => 'form-control',
-                        'placeholder' => 'Correo',
+                        'placeholder' => 'No° Control',
                     ])
                  !!}
 
@@ -75,19 +75,6 @@
                 <button id="btnPass" type="button" class="btn btn-warning">
                     Nueva Contaseña
                 </button>
-            </div>
-            <div class="form-group  col-md-6 col-12 {{ $errors->has('isRoot')? 'has-error':'' }}">
-                {!! Form::label('isRoot','Super Usuario') !!}
-                {!!
-                    Form::checkbox('isRoot',
-                    '1')
-                 !!}
-
-                @if($errors->has('isRoot'))
-                    <span class="help-block">
-                <strong>{{ $errors->first('isRoot') }}</strong>
-            </span>
-                @endif
             </div>
         </div>
 

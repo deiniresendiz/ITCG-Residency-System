@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeAdmin;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use function Sodium\add;
 
-class AdministradoresController extends Controller
+class AdmiEgresadosController extends Controller
 {
     public function __construct()
     {
@@ -22,13 +20,12 @@ class AdministradoresController extends Controller
      */
     public function index(Request $request)
     {
-
-        $title = "Administradores";
-        $users = User::where('isAdmin','=','1')->orderBy('name')->paginate();
+        $title = "Egresados";
+        $users = User::where('isAdmin','=','0')->orderBy('name')->paginate();
         $page_no = ($request->get('page'))? $request->get('page'):1;
 
         $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        return view('admin.index',compact('users','title','x'));
+        return view('admin_egresados.index',compact('users','title','x'));
     }
 
     /**
@@ -38,11 +35,7 @@ class AdministradoresController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->isRoot == 1){
-            return view('admin.create');
-        }else{
-            return view('home');
-        }
+        //
     }
 
     /**
@@ -53,14 +46,7 @@ class AdministradoresController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'isAdmin' => 1,
-            'isRoot' => $request->get('root'),
-        ]);
-        return redirect()->route('admin.show',$user);
+        //
     }
 
     /**
@@ -72,7 +58,7 @@ class AdministradoresController extends Controller
     public function show($id)
     {
         $user = User::where('id',$id)->first();
-        return view('admin.show',compact('user'));
+        return view('admin_egresados.show',compact('user'));
     }
 
     /**
@@ -84,7 +70,7 @@ class AdministradoresController extends Controller
     public function edit($id)
     {
         $user = User::where('id',$id)->first();
-        return view('admin.edit',compact('user','id'));
+        return view('admin_egresados.edit',compact('user','id'));
     }
 
     /**
@@ -96,12 +82,7 @@ class AdministradoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::where('id',$id)->first();
-        $user->email = $request->get('email');
-        $user->name = $request->get('name');
-        $user->isRoot ($request->get('isRoot') != 1? 0 : 1);
-        $user->save();
-        return view('admin.show',compact('user'));
+        //
     }
 
     /**
@@ -112,8 +93,7 @@ class AdministradoresController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('admin.index');
+        //
     }
 
     public function updatePass(Request $request, $id, $pass){
@@ -125,5 +105,4 @@ class AdministradoresController extends Controller
             $user->save();
         }
     }
-
 }

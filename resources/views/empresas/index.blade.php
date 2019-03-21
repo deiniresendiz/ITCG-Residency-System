@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+    <br>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+            </ol>
+        </nav>
+    </div>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
@@ -39,7 +48,14 @@
     <br>
     <div class="container">
     <hr>
-    <h1>{{ $title }}</h1>
+    <h1>{{ $title }}
+        <a href="{{ route('empresas.create') }}">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+
+    </h1>
+        <span class="float-right">Resultados: {{ $y }}</span>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -75,8 +91,7 @@
 
     </table>
         <div class="text-center">
-                {!! $empresas->render() !!}
-
+            {!! $empresas->appends(['ciudad'=> Request::get('ciudad'),'name'=> Request::get('name')])->render() !!}
         </div>
     </div>
 @endsection
@@ -94,7 +109,17 @@
                 }
                 window.location.replace(url);
             }
+
+
+                $('#ciudad').select2({
+                    placeholder:'Seleccione una Ciudad',
+                    tags:true,
+                    tokenSeparators:[','],
+                });
+
         });
 
     </script>
 @endsection
+
+

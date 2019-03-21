@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-    <br>
-    <h1>
-        <i class="fas fa-university"></i>  Carrera
-    </h1>
-    <hr>
+
     <div class="container">
+        <br>
+        <h1>
+            <i class="fas fa-university"> {{ $carrera->nombre }}</i>
+        </h1>
+        <hr>
         <dl class="row">
             <dt class="col-sm-3">Clave</dt>
             <dd class="col-sm-9">{{ $carrera->clave }}</dd>

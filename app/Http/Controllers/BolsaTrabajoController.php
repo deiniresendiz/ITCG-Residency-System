@@ -33,7 +33,12 @@ class BolsaTrabajoController extends Controller
         $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
         $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
         $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
-        return view('trabajos.index',compact('trabajos','title','citys','empresas','areas'));
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $y = BolsaTrabajo::areat($area)->name($pusto)->empresas($empresa)->town($ciudad)->orderBy('puesto')->count();
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+        return view('trabajos.index',compact('trabajos','title','citys','empresas','areas','x','y'));
     }
 
     /**
@@ -46,7 +51,8 @@ class BolsaTrabajoController extends Controller
         $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
         $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        return view('trabajos.create', compact('empresas','areas','state'));
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('trabajos.create', compact('empresas','areas','state','town'));
     }
 
     /**
@@ -137,9 +143,10 @@ class BolsaTrabajoController extends Controller
     {
         $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
         $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
-        $ciudades = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
         $trabajo = BolsaTrabajo::where('id',$id)->first();
-        return view('trabajos.edit', compact('trabajo','id','empresas','areas','ciudades'));
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('trabajos.edit', compact('trabajo','id','empresas','areas','state','town'));
     }
 
     /**

@@ -35,8 +35,12 @@ class CursosController extends Controller
         $name = $request->get('name');
         $cursos = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->paginate();
 
+        $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        return view('cursos.index',compact('cursos','title'));
+        $y = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->count();
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+        return view('cursos.index',compact('cursos','title','x','y'));
     }
 
     /**

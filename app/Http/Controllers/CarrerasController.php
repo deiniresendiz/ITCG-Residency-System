@@ -21,7 +21,9 @@ class CarrerasController extends Controller
     {
         $title = "Carraras";
         $carreras = Carreras::orderBy('nombre')->paginate();
-        $x = 1;
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
         return view('carreras.index',compact('carreras','title','x'));
     }
 

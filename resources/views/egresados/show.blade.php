@@ -16,7 +16,9 @@
             <a href="{{ route('egresados.edit',$egresado) }}">
                 <i class="fas fa-user-edit"></i>
             </a>
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$egresado) }}"><i class="fas fa-print"></i></a>
         </h1>
+
         <hr>
     </div>
 
@@ -47,7 +49,7 @@
             <dd class="col-sm-5">{{ date_format($egresado->fecha_egreso,'d/m/Y') }}</dd>
             <dt class="col-sm-2">Ciudad:</dt>
             <dd class="col-sm-3">{{ $egresado->ciudad->nombre }}</dd>
-            <dt class="col-sm-2">Curp:</dt>
+            <dt class="col-sm-2">Telefono:</dt>
             <dd class="col-sm-5">{{ $egresado->telefono }}</dd>
             <dt class="col-sm-2">Celular:</dt>
             <dd class="col-sm-3">{{ $egresado->celular }}</dd>

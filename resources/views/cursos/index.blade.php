@@ -38,8 +38,15 @@
     </div>
     <br>
     <div class="container">
-    <h1>{{ $title }}</h1>
-    <hr>
+        <h1>{{ $title }}
+            <a href="{{ route('cursos.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
+            <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+
+        </h1>
+        <span class="float-right">Resultados: {{ $y }}</span>
+
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
             <tr>
@@ -76,6 +83,8 @@
         </tbody>
     </table>
 
-    {{ $cursos->render() }}
+        <div class="text-center">
+            {!! $cursos->appends(['name'=> Request::get('name'),'state'=> Request::get('state')])->render() !!}
+        </div>
     </div>
 @endsection

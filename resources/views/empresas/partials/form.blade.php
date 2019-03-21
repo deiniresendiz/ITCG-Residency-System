@@ -65,12 +65,14 @@
 
         {!!
             Form::select('ciudad_id',
-                ['placeholder' => 'Selecciona un estado'],
+                $town,
                 null,
                 [
+                    'placeholder' => 'Selecciona una Ciudad',
                     'required',
                     'class' => 'form-control',
                     'id' => 'townEmpresa',
+                    'min' => '4'
                 ]
             )
          !!}

@@ -38,9 +38,22 @@ Route::get('empresas/towns/{id}','EmpresasController@getTowns');
 Route::get('egresados/towns/{id}','EgresadosController@getTowns');
 Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
 
+Route::get('pdf/egresados','EgresadosController@pdfegresados')->name('egresados.pdf');
+Route::get('pdf/{id}/egresado','EgresadosController@pdf')->name('egresado.pdf');
 
 Route::post('change-password', 'MyCountAdminController@updatePass')->name('password.update');
 
+
+Route::resource('/adminegresado','AdmiEgresadosController');
+Route::get('adminegresado/{id}/pass/{pass}','AdmiEgresadosController@updatePass');
+
+Route::get('pdf/', function () {
+    $pdf = resolve('dompdf.wrapper');
+    $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+    $pdf->loadView('pdf.egresados');
+    return $pdf->stream();
+
+});
 
 
 

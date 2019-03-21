@@ -50,8 +50,8 @@ class EgresadosController extends Controller
     {
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-
-        return view('egresados.create', compact('carerras','state'));
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('egresados.create', compact('carerras','state','town'));
     }
     public function getTowns(Request $request, $id){
         if($request->ajax()){
@@ -157,9 +157,10 @@ class EgresadosController extends Controller
     {
 
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
-        $state = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
         $egresado = Egresados::where('id',$id)->first();
-        return view('egresados.edit',compact('egresado','id','carerras','state'));
+        return view('egresados.edit',compact('egresado','id','carerras','state','town'));
     }
 
     /**
@@ -222,5 +223,32 @@ class EgresadosController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function pdfegresados(Request $request){
+        set_time_limit(0);
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+
+        $nombre = $request->get('name');
+        $carrera = $request->get('carrera_id');
+        $sexo = $request->get('sexo');
+        $promedio = $request->get('promedio');
+        $egresados = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->paginate(100);
+        $pdf = resolve('dompdf.wrapper');
+        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf->setPaper('a4', 'landscape');
+        $pdf->loadView('pdf.egresados',['egresados' => $egresados,'x'=> $x]);
+        return $pdf->stream();
+        //return $egresados;
+    }
+    public function pdf($id){
+        $egresado = Egresados::where('id',$id)->first();
+        //return $egresado->nombre;
+        $pdf = resolve('dompdf.wrapper');
+        $pdf->setOptions(['dpi' => 160, 'defaultFont' => 'sans-serif']);
+        $pdf->loadView('pdf.egresados.egresado',['egresado' => $egresado]);
+        return $pdf->stream();
+        //return $egresados;
     }
 }

@@ -2,21 +2,20 @@
 
 
 @section('content')
-    <br>
+
     <div class="container">
-        <h1>Nueva Carrera</h1>
-        <hr>
+        <h1>Nuevo Administrador</h1>
         {!!
             Form::model(
-                $carrera = new \App\Carreras(),
+                $user = new \App\User(),
                 [
-                    'route' => 'carreras.store',
+                    'route' => 'admin.store',
                     'files' => 'true'
                 ]
             )
          !!}
 
-        @include('carreras.partials.form')
+        @include('admin.partials.form')
 
         {!! Form::close() !!}
     </div>

@@ -81,18 +81,19 @@
         @endif
     </div>
 
-    <div class="form-group col-12 col-sm-6 col-lg-4 py-2 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
+    <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('ciudad_id') ? 'has-error': '' }}">
         {!! Form::label('ciudad_id','Ciudad *') !!}
 
         {!!
             Form::select('ciudad_id',
-                ['placeholder' => 'Selecciona un estado'],
+                $town,
                 null,
                 [
-
+                    'placeholder' => 'Selecciona una Ciudad',
                     'required',
                     'class' => 'form-control',
-                    'id' => 'townTrabajos'
+                    'id' => 'townTrabajos',
+                    'min' => '4'
                 ]
             )
          !!}
@@ -103,6 +104,7 @@
             </span>
         @endif
     </div>
+
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{ $errors->has('domicilio')? 'has-error':'' }}">
         {!! Form::label('domicilio','Domiclio *') !!}

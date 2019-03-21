@@ -1,8 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Editar {{ $carrera->nombre }}</h1>
+    <br>
     <div class="container">
+        <h1> {{ $carrera->nombre }}</h1>
         {!!
             Form::model(
                 $carrera,

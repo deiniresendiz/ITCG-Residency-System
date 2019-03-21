@@ -25,9 +25,13 @@ class EmpresasController extends Controller
         $title = "Empresas";
         $ciudad = $request->get('ciudad');
         $nombre = $request->get('name');
-        $empresas = Empresas::nombre($nombre)->ciudad($ciudad)->orderBy('nombre')->paginate();
+        $y = Empresas::nombre($nombre)->ciudad($ciudad)->orderBy('nombre')->count();
         $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
-        return view('empresas.index',compact('empresas','title','citys'));
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $empresas = Empresas::nombre($nombre)->ciudad($ciudad)->orderBy('nombre')->paginate();
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+        return view('empresas.index',compact('empresas','title','citys','x','y'));
     }
 
     /**
@@ -38,7 +42,8 @@ class EmpresasController extends Controller
     public function create()
     {
         $state = Estados::orderBy('nombre')->pluck('nombre','id');
-        return view('empresas.create',compact('state'));
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('empresas.create',compact('state','town'));
     }
 
     public function getTowns(Request $request, $id){
@@ -104,8 +109,9 @@ class EmpresasController extends Controller
     public function edit($id)
     {
         $empresa = Empresas::where('id',$id)->first();
-        $citys = Ciudades::orderBy('nombre')->pluck('nombre','id');
-        return view('empresas.edit',compact('empresa','id','citys'));
+        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+        return view('empresas.edit',compact('empresa','id','town','state'));
     }
 
     /**

@@ -13,7 +13,9 @@
         <br>
     </div>
     <div class="container">
-    <h1>Nuevo Egresado</h1>
+    <h1>
+        <i class="fas fa-user-edit"></i>
+        Nuevo Egresado</h1>
         <hr>
     {!!
         Form::model(
@@ -29,4 +31,23 @@
 
     {!! Form::close() !!}
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $('#townEgresados').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+            });
+            $('#stateEgresados').select2({
+                placeholder:'Seleccione un Estado',
+            });
+            $('#carrera_id').select2({
+                placeholder:'Seleccione una Carrera',
+            });
+        });
+
+    </script>
 @endsection

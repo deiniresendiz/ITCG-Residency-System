@@ -84,10 +84,10 @@
 
         {!!
             Form::select('ciudad_id',
-                ['placeholder' => 'Selecciona un estado'],
+                $town,
                 null,
                 [
-
+                    'placeholder' => 'Selecciona una Ciudad',
                     'required',
                     'class' => 'form-control',
                     'id' => 'townEgresados',
@@ -292,22 +292,4 @@
 </div>
 
 
-@section('script')
-    <script type="text/javascript" >
-        jQuery(function ($) {
-            $('#townEgresados').select2({
-                placeholder:'Seleccione una ciudad',
-                tags:true,
-                tokenSeparators:[','],
-            });
-            $('#stateEgresados').select2({
-                placeholder:'Seleccione un Estado',
-            });
-            $('#carrera_id').select2({
-                placeholder:'Seleccione una Carrera',
-            });
 
-        });
-
-    </script>
-@endsection
