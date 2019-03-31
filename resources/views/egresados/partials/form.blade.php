@@ -1,6 +1,6 @@
-<span class="mr-3 text-danger ">Campos requeridos *</span>
+<span class="mr-3 text-danger ">Campos obligatorios *</span>
 <div class="row">
-    <div class="form-group col-12 col-sm-4 col-lg-2 {{ $errors->has('no_control')? 'has-error':'' }}">
+    <div class="form-group col-12 col-sm-4 col-lg-4 {{ $errors->has('no_control')? 'has-error':'' }}">
         {!! Form::label('no_control','Numero de control *') !!}
         {!!
             Form::text('no_control',
@@ -17,7 +17,7 @@
             </span>
         @endif
     </div>
-    <div class="form-group col-12 col-sm-7 col-lg-6 {{ $errors->has('nombre')? 'has-error':'' }}">
+    <div class="form-group col-12 col-sm-8 col-lg-8 {{ $errors->has('nombre')? 'has-error':'' }}">
         {!! Form::label('nombre','Nombre *') !!}
         {!!
             Form::text('nombre',
@@ -44,7 +44,6 @@
                 [
                     'required',
                     'class' => 'form-control',
-
                 ]
             )
          !!}
@@ -55,6 +54,9 @@
             </span>
         @endif
     </div>
+    @if($egresado->estado_id)
+        <input type="text" value="{{ $egresado->estado_id->estado_id }}" hidden id="id_estado">
+    @endif
 
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('estado_id') ? 'has-error': '' }}">
         {!! Form::label('estado_id','Estado *') !!}
@@ -265,8 +267,29 @@
             </span>
         @endif
     </div>
+    <div class="form-group col-12 col-sm-12 col-lg-12 {{$errors->has('idioma_id') ? 'has-error': '' }}">
+        {!! Form::label('idioma_id','Idiomas') !!}
+
+        {!!
+            Form::select('idioma_id[]',
+                $idiomas,
+                $idiomas_eg,
+                [
+                    'class' => 'form-control margin',
+                    'multiple' => 'multiple',
+                    'id' => 'idioma_id'
+                ]
+            )
+         !!}
+
+        @if($errors->has('idioma_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('idioma_id') }}</strong>
+            </span>
+        @endif
+    </div>
     <div class="form-group col-12 col-sm-6 col-lg-4 {{$errors->has('imagen') ? 'has-error': '' }}">
-        {!! Form::label('imagen','Imagen') !!}
+        {!! Form::label('imagen','Foto de perfil') !!}
 
         {!!
             Form::file('imagen',
@@ -290,6 +313,8 @@
         Guardar
     </button>
 </div>
+
+
 
 
 

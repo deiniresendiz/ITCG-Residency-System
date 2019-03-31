@@ -5,10 +5,10 @@
 </head>
 <body>
 
-        <h1>Egresado {{ $egresado->nombre }}</h1>
-        <hr>
-<div class="container">
+@include('pdf.encabezado')
 
+<div class="container">
+    <h1>Datos del egresado</h1>
 
         <table >
             <tbody>

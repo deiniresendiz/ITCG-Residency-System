@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\BolsaTrabajo;
+use App\Cursos;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        Cursos::where('fecha_final','<',date('y-m-d'))->where('estado','=','Activo')->update(['estado' => "Terminado"]);
+
+
+        $cursos = Cursos::orderBy('fecha_final')->get();
+        $trabajos = BolsaTrabajo::where('estado','Disponible')->orderBy('puesto')->get();
+
+
+
+
+        return view('home',compact('cursos','trabajos'));
     }
 }

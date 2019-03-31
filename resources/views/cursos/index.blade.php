@@ -39,11 +39,12 @@
     <br>
     <div class="container">
         <h1>{{ $title }}
-            <a href="{{ route('cursos.create') }}">
-                <i class="fas fa-plus"></i>
-            </a>
-            <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
-
+            @if(Auth::user()->isAdmin == 1)
+                <a href="{{ route('cursos.create') }}">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+            @endif
         </h1>
         <span class="float-right">Resultados: {{ $y }}</span>
 

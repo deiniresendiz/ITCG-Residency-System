@@ -30,6 +30,45 @@
 
     {!! Form::close() !!}
     </div>
+    <script type="application/javascript">
+        var estado = document.getElementById('stateEgresados');
+        estado.value = document.getElementById('id_estado').value;
+    </script>
 @endsection
+@section('script')
+    <script type="text/javascript" >
+        $("#stateEgresados").change(event =>{
+            $.get(`townsedit/${event.target.value}`, function (res, state) {
+                $("#townEgresados").empty();
+                $( "#townEgresados" ).prop( "disabled", false );
+                res.forEach(element => {
+                    $("#townEgresados").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                })
+            });
+        });
+        jQuery(function ($) {
+            $('#townEgresados').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+            });
+            $('#stateEgresados').select2({
+                placeholder:'Seleccione un Estado',
+            });
+            $('#carrera_id').select2({
+                placeholder:'Seleccione una Carrera',
+            });
+            $('#idioma_id').select2({
+                placeholder:'Seleccione un idioma',
+                tags:true,
+                tokenSeparators:[','],
+            });
+        });
+
+
+
+    </script>
+@endsection
+
 
 

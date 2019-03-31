@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Egresados;
+use App\Empresas;
+use App\Ocupaciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OcupacionesController extends Controller
 {
@@ -15,9 +19,19 @@ class OcupacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $id = Auth::user()->id;
+        $egresado = Egresados::where('user_id',$id)->first();
+
+        $ocupaciones = Ocupaciones::where('egresado_id',$egresado->id)->paginate();
+
+        $page_no = ($request->get('page'))? $request->get('page'):1;
+
+        $y = Ocupaciones::where('egresado_id',$egresado->id)->count();
+
+        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+        return view('ocupaciones.index',compact('ocupaciones','x','y'));
     }
 
     /**
@@ -27,7 +41,8 @@ class OcupacionesController extends Controller
      */
     public function create()
     {
-        //
+        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+        return view('ocupaciones.create', compact('empresas'));
     }
 
     /**
@@ -35,10 +50,31 @@ class OcupacionesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 'egresado_id',
+    'empresa_id',
+    'puesto',
+    'descripcion',
+    'lugar',
+    'antiguedad',
      */
     public function store(Request $request)
     {
-        //
+        $ocupacion = new Ocupaciones($request->all());
+        $id = Auth::user()->id;
+        $egresado = Egresados::where('user_id',$id)->first();
+        $empresa = $request->get('empresa_id');
+        if(!is_numeric($empresa)){
+            $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
+            $ocupacion->empresa_id = $newEmpresa->id;
+        }else{
+            $ocupacion->empresa_id = $empresa;
+        }
+        $ocupacion->puesto = $request->get('puesto');
+        $ocupacion->descripcion = $request->get('descripcion');
+        $ocupacion->antiguedad = $request->get('antiguedad');
+        $ocupacion->egresado_id = $egresado->id;
+        $ocupacion->save();
+        return redirect()->route('ocupaciones.show',$ocupacion);
     }
 
     /**
@@ -49,7 +85,8 @@ class OcupacionesController extends Controller
      */
     public function show($id)
     {
-        //
+        $ocupacion = Ocupaciones::where('id',$id)->first();
+        return view('ocupaciones.show', compact('ocupacion'));
     }
 
     /**
@@ -60,7 +97,9 @@ class OcupacionesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ocupacion = Ocupaciones::where('id',$id)->first();
+        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+        return view('ocupaciones.edit', compact('ocupacion','empresas','id'));
     }
 
     /**
@@ -72,7 +111,22 @@ class OcupacionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ocupacion = Ocupaciones::where('id',$id)->first();
+        $id = Auth::user()->id;
+        $egresado = Egresados::where('user_id',$id)->first();
+        $empresa = $request->get('empresa_id');
+        if(!is_numeric($empresa)){
+            $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
+            $ocupacion->empresa_id = $newEmpresa->id;
+        }else{
+            $ocupacion->empresa_id = $empresa;
+        }
+        $ocupacion->puesto = $request->get('puesto');
+        $ocupacion->descripcion = $request->get('descripcion');
+        $ocupacion->antiguedad = $request->get('antiguedad');
+        $ocupacion->egresado_id = $egresado->id;
+        $ocupacion->save();
+        return redirect()->route('ocupaciones.show',$ocupacion);
     }
 
     /**

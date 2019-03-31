@@ -23,6 +23,10 @@ class Empresas extends Model
         return $this->belongsTo(Ciudades::class);
     }
 
+    public function estado_id(){
+        return $this->ciudad()->select(['estado_id']);
+    }
+
     public function scopeNombre($query, $nombre){
         if ($nombre)
             return $query->orWhere('nombre', 'LIKE' ,"%$nombre%");

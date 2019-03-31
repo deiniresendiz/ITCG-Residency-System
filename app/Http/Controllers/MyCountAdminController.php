@@ -6,6 +6,8 @@ use App\Carreras;
 use App\Ciudades;
 use App\Egresados;
 use App\Estados;
+use App\IdiomaDetalle;
+use App\Idiomas;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +29,11 @@ class MyCountAdminController extends Controller
         $user = User::where('id',$id)->first();
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre','id');
+        $town = Ciudades::orderBy('nombre')->pluck('nombre','id');
         $egresado = Egresados::where('user_id',$id)->first();
-        return view('account.index',compact('user', 'id','egresado','carerras','state'));
+        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+        return view('account.index',compact('user', 'id','egresado','carerras','state','town','idiomas_eg','idiomas'));
     }
 
     /**

@@ -40,6 +40,10 @@ class BolsaTrabajo extends Model
         return $this->belongsTo(Ciudades::class);
     }
 
+    public function estado_id(){
+        return $this->ciudad()->select(['estado_id']);
+    }
+
     //scope
 
     public function scopeName($query, $puesto){

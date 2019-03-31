@@ -30,3 +30,28 @@
     {!! Form::close() !!}
     </div>
 @endsection
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $('#townEmpresa').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+            });
+            $('#stateEmpresa').select2({
+                placeholder:'Seleccione un Estado',
+            });
+        });
+
+        $("#stateEmpresa").change(event =>{
+            $.get(`towns/${event.target.value}`, function (res, state) {
+                $("#townEmpresa").empty();
+                $( "#townEmpresa" ).prop( "disabled", false );
+                res.forEach(element => {
+                    $("#townEmpresa").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                })
+            });
+        });
+    </script>
+@endsection

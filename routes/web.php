@@ -32,11 +32,16 @@ Route::resource('/empresas','EmpresasController');
 Route::resource('/carreras','CarrerasController');
 Route::resource('/admin','AdministradoresController');
 Route::resource('/account','MyCountAdminController');
+Route::resource('/ocupaciones','OcupacionesController');
+Route::resource('/estudios','EstudiosController');
 Route::get('admin/{id}/pass/{pass}','AdministradoresController@updatePass');
 Route::get('admin/{id}/destroy','AdministradoresController@destroy');
 Route::get('empresas/towns/{id}','EmpresasController@getTowns');
+Route::get('empresas/{em}/townsedit/{id}','EmpresasController@getTownsEdit');
 Route::get('egresados/towns/{id}','EgresadosController@getTowns');
+Route::get('egresados/{eg}/townsedit/{id}','EgresadosController@getTownsEdit');
 Route::get('trabajos/towns/{id}','BolsaTrabajoController@getTowns');
+Route::get('trabajos/{ta}/townsedit/{id}','BolsaTrabajoController@getTownsEdit');
 
 Route::get('pdf/egresados','EgresadosController@pdfegresados')->name('egresados.pdf');
 Route::get('pdf/{id}/egresado','EgresadosController@pdf')->name('egresado.pdf');

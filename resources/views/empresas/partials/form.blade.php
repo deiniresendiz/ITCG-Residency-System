@@ -154,6 +154,9 @@
 
     </div>
 </div>
+@if($empresa->estado_id)
+    <input type="text" value="{{ $empresa->estado_id->estado_id }}" hidden id="id_estado">
+@endif
 <div class="form-group">
     <button type="submit" class="btn btn-danger">
         Guardar
@@ -161,19 +164,4 @@
 </div>
 
 
-@section('script')
-    <script type="text/javascript" >
-        jQuery(function ($) {
-            $('#townEmpresa').select2({
-                placeholder:'Seleccione una ciudad',
-                tags:true,
-                tokenSeparators:[','],
-                disabled: true
-            });
-            $('#stateEmpresa').select2({
-                placeholder:'Seleccione un Estado',
-            });
-        });
 
-    </script>
-@endsection

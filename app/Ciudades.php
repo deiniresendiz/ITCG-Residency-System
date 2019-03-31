@@ -13,7 +13,7 @@ class Ciudades extends Model
         'nombre',
     ];
 
-    public function estado(){
+    public  function estado(){
         return $this->belongsTo(Estados::class);
     }
 

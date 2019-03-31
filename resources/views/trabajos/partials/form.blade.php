@@ -312,37 +312,14 @@
 
     </div>
 </div>
+@if($trabajo->estado_id)
+    <input type="text" value="{{ $trabajo->estado_id->estado_id }}" hidden id="id_estado">
+@endif
 <div class="form-group">
     <button type="submit" class="btn btn-danger">
         Guardar
     </button>
 </div>
 
-@section('script')
-    <script type="text/javascript" >
 
-        jQuery(function ($) {
-            $('#townTrabajos').select2({
-                placeholder:'Seleccione una ciudad',
-                tags:true,
-                tokenSeparators:[','],
-                disabled: true
-            });
-            $('#stateTraajos').select2({
-                placeholder:'Seleccione un Estado',
-            });
-            $('#area_id').select2({
-                placeholder:'Seleccione el Area Profesional',
-                tags:true,
-                tokenSeparators:[','],
-            });
-            $('#empresa_id').select2({
-                placeholder:'Seleccione una empresa',
-                tags:true,
-                tokenSeparators:[','],
-            });
-        });
-
-    </script>
-@endsection
 

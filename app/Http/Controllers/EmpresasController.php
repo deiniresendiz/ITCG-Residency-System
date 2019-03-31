@@ -53,6 +53,12 @@ class EmpresasController extends Controller
         }
     }
 
+    public function getTownsEdit(Request $request, $em, $id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

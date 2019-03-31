@@ -35,7 +35,7 @@ class BolsaTrabajoController extends Controller
         $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
         $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        $y = BolsaTrabajo::areat($area)->name($pusto)->empresas($empresa)->town($ciudad)->orderBy('puesto')->count();
+        $y = BolsaTrabajo::areat($area)->name($pusto)->empresas($empresa)->town($ciudad)->count();
 
         $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
         return view('trabajos.index',compact('trabajos','title','citys','empresas','areas','x','y'));
@@ -115,6 +115,13 @@ class BolsaTrabajoController extends Controller
     }
 
     public function getTowns(Request $request, $id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
+    }
+
+    public function getTownsEdit(Request $request, $ta, $id){
         if($request->ajax()){
             $citys = Ciudades::towns($id);
             return response()->json($citys);

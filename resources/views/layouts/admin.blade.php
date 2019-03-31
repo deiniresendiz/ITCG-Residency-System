@@ -115,6 +115,16 @@
                                 <i class="fas fa-briefcase"></i> Bolsa de Trabajos
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ Route('estudios.index') }}">
+                                <i class="fas fa-university"></i> Mis Estudios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ Route('ocupaciones.index') }}">
+                                <i class="fas fa-building"></i> Mis Trabajos
+                            </a>
+                        </li>
                     @endif
                 </ul>
                 @if(Auth::user()->isRoot == 1)
@@ -182,8 +192,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-{!! Html::script('js/dropdown.js') !!}
 
 
 

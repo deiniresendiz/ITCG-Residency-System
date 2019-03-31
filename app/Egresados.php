@@ -33,6 +33,11 @@ class Egresados extends Model
     }
 
 
+    public function estado_id(){
+        return $this->ciudad()->select(['estado_id']);
+    }
+
+
     public static function carreras($id){
         return Carreras::where('id',$id)->first();
     }

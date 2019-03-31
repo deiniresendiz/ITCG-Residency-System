@@ -12,7 +12,6 @@ class IdiomaDetalle extends Model
     protected $fillable = [
         'idioma_id',
         'egresado_id',
-        'nivel',
     ];
 
 

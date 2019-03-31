@@ -29,4 +29,34 @@
 
     {!! Form::close() !!}
     </div>
+    <script type="application/javascript">
+        var estado = document.getElementById('stateEmpresa');
+        estado.value = document.getElementById('id_estado').value;
+    </script>
+@endsection
+
+@section('script')
+    <script type="text/javascript" >
+        jQuery(function ($) {
+            $('#townEmpresa').select2({
+                placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
+
+            });
+            $('#stateEmpresa').select2({
+                placeholder:'Seleccione un Estado',
+            });
+        });
+
+        $("#stateEmpresa").change(event =>{
+            $.get(`townsedit/${event.target.value}`, function (res, state) {
+                $("#townEmpresa").empty();
+                $( "#townEmpresa" ).prop( "disabled", false );
+                res.forEach(element => {
+                    $("#townEmpresa").append(`<option value=${element.id}> ${element.nombre} </option>`);
+                })
+            });
+        });
+    </script>
 @endsection

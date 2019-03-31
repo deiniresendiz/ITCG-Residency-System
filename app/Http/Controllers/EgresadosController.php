@@ -7,6 +7,8 @@ use App\Ciudades;
 use App\Egresados;
 use App\Estados;
 use App\Http\Requests\storeEgresados;
+use App\IdiomaDetalle;
+use App\Idiomas;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -51,9 +53,17 @@ class EgresadosController extends Controller
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
         $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('egresados.create', compact('carerras','state','town'));
+        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+        $idiomas_eg = null;
+        return view('egresados.create', compact('carerras','state','town','idiomas','idiomas_eg'));
     }
-    public function getTowns(Request $request, $id){
+    public function getTowns(Request $request ,$id){
+        if($request->ajax()){
+            $citys = Ciudades::towns($id);
+            return response()->json($citys);
+        }
+    }
+    public function getTownsEdit(Request $request, $eg, $id){
         if($request->ajax()){
             $citys = Ciudades::towns($id);
             return response()->json($citys);
@@ -79,9 +89,10 @@ class EgresadosController extends Controller
     'fecha_egreso',
     'promedio',
     'imagen'
+     * storeEgresados
      */
 
-    public function store(storeEgresados $request)
+    public function store(Request $request)
     {
         $egresado = new Egresados($request->all());
         $egresado->no_control = $request->get('no_control');
@@ -132,6 +143,31 @@ class EgresadosController extends Controller
         ]);
         $egresado->user_id =  $user->id;
         $egresado->save();
+
+        /*Agregar idiomas */
+        $idiomas = $request->get('idioma_id');
+
+        foreach ($idiomas as $idioma){
+            if(!is_numeric($idioma)){
+                $newIdioma = Idiomas::firstOrCreate(
+                    [
+                        'nombre' => ucwords($idioma)
+                    ]);
+
+                IdiomaDetalle::firstOrCreate(
+                    [
+                        'idioma_id' => $newIdioma->id,
+                        'egresado_id' => $egresado->id
+                    ]);
+            }else{
+                IdiomaDetalle::firstOrCreate(
+                    [
+                        'idioma_id' => $idioma,
+                        'egresado_id' => $egresado->id
+                    ]);
+            }
+        }
+
         return redirect()->route('egresados.show',$egresado);
     }
 
@@ -160,7 +196,9 @@ class EgresadosController extends Controller
         $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
         $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
         $egresado = Egresados::where('id',$id)->first();
-        return view('egresados.edit',compact('egresado','id','carerras','state','town'));
+        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+        return view('egresados.edit',compact('egresado','id','carerras','state','town','idiomas','idiomas_eg'));
     }
 
     /**
@@ -211,6 +249,35 @@ class EgresadosController extends Controller
         }
 
         $egresado->save();
+
+        /*Idiomas */
+        $idiomas = $request->get('idioma_id');
+        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+
+        if(count($idiomas) != count($idiomas_eg)){
+            IdiomaDetalle::where('egresado_id',$id)->delete();
+            foreach ($idiomas as $idioma){
+                if(!is_numeric($idioma)){
+                    $newIdioma = Idiomas::firstOrCreate(
+                        [
+                            'nombre' => ucwords($idioma)
+                        ]);
+
+                    IdiomaDetalle::firstOrCreate(
+                        [
+                            'idioma_id' => $newIdioma->id,
+                            'egresado_id' => $egresado->id
+                        ]);
+                }else{
+                    IdiomaDetalle::firstOrCreate(
+                        [
+                            'idioma_id' => $idioma,
+                            'egresado_id' => $egresado->id
+                        ]);
+                }
+            }
+        }
+
         return redirect()->route('egresados.show',$egresado);
     }
 
