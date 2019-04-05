@@ -1,15 +1,12 @@
 @extends('layouts.admin')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/egresados">Egresados</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Mostar Egresado</li>
+@endsection
 @section('content')
     <br>
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/egresados">Egresados</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mostar Egresado</li>
-            </ol>
-        </nav>
         <br>
         <h1>
             <i class="fas fa-user-graduate"></i> Egresado
@@ -25,8 +22,8 @@
     <div class="container">
         @if($egresado->imagen)
             <div class="d-flex justify-content-center">
-                <a href="{{ asset($egresado->imagen) }}" class="img-thumbnail align-content-center w-25" target="_blank" >
-                    <img src="{{ asset($egresado->imagen) }}" alt="cartel del curso">
+                <a href="{{ asset($egresado->imagen) }}"  target="_blank" >
+                    <img src="{{ asset($egresado->imagen) }}" alt="cartel del curso" class="img-thumbnail align-content-center img-fluid" >
                 </a>
             </div>
         @endif

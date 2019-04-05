@@ -1,24 +1,20 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/ocupaciones">Mis Trabajos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Mostar Trabajo</li>
+@endsection
 @section('content')
     <br>
+    <br>
+
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/ocupaciones">Mis Trabajos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mostar Trabajo</li>
-            </ol>
-        </nav>
-    </div>
-    <h1>
-        <i class="fas fa-briefcase"></i> Trabajo
-        <a href="{{ route('ocupaciones.edit',$ocupacion) }}">
-            <i class="fas fa-edit"></i>
-        </a>
-    </h1>
-    <hr>
-    <div class="container">
+        <h1>
+            <i class="fas fa-briefcase"></i> Trabajo
+            <a href="{{ route('ocupaciones.edit',$ocupacion) }}">
+                <i class="fas fa-edit"></i>
+            </a>
+        </h1>
+        <hr>
         <dl class="row">
             <dt class="col-sm-2">Empresa:</dt>
             <dd class="col-sm-4">{{ $ocupacion->empresa->nombre }}</dd>

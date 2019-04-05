@@ -1,26 +1,26 @@
 @extends('layouts.admin')
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/ocupaciones">Mis Trabajos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Editar Trabajo</li>
-@endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/estudios">Mis Estudios</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Estudio</li>
+@endsection
 @section('content')
     <br>
     <br>
     <div class="container">
-        <h1><i class="fas fa-edit"></i> {{ $ocupacion->puesto }}</h1>
+        <h1><i class="fas fa-edit"></i> {{ $estudio->instituto }}</h1>
     {!!
         Form::model(
-            $ocupacion,
+            $estudio,
             [
-                'route' => ['ocupaciones.update', $ocupacion,$id],
-                'files' => 'true',
+                'route' => ['estudios.update', $estudio,$id],
+                'files' => 'false',
                 'method' => 'PUT'
             ]
         )
      !!}
 
-    @include('ocupaciones.partials.form')
+    @include('estudios.partials.form')
 
     {!! Form::close() !!}
     </div>
@@ -31,9 +31,8 @@
     <script type="text/javascript" >
 
         jQuery(function ($) {
-
-            $('#empresa_id').select2({
-                placeholder:'Seleccione una empresa',
+            $('#posgrado_id').select2({
+                placeholder:'Seleccione un posgrado',
                 tags:true,
                 tokenSeparators:[','],
             });

@@ -147,24 +147,26 @@ class EgresadosController extends Controller
         /*Agregar idiomas */
         $idiomas = $request->get('idioma_id');
 
-        foreach ($idiomas as $idioma){
-            if(!is_numeric($idioma)){
-                $newIdioma = Idiomas::firstOrCreate(
-                    [
-                        'nombre' => ucwords($idioma)
-                    ]);
+        if($idiomas) {
+            foreach ($idiomas as $idioma) {
+                if (!is_numeric($idioma)) {
+                    $newIdioma = Idiomas::firstOrCreate(
+                        [
+                            'nombre' => ucwords($idioma)
+                        ]);
 
-                IdiomaDetalle::firstOrCreate(
-                    [
-                        'idioma_id' => $newIdioma->id,
-                        'egresado_id' => $egresado->id
-                    ]);
-            }else{
-                IdiomaDetalle::firstOrCreate(
-                    [
-                        'idioma_id' => $idioma,
-                        'egresado_id' => $egresado->id
-                    ]);
+                    IdiomaDetalle::firstOrCreate(
+                        [
+                            'idioma_id' => $newIdioma->id,
+                            'egresado_id' => $egresado->id
+                        ]);
+                } else {
+                    IdiomaDetalle::firstOrCreate(
+                        [
+                            'idioma_id' => $idioma,
+                            'egresado_id' => $egresado->id
+                        ]);
+                }
             }
         }
 
@@ -254,28 +256,32 @@ class EgresadosController extends Controller
         $idiomas = $request->get('idioma_id');
         $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
 
-        if(count($idiomas) != count($idiomas_eg)){
+        if($idiomas){
             IdiomaDetalle::where('egresado_id',$id)->delete();
-            foreach ($idiomas as $idioma){
-                if(!is_numeric($idioma)){
-                    $newIdioma = Idiomas::firstOrCreate(
-                        [
-                            'nombre' => ucwords($idioma)
-                        ]);
+            if(count($idiomas) != count($idiomas_eg)){
+                foreach ($idiomas as $idioma){
+                    if(!is_numeric($idioma)){
+                        $newIdioma = Idiomas::firstOrCreate(
+                            [
+                                'nombre' => ucwords($idioma)
+                            ]);
 
-                    IdiomaDetalle::firstOrCreate(
-                        [
-                            'idioma_id' => $newIdioma->id,
-                            'egresado_id' => $egresado->id
-                        ]);
-                }else{
-                    IdiomaDetalle::firstOrCreate(
-                        [
-                            'idioma_id' => $idioma,
-                            'egresado_id' => $egresado->id
-                        ]);
+                        IdiomaDetalle::firstOrCreate(
+                            [
+                                'idioma_id' => $newIdioma->id,
+                                'egresado_id' => $egresado->id
+                            ]);
+                    }else{
+                        IdiomaDetalle::firstOrCreate(
+                            [
+                                'idioma_id' => $idioma,
+                                'egresado_id' => $egresado->id
+                            ]);
+                    }
                 }
             }
+        }else{
+            IdiomaDetalle::where('egresado_id',$id)->delete();
         }
 
         return redirect()->route('egresados.show',$egresado);

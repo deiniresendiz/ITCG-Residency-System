@@ -3,7 +3,14 @@
 @section('content')
     <br>
     <div class="container" >
-    <h1>Carreras</h1>
+        <br>
+        <h1>
+            <i class="fas fa-university"></i>
+            Carreras
+            <a href="{{ route('carreras.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
+        </h1>
     <hr>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">

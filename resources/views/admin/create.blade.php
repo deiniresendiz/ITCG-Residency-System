@@ -2,7 +2,8 @@
 
 
 @section('content')
-
+    <br>
+    <br>
     <div class="container">
         <h1>Nuevo Administrador</h1>
         {!!

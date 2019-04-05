@@ -3,9 +3,14 @@
 @section('content')
     <br>
     <div class="container">
+        <br>
     <h1>
         <i class="fas fa-users-cog"></i>
-        {{ $title }}</h1>
+        {{ $title }}
+        <a href="{{ route('admin.create') }}">
+            <i class="fas fa-plus"></i>
+        </a>
+    </h1>
     <hr>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">

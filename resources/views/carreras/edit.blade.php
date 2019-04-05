@@ -3,6 +3,7 @@
 @section('content')
     <br>
     <div class="container">
+        <br>
         <h1> {{ $carrera->nombre }}</h1>
         {!!
             Form::model(

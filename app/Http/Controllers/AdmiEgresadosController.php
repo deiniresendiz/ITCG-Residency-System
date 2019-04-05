@@ -21,11 +21,13 @@ class AdmiEgresadosController extends Controller
     public function index(Request $request)
     {
         $title = "Egresados";
-        $users = User::where('isAdmin','=','0')->orderBy('name')->paginate();
+        $name = $request->get('name');
+        $users = User::name($name)->where('isAdmin','=','0')->orderBy('name')->paginate();
         $page_no = ($request->get('page'))? $request->get('page'):1;
 
         $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        return view('admin_egresados.index',compact('users','title','x'));
+        $y = User::name($name)->where('isAdmin','=','0')->orderBy('name')->count();
+        return view('admin_egresados.index',compact('users','title','x','y'));
     }
 
     /**

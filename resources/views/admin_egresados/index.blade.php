@@ -2,11 +2,31 @@
 
 @section('content')
     <br>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    {!! Form::open([ 'route' => 'adminegresado.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    <div class="form-group">
+                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control']) !!}
+
+                    </div>
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
     <div class="container">
     <h1>
         <i class="fas fa-user-graduate"></i>
         {{ $title }}</h1>
-    <hr>
+        <span class="float-right">Resultados: {{ $y }}</span>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -39,7 +59,8 @@
         </tbody>
     </table>
         <div class="text-center">
-            {!! $users->render() !!}
+            {!! $users->appends(['name'=> Request::get('name')])->render() !!}
+
         </div>
     </div>
 @endsection

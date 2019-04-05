@@ -4,6 +4,7 @@
 
     <div class="container">
         <br>
+        <br>
         <h1>
             <i class="fas fa-university"> {{ $carrera->nombre }}</i>
         </h1>

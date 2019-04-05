@@ -2,6 +2,7 @@
 
 @section('content')
     <br>
+    <br>
     @if($egresado == null)
         <div class="container border">
             <h2 class="mt-1">Datos de Acceso</h2>
@@ -64,6 +65,7 @@
 
 @endsection
 
+
 @section('script')
     <script type="text/javascript" >
         $("#stateEgresados").change(event =>{
@@ -78,6 +80,8 @@
         jQuery(function ($) {
             $('#townEgresados').select2({
                 placeholder:'Seleccione una ciudad',
+                tags:true,
+                tokenSeparators:[','],
             });
             $('#stateEgresados').select2({
                 placeholder:'Seleccione un Estado',
@@ -87,6 +91,8 @@
             });
             $('#idioma_id').select2({
                 placeholder:'Seleccione un idioma',
+                tags:true,
+                tokenSeparators:[','],
             });
         });
 
@@ -94,4 +100,3 @@
 
     </script>
 @endsection
-

@@ -19,6 +19,12 @@ class User extends Authenticatable
         'name', 'email', 'password','isAdmin','isRoot'
     ];
 
+    public function scopeName($query, $name){
+        if ($name)
+            return $query->orWhere('name', 'LIKE' ,"%$name%")->orWhere('email', 'LIKE' ,"%$name%");
+
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

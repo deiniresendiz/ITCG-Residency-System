@@ -1,20 +1,26 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/cursos">Cursos/Talleres</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Mostar Cursos/Talleres</li>
+@endsection
 @section('content')
     <br>
-    <h1>
-        <i class="fas fa-chalkboard-teacher"></i>  Cursos y Talleres
-        <a href="{{ route('cursos.edit',$curso) }}">
-            <i class="fas fa-edit"></i>
-        </a>
-        <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$curso) }}"><i class="fas fa-print"></i></a>
-    </h1>
-    <hr>
+    <br>
     <div class="container">
+        <h1>
+            <i class="fas fa-chalkboard-teacher"></i>  Cursos y Talleres
+            @if(Auth::user()->isAdmin == 1)
+                <a href="{{ route('cursos.edit',$curso) }}">
+                    <i class="fas fa-edit"></i>
+                </a>
+            @endif
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$curso) }}"><i class="fas fa-print"></i></a>
+        </h1>
+        <hr>
         @if($curso->imagen)
-            <div class="d-flex justify-content-center">
-                <a href="{{ asset($curso->imagen) }}" class="img-thumbnail align-content-center" target="_blank" >
-                    <img src="{{ asset($curso->imagen) }}" alt="cartel del curso">
+            <div class="d-flex text-center">
+                <a href="{{ asset($curso->imagen) }}" target="_blank" >
+                    <img src="{{ asset($curso->imagen) }}" alt="cartel del curso" class="img-thumbnail align-content-center img-fluid w-50" >
                 </a>
             </div>
         @endif

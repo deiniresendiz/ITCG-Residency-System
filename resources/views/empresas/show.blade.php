@@ -1,17 +1,10 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="/empresas">Empresas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Mostrar Empresa</li>
+@endsection
 @section('content')
     <br>
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/empresas">Empresas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mostrar Empresa</li>
-            </ol>
-        </nav>
-    </div>
-
 
     <div class="container">
         <h1>
@@ -24,8 +17,8 @@
         <hr>
         @if($empresa->imagen)
             <div class="d-flex justify-content-center">
-                <a href="{{ asset($empresa->imagen) }}" class="img-thumbnail align-content-center w-25" target="_blank" >
-                    <img src="{{ asset($empresa->imagen) }}" alt="cartel del curso">
+                <a href="{{ asset($empresa->imagen) }}" target="_blank" >
+                    <img src="{{ asset($empresa->imagen) }}" class="img-thumbnail align-content-center img-fluid"  alt="cartel del curso">
                 </a>
             </div>
         @endif
@@ -33,7 +26,7 @@
             <dt class="col-sm-2">Nombre:</dt>
             <dd class="col-sm-4">{{ $empresa->nombre }}</dd>
             <dt class="col-sm-2">Ciudad:</dt>
-            <dd class="col-sm-4">{{ $empresa->ciudad->nombre  }}</dd>
+            <dd class="col-sm-4">{{ ($empresa->ciudad != null)?$empresa->ciudad->nombre:null  }}</dd>
             <dt class="col-sm-2">Domicilio:</dt>
             <dd class="col-sm-4">{{ $empresa->domicilio }}</dd>
             <dt class="col-sm-2">Telefono:</dt>

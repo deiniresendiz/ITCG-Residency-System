@@ -1,15 +1,9 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+@endsection
 @section('content')
     <br>
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
-            </ol>
-        </nav>
-    </div>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
@@ -71,7 +65,7 @@
         @foreach($empresas as $empresa)
             <tr>
                 <td>{{ $empresa->nombre }}</td>
-                <td>{{ $empresa->ciudad->nombre }}</td>
+                <td>{{ ($empresa->ciudad != null)?$empresa->ciudad->nombre:null }}</td>
                 <td>{{ $empresa->domicilio }}</td>
                 <td>{{ $empresa->telefono}}</td>
                 <td>{{ $empresa->contacto }}</td>

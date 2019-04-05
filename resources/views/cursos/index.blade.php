@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Cursos/Talleres</li>
+@endsection
 @section('content')
     <br>
     <div class="container mt-3">
@@ -75,9 +77,11 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ route('cursos.edit',$curso) }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
+                    @if(Auth::user()->isAdmin == 1)
+                        <a href="{{ route('cursos.edit',$curso) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    @endif
                 </td>
             </tr>
             @endforeach

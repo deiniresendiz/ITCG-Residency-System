@@ -32,7 +32,7 @@ class MyCountAdminController extends Controller
         $town = Ciudades::orderBy('nombre')->pluck('nombre','id');
         $egresado = Egresados::where('user_id',$id)->first();
         $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
-        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+        $idiomas_eg = IdiomaDetalle::where('egresado_id',$egresado->id)->pluck('idioma_id');
         return view('account.index',compact('user', 'id','egresado','carerras','state','town','idiomas_eg','idiomas'));
     }
 
@@ -91,7 +91,6 @@ class MyCountAdminController extends Controller
 
         $egresado = Egresados::where('user_id',$id)->first();
         if($egresado != null) {
-            $egresado->no_control = $request->get('no_control');
             $egresado->nombre = $request->get('nombre');
             $egresado->sexo = $request->get('sexo');
             $egresado->estado_civil = $request->get('estado_civil');
@@ -107,35 +106,69 @@ class MyCountAdminController extends Controller
             $city=$request->get('ciudad_id');
 
             if(!is_numeric($city)){
-                $newCity = Ciudades::firstOrCreate(
-                    ['estado_id' => $request->get('estado_id'),
-                        'nombre' => ucwords($city)]);
+                $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
                 $egresado->ciudad_id = $newCity->id;
             }else{
                 $egresado->ciudad_id = $city;
             }
 
-            $carrera = $request->get('carrera_id');
+            $carrera=$request->get('carrera_id');
 
-            if (!is_numeric($carrera)) {
+            if(!is_numeric($carrera)){
                 $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
                 $egresado->carrera_id = $newCarrera->id;
-            } else {
+            }else{
                 $egresado->carrera_id = $carrera;
             }
 
-            if ($request->hasFile('imagen')) {
+            if($request->hasFile('imagen')){
                 $imagen = $request->file('imagen');
                 $file = $imagen->store('imagenes/cursos');
                 $egresado->imagen = $file;
             }
 
             $egresado->save();
+
+            /*Idiomas */
+            $idiomas = $request->get('idioma_id');
+            $idiomas_eg = IdiomaDetalle::where('egresado_id',$egresado->id)->pluck('idioma_id');
+
+            if($idiomas){
+                IdiomaDetalle::where('egresado_id',$egresado->id)->delete();
+                if(count($idiomas) != count($idiomas_eg)){
+                    foreach ($idiomas as $idioma){
+                        if(!is_numeric($idioma)){
+                            $newIdioma = Idiomas::firstOrCreate(
+                                [
+                                    'nombre' => ucwords($idioma)
+                                ]);
+
+                            IdiomaDetalle::firstOrCreate(
+                                [
+                                    'idioma_id' => $newIdioma->id,
+                                    'egresado_id' => $egresado->id
+                                ]);
+                        }else{
+                            IdiomaDetalle::firstOrCreate(
+                                [
+                                    'idioma_id' => $idioma,
+                                    'egresado_id' => $egresado->id
+                                ]);
+                        }
+                    }
+                }
+            }else{
+                IdiomaDetalle::where('egresado_id',$egresado->id)->delete();
+            }
         }
         $user = User::where('id',$id)->first();
         $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
         $state = Estados::orderBy('nombre')->pluck('nombre','id');
-        return view('account.index',compact('user', 'id','egresado','carerras','state'));
+        $town = Ciudades::orderBy('nombre')->pluck('nombre','id');
+        $egresado = Egresados::where('user_id',$id)->first();
+        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+        $idiomas_eg = IdiomaDetalle::where('egresado_id',$egresado->id)->pluck('idioma_id');
+        return view('account.index',compact('user', 'id','egresado','carerras','state','town','idiomas','idiomas_eg'));
     }
 
     /**

@@ -1,15 +1,9 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Trabajos</li>
+@endsection
 @section('content')
     <br>
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Trabajos</li>
-            </ol>
-        </nav>
-    </div>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
@@ -112,9 +106,11 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ route('trabajos.edit',$trabajo) }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
+                    @if(Auth::user()->isAdmin == 1)
+                        <a href="{{ route('trabajos.edit',$trabajo) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    @endif
                 </td>
             </tr>
         @endforeach

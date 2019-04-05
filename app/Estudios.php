@@ -23,7 +23,7 @@ class Estudios extends Model
     public function egresado(){
         return $this->belongsTo(Egresados::class);
     }
-    public function posgrados(){
+    public function posgrado(){
         return $this->belongsTo(Prosgrados::class);
     }
 }
