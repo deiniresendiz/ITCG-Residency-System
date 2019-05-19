@@ -28,7 +28,7 @@
 
         @foreach($ocupaciones as $ocupacion)
             <tr>
-                <td>{{ $ocupacion->empresa->nombre }}</td>
+                <td>{{ $ocupacion->empresa->nombre}}</td>
                 <td>{{ $ocupacion->puesto }}</td>
                 <td>{{ $ocupacion->antiguedad }}</td>
                 <td>

@@ -55,8 +55,57 @@
             <dt class="col-sm-2">Promedio:</dt>
             <dd class="col-sm-3">{{ $egresado->promedio }}</dd>
         </dl>
+            <br>
+
+        <p class="h3">Estudios</p>
+    <table class="table table-light table-striped table-hover">
+        <thead class="thead-dark bg-primary font-weight-bold text-white">
+        <tr>
+            <td scope="col" >#</td>
+            <td scope="col">Postgrado</td>
+            <td scope="col" >Instituto</td>
+            <td scope="col">Nivel</td>
+            <td scope="col">Fecha de Inicio</td>
+            <td scope="col">Fecha de Finalizacion</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($estudios as $estudio)
+            <tr>
+                <td>{{ $x++ }}</td>
+                <td>{{ $estudio->posgrado->nombre }}</td>
+                <td>{{ $estudio->instituto }}</td>
+                <td>{{ $estudio->nivel }}</td>
+                <td>{{ date_format($estudio->fecha_inicio,'d/m/Y') }}</td>
+                <td>{{ date_format($estudio->fecha_final,'d/m/Y') }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+        </table>
+        <br>
+        <p class="h3">Empleos</p>
+        <table class="table table-light table-striped table-hover">
+            <thead class="thead-dark bg-primary font-weight-bold text-white">
+            <tr>
+                <td scope="col" >#</td>
+                <td scope="col">Puesto</td>
+                <td scope="col" >Empresa</td>
+                <td scope="col">Antiguedad</td>
+                <td scope="col">Descripcion</td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($empleos as $empleo)
+                <tr>
+                    <td>{{ $y++ }}</td>
+                    <td>{{ $empleo->puesto }}</td>
+                    <td>{{ $empleo->empresa->nombre }}</td>
+                    <td>{{ $empleo->antiguedad }}</td>
+                    <td>{{ $empleo->descripcion }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
-
-
 @endsection
 

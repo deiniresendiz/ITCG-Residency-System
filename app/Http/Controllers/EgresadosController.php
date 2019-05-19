@@ -6,9 +6,11 @@ use App\Carreras;
 use App\Ciudades;
 use App\Egresados;
 use App\Estados;
+use App\Estudios;
 use App\Http\Requests\storeEgresados;
 use App\IdiomaDetalle;
 use App\Idiomas;
+use App\Ocupaciones;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,9 +40,10 @@ class EgresadosController extends Controller
         $carrera = $request->get('carrera_id');
         $sexo = $request->get('sexo');
         $promedio = $request->get('promedio');
-        $egresados = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->paginate();
-        $y = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->count();
-        return view('egresados.index',compact('egresados','title','x','carerras','y'));
+        $egresados = Egresados::promedio($promedio)->orderBy('nombre')->carrera($carrera)->nombre($nombre)->sexo($sexo)->
+        select('id','no_control','nombre','carrera_id','sexo','fecha_egreso','telefono','promedio')->paginate(25);
+
+        return view('egresados.index',compact('egresados','title','x','carerras'));
     }
 
     /**
@@ -182,7 +185,11 @@ class EgresadosController extends Controller
     public function show($id)
     {
         $egresado = Egresados::where('id',$id)->first();
-        return view('egresados.show',compact('egresado'));
+        $estudios = Estudios::where('egresado_id',$id)->get();
+        $empleos = Ocupaciones::where('egresado_id',$id)->get();
+        $x = 1;
+        $y = 1;
+        return view('egresados.show',compact('egresado','estudios','x','empleos','y'));
     }
 
     /**

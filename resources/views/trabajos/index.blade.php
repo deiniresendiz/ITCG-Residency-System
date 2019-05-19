@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    {!! Form::open([ 'route' => 'trabajos.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    {!! Form::open([ 'route' => 'trabajos.index' , 'method' => 'GET', 'class' => 'form-inline pull-right','id' => 'filtter']) !!}
                     <div class="form-group">
                         {!!
                             Form::select('town',
                                 $citys,
-                                null,
+                                Request::get('town'),
                                 [
                                     'class' => 'form-control mx-1',
                                     'id' => 'ciudad',
@@ -27,7 +27,7 @@
                         {!!
                             Form::select('area',
                                 $areas,
-                                null,
+                                Request::get('area'),
                                 [
                                     'class' => 'form-control mx-1',
                                     'id' => 'area',
@@ -42,7 +42,7 @@
                         {!!
                             Form::select('company',
                                 $empresas,
-                                null,
+                                Request::get('company'),
                                 [
                                     'class' => 'form-control mx-1',
                                     'id' => 'empresa',
@@ -52,10 +52,7 @@
                             )
                          !!}
                     </div>
-                    <div class="form-group">
-                        {!! Form::text('puesto',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre de la Empresa']) !!}
 
-                    </div>
                     <div class="form-group">
 
                         <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
@@ -75,7 +72,7 @@
                 <a href="{{ route('trabajos.create') }}">
                     <i class="fas fa-plus"></i>
                 </a>
-                <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+                <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($trabajos),'option' => 3, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
             @endif
         </h1>
         <span class="float-right">Resultados: {{ $y }}</span>
@@ -117,30 +114,33 @@
         </tbody>
     </table>
         <div class="text-center">
-            {!! $trabajos->appends(['are'=> Request::get('are'),'puesto'=> Request::get('puesto'),'company'=> Request::get('company'),'town'=> Request::get('town')])->render() !!}
+            {!! $trabajos->appends(['are'=> Request::get('area'),'puesto'=> Request::get('puesto'),'company'=> Request::get('company'),'town'=> Request::get('town')])->render() !!}
         </div>
     </div>
 @endsection
 
 @section('script')
     <script type="text/javascript" >
+        function sendForm() {
+            document.getElementById("filtter").submit();
+        }
         jQuery(function ($) {
 
             $('#ciudad').select2({
-                placeholder:'Seleccione una Ciudad',
                 tags:true,
                 tokenSeparators:[','],
             });
+            $('#ciudad').change(()=>sendForm());
             $('#area').select2({
-                placeholder:'Seleccione una Area',
                 tags:true,
                 tokenSeparators:[','],
             });
+            $('#area').change(()=>sendForm());
             $('#empresa').select2({
-                placeholder:'Seleccione una Empresa',
                 tags:true,
                 tokenSeparators:[','],
             });
+            $('#empresa').change(()=>sendForm());
 
         });
 

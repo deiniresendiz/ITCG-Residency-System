@@ -33,14 +33,13 @@ class CursosController extends Controller
 
         $state = $request->get('state');
         $name = $request->get('name');
-        $cursos = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->paginate();
+        $cursos = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->
+        select('id','nombre', 'instructor', 'lugar', 'fecha_inicio', 'precio', 'estado')->paginate(25);
 
         $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        $y = Cursos::nombre($name)->estado($state)->orderBy('fecha_final')->count();
-
         $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        return view('cursos.index',compact('cursos','title','x','y'));
+        return view('cursos.index',compact('cursos','title','x'));
     }
 
     /**
@@ -161,7 +160,8 @@ class CursosController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
+
 
 }

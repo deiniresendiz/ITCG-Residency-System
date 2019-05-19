@@ -10,16 +10,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    {!! Form::open([ 'route' => 'egresados.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    {!! Form::open([ 'route' => 'egresados.index' , 'method' => 'GET', 'class' => 'form-inline pull-right', 'id' => 'filtter']) !!}
                     <div class="form-group">
                         {!!
                             Form::select('carrera_id',
                                 $carerras,
-                                null,
+                                Request::get('carrera_id'),
                                 [
                                     'class' => 'form-control mx-1',
                                     'id' => 'carrera',
-                                    'placeholder'=>'Seleccione una Carrera'
+                                    'placeholder'=>'Seleccione una Carrera',
 
                                 ]
                             )
@@ -29,7 +29,7 @@
                         {!!
                             Form::select('sexo',
                                 ['Masculino'=>'Masculino','Femenino'=>'Femenino','Indefinido'=>'Indefinido'],
-                                null,
+                                Request::get('sexo'),
                                 [
                                     'class' => ' form-control mx-1',
                                     'id' => 'sexo',
@@ -43,10 +43,10 @@
                         {!!
                             Form::select('promedio',
                                 ['1'=>'Mayor a Menor','0'=>'Menor a Mayor'],
-                                null,
+                                Request::get('promedio'),
                                 [
                                     'class' => ' form-control mx-1',
-                                    'id' => 'sexo',
+                                    'id' => 'promedio',
                                     'placeholder'=>'Promedio'
 
                                 ]
@@ -54,7 +54,7 @@
                          !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control']) !!}
+                        {!! Form::text('name',Request::get('name'),['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control', 'onfocus' => 'this.value=""']) !!}
 
                     </div>
                     <div class="form-group">
@@ -74,10 +74,10 @@
             <a href="{{ route('egresados.create') }}">
                 <i class="fas fa-plus"></i>
             </a>
-            <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+            <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($egresados),'option' => 7, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
 
         </h1>
-        <span class="float-right">Resultados: {{ $y }}</span>
+        <span class="float-right">Resultados: {{ $egresados->total() }}</span>
 
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
@@ -126,15 +126,27 @@
 
 @section('script')
     <script type="text/javascript" >
+
+        function sendForm() {
+            document.getElementById("filtter").submit();
+        }
+
         jQuery(function ($) {
             $('#carrera').select2({
-                placeholder:'Seleccione una Carrera',
                 tags:true,
                 tokenSeparators:[','],
             });
+            $("#carrera").change(function(){
+                sendForm();
+            });
+            $("#sexo").change(function(){
+                sendForm();
+            });
+            $("#promedio").change(function(){
+                sendForm();
+            });
 
         });
-
     </script>
 @endsection
 

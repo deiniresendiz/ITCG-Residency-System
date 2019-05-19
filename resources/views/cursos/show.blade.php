@@ -14,7 +14,7 @@
                     <i class="fas fa-edit"></i>
                 </a>
             @endif
-            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$curso) }}"><i class="fas fa-print"></i></a>
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('imprimirpdf', ['result' => json_encode($curso),'option' => 2, 'title' => $curso->nombre]) }}"><i class="fas fa-print"></i></a>
         </h1>
         <hr>
         @if($curso->imagen)
@@ -27,7 +27,7 @@
         <dl class="row">
             <dt class="col-sm-2">Nombré</dt>
             <dd class="col-sm-10">{{ $curso->nombre }}</dd>
-            <dt class="col-sm-2">Descripcion</dt>
+            <dt class="col-sm-2">Descripción</dt>
             <dd class="col-sm-10">
                 {{ $curso->descripcion }}
             </dd>

@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    {!! Form::open([ 'route' => 'empresas.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+                    {!! Form::open([ 'route' => 'empresas.index' , 'method' => 'GET', 'class' => 'form-inline pull-right','id' => 'filtter']) !!}
                     <div class="form-group">
                         {!!
                             Form::select('ciudad',
                                 $citys,
-                                null,
+                                Request::get('ciudad'),
                                 [
                                     'class' => 'form-control mx-1',
                                     'id' => 'ciudad',
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre de la Empresa']) !!}
+                        {!! Form::text('name',Request::get('name'),['class' => 'form-control  mx-1', 'placeholder' => 'Nombre de la Empresa', 'onfocus' => 'this.value = ""']) !!}
 
                     </div>
                     <div class="form-group">
@@ -46,10 +46,10 @@
         <a href="{{ route('empresas.create') }}">
             <i class="fas fa-plus"></i>
         </a>
-        <a class="float-right text-black-50" href="{{ route('egresados.pdf',['carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="fas fa-print"></i></a>
+        <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($empresas),'option' => 5, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
 
     </h1>
-        <span class="float-right">Resultados: {{ $y }}</span>
+        <span class="float-right">Resultados: {{ $empresas->total() }}</span>
     <table class="table table-light table-striped table-hover">
         <thead class="thead-dark bg-primary font-weight-bold text-white">
         <tr>
@@ -92,8 +92,11 @@
 
 @section('script')
     <script type="text/javascript" >
+        function sendForm() {
+            document.getElementById("filtter").submit();
+        }
         jQuery(function ($) {
-            $("#estado").change(event =>{
+            /*$("#estado").change(event =>{
                 url();
             });
             function url () {
@@ -102,14 +105,14 @@
                     url += "?estado="+$("#estado").val();
                 }
                 window.location.replace(url);
-            }
+            }*/
 
 
                 $('#ciudad').select2({
-                    placeholder:'Seleccione una Ciudad',
                     tags:true,
                     tokenSeparators:[','],
                 });
+            $('#ciudad').change(() => sendForm());
 
         });
 

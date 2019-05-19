@@ -8,7 +8,7 @@ class Egresados extends Model
 {
 
     protected $table = "egresados";
-    protected $fillable = [
+     protected $fillable = [
         'carrera_id',
         'ciudad_id',
         'no_control',
@@ -26,6 +26,8 @@ class Egresados extends Model
         'password'
     ];
 
+
+
     protected $dates = ['nacimiento','fecha_egreso'];
 
     public function ciudad(){
@@ -40,6 +42,10 @@ class Egresados extends Model
 
     public static function carreras($id){
         return Carreras::where('id',$id)->first();
+    }
+
+    public function carrera(){
+        return $this->belongsTo(Carreras::class);
     }
 
 

@@ -8,7 +8,7 @@
                 <div class="page-header">
                     {!! Form::open([ 'route' => 'adminegresado.index' , 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
                     <div class="form-group">
-                        {!! Form::text('name',null,['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control']) !!}
+                        {!! Form::text('name',Request::get('name'),['class' => 'form-control  mx-1', 'placeholder' => 'Nombre o No Control','onfocus' => 'this.value = ""']) !!}
 
                     </div>
                     <div class="form-group">

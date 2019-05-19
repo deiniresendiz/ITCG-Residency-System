@@ -30,7 +30,9 @@
                         <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
                         @yield("breadcrumb")
                     </ol>
-                <span class="text-dark mr-5"> {{ Auth::user()->name }}</span>
+                <a class="nav-link" href="{{ Route('account.index') }}">
+                    <span class="text-dark mr-5"> {{ Auth::user()->name }}</span>
+                </a>
             </nav>
         </div>
     </div>

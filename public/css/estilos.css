@@ -1,4 +1,7 @@
-
+table{
+    border-color: aqua;
+    border: 2px;
+}
 #menuVertical {
     list-style-type: none;
     margin: 0;

@@ -60,5 +60,13 @@ Route::get('pdf/', function () {
 
 });
 
+// routes pdf
+
+//Route::get('/examplepdf/','PdfController@index')->name('examplepdf');
+
+Route::get('imprimirpdf/','PdfController@pdfprint')->name('imprimirpdf');
+
+
+
 
 

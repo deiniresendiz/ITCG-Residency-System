@@ -12,7 +12,7 @@
             <a href="{{ route('empresas.edit',$empresa) }}">
                 <i class="fas fa-edit"></i>
             </a>
-            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$empresa) }}"><i class="fas fa-print"></i></a>
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('imprimirpdf', ['result' => json_encode($empresa),'option' => 6, 'title' => $empresa->nombre]) }}"><i class="fas fa-print"></i></a>
         </h1>
         <hr>
         @if($empresa->imagen)
@@ -23,7 +23,7 @@
             </div>
         @endif
         <dl class="row">
-            <dt class="col-sm-2">Nombre:</dt>
+            <dt class="col-sm-2">Nombré:</dt>
             <dd class="col-sm-4">{{ $empresa->nombre }}</dd>
             <dt class="col-sm-2">Ciudad:</dt>
             <dd class="col-sm-4">{{ ($empresa->ciudad != null)?$empresa->ciudad->nombre:null  }}</dd>
@@ -33,7 +33,7 @@
             <dd class="col-sm-4">{{ $empresa->telefono }}</dd>
             <dt class="col-sm-2">Contracto:</dt>
             <dd class="col-sm-4">{{ $empresa->contacto }}</dd>
-            <dt class="col-sm-2">Descripcion:</dt>
+            <dt class="col-sm-2">Descripción:</dt>
             <dd class="col-sm-4">{{ $empresa->descripcion }}</dd>
         </dl>
     </div>

@@ -32,7 +32,10 @@ class MyCountAdminController extends Controller
         $town = Ciudades::orderBy('nombre')->pluck('nombre','id');
         $egresado = Egresados::where('user_id',$id)->first();
         $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
-        $idiomas_eg = IdiomaDetalle::where('egresado_id',$egresado->id)->pluck('idioma_id');
+        $idiomas_eg = null;
+        if(Auth::user()->isAdmin == 0){
+            $idiomas_eg = IdiomaDetalle::where('egresado_id',$egresado->id)->pluck('idioma_id');
+        }
         return view('account.index',compact('user', 'id','egresado','carerras','state','town','idiomas_eg','idiomas'));
     }
 

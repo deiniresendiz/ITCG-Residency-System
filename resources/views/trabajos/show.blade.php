@@ -14,7 +14,7 @@
                     <i class="fas fa-edit"></i>
                 </a>
             @endif
-            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$trabajo) }}"><i class="fas fa-print"></i></a>
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('imprimirpdf', ['result' => json_encode($trabajo),'option' => 4, 'title' => $trabajo->puesto]) }}"><i class="fas fa-print"></i></a>
         </h1>
 
         <hr>

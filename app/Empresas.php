@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Empresas extends Model
@@ -20,7 +21,11 @@ class Empresas extends Model
     ];
 
     public function ciudad(){
-        return $this->belongsTo(Ciudades::class);
+        try{
+            return $this->belongsTo(Ciudades::class);
+        }catch (Exception $e){
+            return null;
+        }
     }
 
     public function estado_id(){
