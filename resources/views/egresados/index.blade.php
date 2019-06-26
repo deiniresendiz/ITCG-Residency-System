@@ -74,8 +74,8 @@
             <a href="{{ route('egresados.create') }}">
                 <i class="fas fa-plus"></i>
             </a>
-            <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($egresados),'option' => 7, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
-
+            <a class="float-right  text-black-50" href="{{ route('imprimirpdf', ['option' => 7, 'title' => 'no', 'typedoc' => 0, 'carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="far fa-file-excel"></i></a>
+            <a class="float-right mr-3 text-black-50" href="{{ route('imprimirpdf', ['option' => 7, 'title' => 'no', 'typedoc' => 1, 'carrera_id'=> Request::get('carrera_id'),'sexo'=> Request::get('sexo'),'promedio'=> Request::get('promedio'),'name'=> Request::get('name')]) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
         </h1>
         <span class="float-right">Resultados: {{ $egresados->total() }}</span>
 

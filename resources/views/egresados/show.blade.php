@@ -13,7 +13,7 @@
             <a href="{{ route('egresados.edit',$egresado) }}">
                 <i class="fas fa-user-edit"></i>
             </a>
-            <a class="float-right text-black-50" target="_blank"  href="{{ route('egresado.pdf',$egresado) }}"><i class="fas fa-print"></i></a>
+            <a class="float-right text-black-50" target="_blank"  href="{{ route('imprimirpdf', ['result' => $egresado,'option' => 8, 'title' => 'no']) }}"><i class="fas fa-print"></i></a>
         </h1>
 
         <hr>
@@ -23,7 +23,7 @@
         @if($egresado->imagen)
             <div class="d-flex justify-content-center">
                 <a href="{{ asset($egresado->imagen) }}"  target="_blank" >
-                    <img src="{{ asset($egresado->imagen) }}" alt="cartel del curso" class="img-thumbnail align-content-center img-fluid" >
+                    <img src="{{ asset($egresado->imagen) }}" alt="Foto de Perfil" class="img-thumbnail align-content-center img-fluid" >
                 </a>
             </div>
         @endif

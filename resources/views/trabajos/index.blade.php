@@ -72,7 +72,8 @@
                 <a href="{{ route('trabajos.create') }}">
                     <i class="fas fa-plus"></i>
                 </a>
-                <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($trabajos),'option' => 3, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
+                <a class="float-right  text-black-50" href="{{ route('imprimirpdf', ['option' => 3, 'title' => 'no', 'typedoc' => 0, 'are'=> Request::get('area'),'puesto'=> Request::get('puesto'),'company'=> Request::get('company'),'town'=> Request::get('town')]) }}" target="_blank"><i class="far fa-file-excel"></i></a>
+                <a class="float-right mr-3 text-black-50" href="{{ route('imprimirpdf', ['option' => 3, 'title' => 'no', 'typedoc' => 1, 'are'=> Request::get('area'),'puesto'=> Request::get('puesto'),'company'=> Request::get('company'),'town'=> Request::get('town')]) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
             @endif
         </h1>
         <span class="float-right">Resultados: {{ $y }}</span>

@@ -18,7 +18,7 @@
         @if($empresa->imagen)
             <div class="d-flex justify-content-center">
                 <a href="{{ asset($empresa->imagen) }}" target="_blank" >
-                    <img src="{{ asset($empresa->imagen) }}" class="img-thumbnail align-content-center img-fluid"  alt="cartel del curso">
+                    <img src="{{ asset($empresa->imagen) }}" class="img-thumbnail align-content-center img-fluid"  alt="Logo de la empresa">
                 </a>
             </div>
         @endif

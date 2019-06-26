@@ -18,6 +18,11 @@
         text-align: right;
         padding: 10mm;
     }
+    #logo {
+        margin: auto;
+        width:  100%;
+        text-align: center;
+    }
     table.page_footer {width: 100%; border: none; padding: 2mm}
 </style>
 <page backtop="14mm" backbottom="14mm" backleft="10mm" backright="10mm" style="font-size: 12pt">
@@ -28,9 +33,11 @@
         <h4>Generado el: {{ date('d/m/Y')}} &nbsp;&nbsp;&nbsp;&nbsp;  </h4>
         <br>
         <div>
-            <div>
-                <img src="{{ $data->imagen }}" style="width: 100%">
-            </div>
+            @if($data->imagen)
+                <div id="logo">
+                    <img src="{{ $data->imagen }}" style="width: 60%">
+                </div>
+            @endif
             <br>
             <br>
             <div>

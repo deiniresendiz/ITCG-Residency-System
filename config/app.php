@@ -163,7 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //mi codigo
         Collective\Html\HtmlServiceProvider::class,
-
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +231,8 @@ return [
         //mi codigo
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ],

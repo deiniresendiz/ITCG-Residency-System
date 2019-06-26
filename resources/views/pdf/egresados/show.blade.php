@@ -1,88 +1,150 @@
-
-<link type="text/css" rel="stylesheet" href="css/pdf.css" >
-<style type="text/css">
-
-    /*table.page_footer {width: 100%; border: none; background-color: #DDDDFF; border-top: solid 1mm #AAAADD; padding: 2mm}*/
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
-    th {
-        background-color: gray;
-        color: white;
-    }
-    th, td {
-        text-align: left;
-        padding: 8px;
-    }
-    tr:nth-child(even) {background-color: #f2f2f2;}
-
-    img{
-        width: 100%;
-    }
-    h2 {
-        margin: auto;
-        width:  100%;
-        text-align: center;
-    }
-    h4 {
-        width: 100%;
-        text-align: right;
-        padding: 10mm;
-    }
-    table.page_footer {width: 100%; border: none; padding: 2mm}
-</style>
-<page backtop="14mm" backbottom="14mm" backleft="10mm" backright="10mm" style="font-size: 12pt">
-    <page_header>
-        <img src="img/banner.png" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de egresado</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <img src="img/banner.png" style="width: 100%;"/>
+    <br>
+    <hr>
+        <span class="float-right">Reporte generado el: {{ $date }}</span>
         <br>
-        <h2>{{$title}}</h2>
-        <h4>Generado el: {{ date('d/m/Y')}} &nbsp;&nbsp;&nbsp;&nbsp;  </h4>
+        @if($egresado->imagen)
+            <div class="d-flex justify-content-center">
+                <a href="{{ asset($egresado->imagen) }}"  target="_blank" >
+                    <img src="{{ asset($egresado->imagen) }}" alt="Foto de Perfil" class="img-thumbnail align-content-center img-fluid" >
+                </a>
+            </div>
+        @endif
+            <table>
+                <tr>
+                    <td>
+                        <b>No° Control: </b>{{ $egresado->no_control }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Nombre: </b>{{ $egresado->nombre }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Carrera: </b>{{ $egresado->carreras($egresado->carrera_id)->nombre }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Curp: </b>{{ $egresado->curp }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Sexo: </b>{{ $egresado->sexo }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Fecha de Nacimiento: </b>{{ date_format($egresado->nacimiento,'d/m/Y') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Estado Civil: </b>{{ $egresado->estado_civil }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Fecha de Egresado: </b>{{ date_format($egresado->fecha_egreso,'d/m/Y') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Ciudad: </b>{{ $egresado->ciudad->nombre }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Telefono: </b>{{ $egresado->telefono }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Celular: </b>{{ $egresado->celular }}
+                    </td>
+                    <td style="width: 20px">
+                        <blockquote style="width: 10px"></blockquote>
+                    </td>
+                    <td>
+                        <b>Correo: </b>{{ $egresado->email }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Promedio: </b>{{ $egresado->promedio }}
+                    </td>
+                </tr>
+            </table>
         <br>
-    </page_header>
-    <div style="margin-top: 20mm;">
-        <table style="margin: 3mm;margin-top: 20mm;">
-            <thead>
-            <tr style="background-color: #005cbf;color: white">
-                <td scope="col">Nombre</td>
-                <td scope="col">Instructor</td>
-                <td scope="col">Lugar</td>
+
+        <p class="h3">Estudios</p>
+        <table class="table table-light table-striped table-hover">
+            <thead class="thead-dark bg-primary font-weight-bold text-white">
+            <tr>
+                <td scope="col" >#</td>
+                <td scope="col">Postgrado</td>
+                <td scope="col" >Instituto</td>
+                <td scope="col">Nivel</td>
                 <td scope="col">Fecha de Inicio</td>
-                <td scope="col">Precio</td>
-                <td scope="col">Estado</td>
+                <td scope="col">Fecha de Finalizacion</td>
             </tr>
             </thead>
             <tbody>
-            @foreach($cursos as $curso)
+            @foreach($estudios as $estudio)
                 <tr>
-                    <td>{{ $curso->nombre }}</td>
-                    <td>{{ $curso->instructor }}</td>
-                    <td>{{ $curso->lugar }}</td>
-                    <td>{{ date_format($curso->fecha_inicio,'d/m/Y')}}</td>
-                    <td>{{ $curso->precio }}</td>
-                    <td>{{ $curso->estado }}</td>
+                    <td>{{ $x++ }}</td>
+                    <td>{{ $estudio->posgrado->nombre }}</td>
+                    <td>{{ $estudio->instituto }}</td>
+                    <td>{{ $estudio->nivel }}</td>
+                    <td>{{ date_format($estudio->fecha_inicio,'d/m/Y') }}</td>
+                    <td>{{ date_format($estudio->fecha_final,'d/m/Y') }}</td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-    </div>
-
-    <page_footer>
-        <table class="page_footer">
+        <br>
+        <p class="h3">Empleos</p>
+        <table class="table table-light table-striped table-hover">
+            <thead class="thead-dark bg-primary font-weight-bold text-white">
             <tr>
-                <td style="width: 100%; text-align: right; border: 1px solid white">
-                    Hoja [[page_cu]]/[[page_nb]]
-                </td>
+                <td scope="col" >#</td>
+                <td scope="col">Puesto</td>
+                <td scope="col" >Empresa</td>
+                <td scope="col">Antiguedad</td>
+                <td scope="col">Descripcion</td>
             </tr>
+            </thead>
+            <tbody>
+            @foreach($empleos as $empleo)
+                <tr>
+                    <td>{{ $y++ }}</td>
+                    <td>{{ $empleo->puesto }}</td>
+                    <td>{{ $empleo->empresa->nombre }}</td>
+                    <td>{{ $empleo->antiguedad }}</td>
+                    <td>{{ $empleo->descripcion }}</td>
+                </tr>
+            @endforeach
+            </tbody>
         </table>
-    </page_footer>
-</page>
+</body>
+</html>
+
 
 
 

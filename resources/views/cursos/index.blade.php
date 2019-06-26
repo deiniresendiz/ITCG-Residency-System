@@ -45,7 +45,8 @@
                 <a href="{{ route('cursos.create') }}">
                     <i class="fas fa-plus"></i>
                 </a>
-                <a class="float-right text-black-50" href="{{ route('imprimirpdf', ['result' => json_encode($cursos),'option' => 1, 'title' => $title]) }}" target="_blank"><i class="fas fa-print"></i></a>
+                <a class="float-right  text-black-50" href="{{ route('imprimirpdf', ['option' => 1, 'title' => 'no', 'typedoc' => 0, 'name'=> Request::get('name'),'state'=> Request::get('state')]) }}" target="_blank"><i class="far fa-file-excel"></i></a>
+                <a class="float-right mr-3 text-black-50" href="{{ route('imprimirpdf', ['option' => 1, 'title' => 'no', 'typedoc' => 1, 'name'=> Request::get('name'),'state'=> Request::get('state')]) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
             @endif
         </h1>
         <span class="float-right">Resultados: {{ $cursos->total() }}</span>
