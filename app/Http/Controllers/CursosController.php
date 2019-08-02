@@ -52,7 +52,7 @@ class CursosController extends Controller
         if(Auth::user()->isAdmin == 1){
             return view('cursos.create');
         }else{
-            return view('home');
+            return view('welcome');
         }
 
     }
@@ -86,7 +86,7 @@ class CursosController extends Controller
         $curso->save();
         return redirect()->route('cursos.show',$curso);
         }else{
-            return view('home');
+            return view('welcome');
         }
     }
 
@@ -116,7 +116,7 @@ class CursosController extends Controller
 
             return view('cursos.edit',compact('curso','id'));
         }else{
-            return view('home');
+            return view('welcome');
         }
     }
 
@@ -148,7 +148,7 @@ class CursosController extends Controller
             $curso->save();
         return redirect()->route('cursos.show',$curso);
         }else{
-            return view('home');
+            return view('welcome');
         }
     }
 

@@ -20,14 +20,18 @@ class AdmiEgresadosController extends Controller
      */
     public function index(Request $request)
     {
-        $title = "Egresados";
-        $name = $request->get('name');
-        $users = User::name($name)->where('isAdmin','=','0')->orderBy('name')->paginate();
-        $page_no = ($request->get('page'))? $request->get('page'):1;
+        if(Auth::user()->isRoot == 1){
+            $title = "Egresados";
+            $name = $request->get('name');
+            $users = User::name($name)->where('isAdmin','=','0')->orderBy('name')->paginate();
+            $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        $y = User::name($name)->where('isAdmin','=','0')->orderBy('name')->count();
-        return view('admin_egresados.index',compact('users','title','x','y'));
+            $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+            $y = User::name($name)->where('isAdmin','=','0')->orderBy('name')->count();
+            return view('admin_egresados.index',compact('users','title','x','y'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -59,8 +63,12 @@ class AdmiEgresadosController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id',$id)->first();
-        return view('admin_egresados.show',compact('user'));
+        if(Auth::user()->isRoot == 1){
+            $user = User::where('id',$id)->first();
+            return view('admin_egresados.show',compact('user'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -71,8 +79,12 @@ class AdmiEgresadosController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id',$id)->first();
-        return view('admin_egresados.edit',compact('user','id'));
+        if(Auth::user()->isRoot == 1){
+            $user = User::where('id',$id)->first();
+            return view('admin_egresados.edit',compact('user','id'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**

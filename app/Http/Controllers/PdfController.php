@@ -145,9 +145,9 @@ class PdfController extends Controller
         $type = $request->get('typedoc');
 
         if($type == 0){
-            return Excel::download(new InvoicesExportEmpresas($nombre,$ciudad), $this->namePdf(3,"").'.xlsx',\Maatwebsite\Excel\Excel::XLSX);
+            return Excel::download(new InvoicesExportEmpresas($nombre,$ciudad), $this->namePdf(5,"").'.xlsx',\Maatwebsite\Excel\Excel::XLSX);
         }else{
-            return Excel::download(new InvoicesExportEmpresas($nombre,$ciudad), $this->namePdf(3,"").'.pdf',\Maatwebsite\Excel\Excel::MPDF);
+            return Excel::download(new InvoicesExportEmpresas($nombre,$ciudad), $this->namePdf(5,"").'.pdf',\Maatwebsite\Excel\Excel::MPDF);
         }
 
     }

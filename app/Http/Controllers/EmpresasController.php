@@ -7,6 +7,7 @@ use App\Empresas;
 use App\Estados;
 use App\Http\Requests\storeEmpresas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class EmpresasController extends Controller
@@ -41,9 +42,13 @@ class EmpresasController extends Controller
      */
     public function create()
     {
-        $state = Estados::orderBy('nombre')->pluck('nombre','id');
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('empresas.create',compact('state','town'));
+        if(Auth::user()->isAdmin == 1){
+            $state = Estados::orderBy('nombre')->pluck('nombre','id');
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            return view('empresas.create',compact('state','town'));
+        }else{
+            return view('welcome');
+        }
     }
 
     public function getTowns(Request $request, $id){
@@ -67,31 +72,35 @@ class EmpresasController extends Controller
      */
     public function store(storeEmpresas $request)
     {
-        $empresa = new Empresas($request->all());
-        $city=$request->get('ciudad_id');
+        if(Auth::user()->isAdmin == 1){
+            $empresa = new Empresas($request->all());
+            $city=$request->get('ciudad_id');
 
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(
-                ['estado_id' => $request->get('estado_id'),
-                    'nombre' => ucwords($city)]);
-            $empresa->ciudad_id = $newCity->id;
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(
+                    ['estado_id' => $request->get('estado_id'),
+                        'nombre' => ucwords($city)]);
+                $empresa->ciudad_id = $newCity->id;
+            }else{
+                $empresa->ciudad_id = $city;
+            }
+
+            $empresa->nombre = $request->get('nombre');
+            $empresa->descripcion = $request->get('descripcion');
+            $empresa->domicilio = $request->get('domicilio');
+            $empresa->telefono = $request->get('telefono');
+            $empresa->contacto = $request->get('contacto');
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/empresas');
+                $empresa->imagen = $file;
+            }
+            $empresa->save();
+
+            return view('empresas.show',compact('empresa'));
         }else{
-            $empresa->ciudad_id = $city;
+            return view('welcome');
         }
-
-        $empresa->nombre = $request->get('nombre');
-        $empresa->descripcion = $request->get('descripcion');
-        $empresa->domicilio = $request->get('domicilio');
-        $empresa->telefono = $request->get('telefono');
-        $empresa->contacto = $request->get('contacto');
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/empresas');
-            $empresa->imagen = $file;
-        }
-        $empresa->save();
-
-        return view('empresas.show',compact('empresa'));
     }
 
     /**
@@ -102,8 +111,12 @@ class EmpresasController extends Controller
      */
     public function show($id)
     {
-        $empresa = Empresas::where('id',$id)->first();
-        return view('empresas.show',compact('empresa'));
+        if(Auth::user()->isAdmin == 1){
+            $empresa = Empresas::where('id',$id)->first();
+            return view('empresas.show',compact('empresa'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -114,10 +127,14 @@ class EmpresasController extends Controller
      */
     public function edit($id)
     {
-        $empresa = Empresas::where('id',$id)->first();
-        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('empresas.edit',compact('empresa','id','town','state'));
+        if(Auth::user()->isAdmin == 1){
+            $empresa = Empresas::where('id',$id)->first();
+            $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            return view('empresas.edit',compact('empresa','id','town','state'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -129,28 +146,32 @@ class EmpresasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $empresa = Empresas::where('id',$id)->first();
-        $city=$request->get('ciudad_id');
+        if(Auth::user()->isAdmin == 1){
+            $empresa = Empresas::where('id',$id)->first();
+            $city=$request->get('ciudad_id');
 
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
-            $empresa->ciudad_id = $newCity->id;
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+                $empresa->ciudad_id = $newCity->id;
+            }else{
+                $empresa->ciudad_id = $city;
+            }
+
+            $empresa->nombre = $request->get('nombre');
+            $empresa->descripcion = $request->get('descripcion');
+            $empresa->domicilio = $request->get('domicilio');
+            $empresa->telefono = $request->get('telefono');
+            $empresa->contacto = $request->get('contacto');
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/empresas');
+                $empresa->imagen = $file;
+            }
+            $empresa->save();
+            return view('empresas.show',compact('empresa'));
         }else{
-            $empresa->ciudad_id = $city;
+            return view('welcome');
         }
-
-        $empresa->nombre = $request->get('nombre');
-        $empresa->descripcion = $request->get('descripcion');
-        $empresa->domicilio = $request->get('domicilio');
-        $empresa->telefono = $request->get('telefono');
-        $empresa->contacto = $request->get('contacto');
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/empresas');
-            $empresa->imagen = $file;
-        }
-        $empresa->save();
-        return view('empresas.show',compact('empresa'));
     }
 
     /**

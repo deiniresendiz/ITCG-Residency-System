@@ -13,6 +13,7 @@ use App\Idiomas;
 use App\Ocupaciones;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -53,12 +54,16 @@ class EgresadosController extends Controller
      */
     public function create()
     {
-        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
-        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
-        $idiomas_eg = null;
-        return view('egresados.create', compact('carerras','state','town','idiomas','idiomas_eg'));
+        if(Auth::user()->isAdmin == 1){
+            $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
+            $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+            $idiomas_eg = null;
+            return view('egresados.create', compact('carerras','state','town','idiomas','idiomas_eg'));
+        }else{
+            return view('welcome');
+        }
     }
     public function getTowns(Request $request ,$id){
         if($request->ajax()){
@@ -97,83 +102,87 @@ class EgresadosController extends Controller
 
     public function store(Request $request)
     {
-        $egresado = new Egresados($request->all());
-        $egresado->no_control = $request->get('no_control');
-        $egresado->nombre = $request->get('nombre');
-        $egresado->sexo = $request->get('sexo');
-        $egresado->estado_civil = $request->get('estado_civil');
-        $egresado->nacimiento = $request->get('nacimiento');
-        $egresado->curp = $request->get('curp');
-        $egresado->telefono = $request->get('telefono');
-        $egresado->celular = $request->get('celular');
-        $egresado->email = $request->get('email');
-        $egresado->fecha_egreso = $request->get('fecha_egreso');
-        $egresado->promedio = $request->get('promedio');
-        $egresado->password = $request->get('no_control');
+        if(Auth::user()->isAdmin == 1){
+            $egresado = new Egresados($request->all());
+            $egresado->no_control = $request->get('no_control');
+            $egresado->nombre = $request->get('nombre');
+            $egresado->sexo = $request->get('sexo');
+            $egresado->estado_civil = $request->get('estado_civil');
+            $egresado->nacimiento = $request->get('nacimiento');
+            $egresado->curp = $request->get('curp');
+            $egresado->telefono = $request->get('telefono');
+            $egresado->celular = $request->get('celular');
+            $egresado->email = $request->get('email');
+            $egresado->fecha_egreso = $request->get('fecha_egreso');
+            $egresado->promedio = $request->get('promedio');
+            $egresado->password = $request->get('no_control');
 
-        $city=$request->get('ciudad_id');
+            $city=$request->get('ciudad_id');
 
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(
-                ['estado_id' => $request->get('estado_id'),
-                    'nombre' => ucwords($city)]);
-            $egresado->ciudad_id = $newCity->id;
-        }else{
-            $egresado->ciudad_id = $city;
-        }
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(
+                    ['estado_id' => $request->get('estado_id'),
+                        'nombre' => ucwords($city)]);
+                $egresado->ciudad_id = $newCity->id;
+            }else{
+                $egresado->ciudad_id = $city;
+            }
 
-        $carrera=$request->get('carrera_id');
+            $carrera=$request->get('carrera_id');
 
-        if(!is_numeric($carrera)){
-            $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
-            $egresado->carrera_id = $newCarrera->id;
-        }else{
-            $egresado->carrera_id = $carrera;
-        }
+            if(!is_numeric($carrera)){
+                $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
+                $egresado->carrera_id = $newCarrera->id;
+            }else{
+                $egresado->carrera_id = $carrera;
+            }
 
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/cursos');
-            $egresado->imagen = $file;
-        }
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/cursos');
+                $egresado->imagen = $file;
+            }
 
-        $user = User::create([
-            'name' => $request->get('no_control'),
-            'email' => $request->get('no_control'),
-            'password' => Hash::make($request->get('no_control')),
-            'isAdmin' => 0,
-            'isRoot' => 0,
-        ]);
-        $egresado->user_id =  $user->id;
-        $egresado->save();
+            $user = User::create([
+                'name' => $request->get('no_control'),
+                'email' => $request->get('no_control'),
+                'password' => Hash::make($request->get('no_control')),
+                'isAdmin' => 0,
+                'isRoot' => 0,
+            ]);
+            $egresado->user_id =  $user->id;
+            $egresado->save();
 
-        /*Agregar idiomas */
-        $idiomas = $request->get('idioma_id');
+            /*Agregar idiomas */
+            $idiomas = $request->get('idioma_id');
 
-        if($idiomas) {
-            foreach ($idiomas as $idioma) {
-                if (!is_numeric($idioma)) {
-                    $newIdioma = Idiomas::firstOrCreate(
-                        [
-                            'nombre' => ucwords($idioma)
-                        ]);
+            if($idiomas) {
+                foreach ($idiomas as $idioma) {
+                    if (!is_numeric($idioma)) {
+                        $newIdioma = Idiomas::firstOrCreate(
+                            [
+                                'nombre' => ucwords($idioma)
+                            ]);
 
-                    IdiomaDetalle::firstOrCreate(
-                        [
-                            'idioma_id' => $newIdioma->id,
-                            'egresado_id' => $egresado->id
-                        ]);
-                } else {
-                    IdiomaDetalle::firstOrCreate(
-                        [
-                            'idioma_id' => $idioma,
-                            'egresado_id' => $egresado->id
-                        ]);
+                        IdiomaDetalle::firstOrCreate(
+                            [
+                                'idioma_id' => $newIdioma->id,
+                                'egresado_id' => $egresado->id
+                            ]);
+                    } else {
+                        IdiomaDetalle::firstOrCreate(
+                            [
+                                'idioma_id' => $idioma,
+                                'egresado_id' => $egresado->id
+                            ]);
+                    }
                 }
             }
-        }
 
-        return redirect()->route('egresados.show',$egresado);
+            return redirect()->route('egresados.show',$egresado);
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -184,12 +193,16 @@ class EgresadosController extends Controller
      */
     public function show($id)
     {
-        $egresado = Egresados::where('id',$id)->first();
-        $estudios = Estudios::where('egresado_id',$id)->get();
-        $empleos = Ocupaciones::where('egresado_id',$id)->get();
-        $x = 1;
-        $y = 1;
-        return view('egresados.show',compact('egresado','estudios','x','empleos','y'));
+        if(Auth::user()->isAdmin == 1){
+            $egresado = Egresados::where('id',$id)->first();
+            $estudios = Estudios::where('egresado_id',$id)->get();
+            $empleos = Ocupaciones::where('egresado_id',$id)->get();
+            $x = 1;
+            $y = 1;
+            return view('egresados.show',compact('egresado','estudios','x','empleos','y'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -200,14 +213,17 @@ class EgresadosController extends Controller
      */
     public function edit($id)
     {
-
-        $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
-        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        $egresado = Egresados::where('id',$id)->first();
-        $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
-        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
-        return view('egresados.edit',compact('egresado','id','carerras','state','town','idiomas','idiomas_eg'));
+        if(Auth::user()->isAdmin == 1){
+            $carerras = Carreras::orderBy('nombre')->pluck('nombre','id');
+            $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            $egresado = Egresados::where('id',$id)->first();
+            $idiomas = Idiomas::orderBy('nombre')->pluck('nombre','id');
+            $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+            return view('egresados.edit',compact('egresado','id','carerras','state','town','idiomas','idiomas_eg'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -219,79 +235,83 @@ class EgresadosController extends Controller
      */
     public function update(storeEgresados $request, $id)
     {
-        $egresado = Egresados::where('id',$id)->first();
-        $egresado->no_control = $request->get('no_control');
-        $egresado->nombre = $request->get('nombre');
-        $egresado->sexo = $request->get('sexo');
-        $egresado->estado_civil = $request->get('estado_civil');
-        $egresado->nacimiento = $request->get('nacimiento');
-        $egresado->curp = $request->get('curp');
-        $egresado->telefono = $request->get('telefono');
-        $egresado->celular = $request->get('celular');
-        $egresado->email = $request->get('email');
-        $egresado->fecha_egreso = $request->get('fecha_egreso');
-        $egresado->promedio = $request->get('promedio');
-        $egresado->password = $request->get('no_control');
+        if(Auth::user()->isAdmin == 1){
+            $egresado = Egresados::where('id',$id)->first();
+            $egresado->no_control = $request->get('no_control');
+            $egresado->nombre = $request->get('nombre');
+            $egresado->sexo = $request->get('sexo');
+            $egresado->estado_civil = $request->get('estado_civil');
+            $egresado->nacimiento = $request->get('nacimiento');
+            $egresado->curp = $request->get('curp');
+            $egresado->telefono = $request->get('telefono');
+            $egresado->celular = $request->get('celular');
+            $egresado->email = $request->get('email');
+            $egresado->fecha_egreso = $request->get('fecha_egreso');
+            $egresado->promedio = $request->get('promedio');
+            $egresado->password = $request->get('no_control');
 
-        $city=$request->get('ciudad_id');
+            $city=$request->get('ciudad_id');
 
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
-            $egresado->ciudad_id = $newCity->id;
-        }else{
-            $egresado->ciudad_id = $city;
-        }
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+                $egresado->ciudad_id = $newCity->id;
+            }else{
+                $egresado->ciudad_id = $city;
+            }
 
-        $carrera=$request->get('carrera_id');
+            $carrera=$request->get('carrera_id');
 
-        if(!is_numeric($carrera)){
-            $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
-            $egresado->carrera_id = $newCarrera->id;
-        }else{
-            $egresado->carrera_id = $carrera;
-        }
+            if(!is_numeric($carrera)){
+                $newCarrera = Carreras::firstOrCreate(['nombre' => ucwords($carrera)]);
+                $egresado->carrera_id = $newCarrera->id;
+            }else{
+                $egresado->carrera_id = $carrera;
+            }
 
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/cursos');
-            $egresado->imagen = $file;
-        }
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/cursos');
+                $egresado->imagen = $file;
+            }
 
-        $egresado->save();
+            $egresado->save();
 
-        /*Idiomas */
-        $idiomas = $request->get('idioma_id');
-        $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
+            /*Idiomas */
+            $idiomas = $request->get('idioma_id');
+            $idiomas_eg = IdiomaDetalle::where('egresado_id',$id)->pluck('idioma_id');
 
-        if($idiomas){
-            IdiomaDetalle::where('egresado_id',$id)->delete();
-            if(count($idiomas) != count($idiomas_eg)){
-                foreach ($idiomas as $idioma){
-                    if(!is_numeric($idioma)){
-                        $newIdioma = Idiomas::firstOrCreate(
-                            [
-                                'nombre' => ucwords($idioma)
-                            ]);
+            if($idiomas){
+                IdiomaDetalle::where('egresado_id',$id)->delete();
+                if(count($idiomas) != count($idiomas_eg)){
+                    foreach ($idiomas as $idioma){
+                        if(!is_numeric($idioma)){
+                            $newIdioma = Idiomas::firstOrCreate(
+                                [
+                                    'nombre' => ucwords($idioma)
+                                ]);
 
-                        IdiomaDetalle::firstOrCreate(
-                            [
-                                'idioma_id' => $newIdioma->id,
-                                'egresado_id' => $egresado->id
-                            ]);
-                    }else{
-                        IdiomaDetalle::firstOrCreate(
-                            [
-                                'idioma_id' => $idioma,
-                                'egresado_id' => $egresado->id
-                            ]);
+                            IdiomaDetalle::firstOrCreate(
+                                [
+                                    'idioma_id' => $newIdioma->id,
+                                    'egresado_id' => $egresado->id
+                                ]);
+                        }else{
+                            IdiomaDetalle::firstOrCreate(
+                                [
+                                    'idioma_id' => $idioma,
+                                    'egresado_id' => $egresado->id
+                                ]);
+                        }
                     }
                 }
+            }else{
+                IdiomaDetalle::where('egresado_id',$id)->delete();
             }
-        }else{
-            IdiomaDetalle::where('egresado_id',$id)->delete();
-        }
 
-        return redirect()->route('egresados.show',$egresado);
+            return redirect()->route('egresados.show',$egresado);
+        }else{
+            return view('welcome');
+        }
     }
 
     /**

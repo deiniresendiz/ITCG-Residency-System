@@ -30,11 +30,8 @@ class HomeController extends Controller
         Cursos::where('fecha_final','<',date('y-m-d'))->where('estado','=','Activo')->update(['estado' => "Terminado"]);
 
 
-        $cursos = Cursos::orderBy('fecha_final')->get();
+        $cursos = Cursos::orderBy('fecha_final')->where('estado','=','Activo')->get();
         $trabajos = BolsaTrabajo::where('estado','Disponible')->orderBy('puesto')->get();
-
-
-
 
         return view('home',compact('cursos','trabajos'));
     }

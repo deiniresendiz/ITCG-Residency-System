@@ -22,13 +22,16 @@ class AdministradoresController extends Controller
      */
     public function index(Request $request)
     {
+        if(Auth::user()->isRoot == 1){
+            $title = "Administradores";
+            $users = User::where('isAdmin','=','1')->orderBy('name')->paginate();
+            $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        $title = "Administradores";
-        $users = User::where('isAdmin','=','1')->orderBy('name')->paginate();
-        $page_no = ($request->get('page'))? $request->get('page'):1;
-
-        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        return view('admin.index',compact('users','title','x'));
+            $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+            return view('admin.index',compact('users','title','x'));
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -53,14 +56,18 @@ class AdministradoresController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'isAdmin' => 1,
-            'isRoot' => $request->get('root'),
-        ]);
-        return redirect()->route('admin.show',$user);
+        if(Auth::user()->isRoot == 1) {
+            $user = User::create([
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+                'isAdmin' => 1,
+                'isRoot' => $request->get('root'),
+            ]);
+            return redirect()->route('admin.show', $user);
+        }else{
+                return view('home');
+            }
     }
 
     /**
@@ -71,8 +78,12 @@ class AdministradoresController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id',$id)->first();
-        return view('admin.show',compact('user'));
+        if(Auth::user()->isRoot == 1) {
+            $user = User::where('id',$id)->first();
+            return view('admin.show',compact('user'));
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -83,8 +94,12 @@ class AdministradoresController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id',$id)->first();
-        return view('admin.edit',compact('user','id'));
+        if(Auth::user()->isRoot == 1) {
+            $user = User::where('id',$id)->first();
+            return view('admin.edit',compact('user','id'));
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -96,12 +111,16 @@ class AdministradoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::where('id',$id)->first();
-        $user->email = $request->get('email');
-        $user->name = $request->get('name');
-        $user->isRoot ($request->get('isRoot') != 1? 0 : 1);
-        $user->save();
-        return view('admin.show',compact('user'));
+        if(Auth::user()->isRoot == 1) {
+            $user = User::where('id',$id)->first();
+            $user->email = $request->get('email');
+            $user->name = $request->get('name');
+            $user->isRoot ($request->get('isRoot') != 1? 0 : 1);
+            $user->save();
+            return view('admin.show',compact('user'));
+        }else{
+            return view('home');
+        }
     }
 
     /**
@@ -112,8 +131,12 @@ class AdministradoresController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('admin.index');
+        if(Auth::user()->isRoot == 1) {
+            User::find($id)->delete();
+            return redirect()->route('admin.index');
+        }else{
+            return view('home');
+        }
     }
 
     public function updatePass(Request $request, $id, $pass){

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Carreras;
 use App\Http\Requests\storeCarerras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarrerasController extends Controller
 {
@@ -19,12 +20,16 @@ class CarrerasController extends Controller
     }
     public function index(Request $request)
     {
-        $title = "Carraras";
-        $carreras = Carreras::orderBy('nombre')->paginate();
-        $page_no = ($request->get('page'))? $request->get('page'):1;
+        if(Auth::user()->isRoot == 1){
+            $title = "Carraras";
+            $carreras = Carreras::orderBy('nombre')->paginate();
+            $page_no = ($request->get('page'))? $request->get('page'):1;
 
-        $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
-        return view('carreras.index',compact('carreras','title','x'));
+            $x = ($page_no != 1)? (($page_no -1) * 15)+1 :$page_no;
+            return view('carreras.index',compact('carreras','title','x'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -34,8 +39,11 @@ class CarrerasController extends Controller
      */
     public function create()
     {
-        //
-        return view('carreras.create');
+        if(Auth::user()->isRoot == 1){
+            return view('carreras.create');
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -46,11 +54,15 @@ class CarrerasController extends Controller
      */
     public function store(storeCarerras $request)
     {
-        $carrera = new Carreras($request->all());
-        $carrera->nombre = $request->get('nombre');
-        $carrera->clave = $request->get('clave');
-        $carrera->save();
-        return redirect()->route('carreras.show',$carrera);
+        if(Auth::user()->isRoot == 1){
+            $carrera = new Carreras($request->all());
+            $carrera->nombre = $request->get('nombre');
+            $carrera->clave = $request->get('clave');
+            $carrera->save();
+            return redirect()->route('carreras.show',$carrera);
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -61,8 +73,12 @@ class CarrerasController extends Controller
      */
     public function show($id)
     {
-        $carrera = Carreras::where('id',$id)->first();
-        return view('carreras.show',compact('carrera'));
+        if(Auth::user()->isRoot == 1){
+            $carrera = Carreras::where('id',$id)->first();
+            return view('carreras.show',compact('carrera'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -73,9 +89,13 @@ class CarrerasController extends Controller
      */
     public function edit($id)
     {
-        $carrera = Carreras::where('id',$id)->first();
+        if(Auth::user()->isRoot == 1){
+            $carrera = Carreras::where('id',$id)->first();
 
-        return view('carreras.edit',compact('carrera','id'));
+            return view('carreras.edit',compact('carrera','id'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -87,11 +107,15 @@ class CarrerasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $carrera = Carreras::where('id',$id)->first();
-        $carrera->nombre = $request->get('nombre');
-        $carrera->clave = $request->get('clave');
-        $carrera->save();
-        return redirect()->route('carreras.show',$carrera);
+        if(Auth::user()->isRoot == 1){
+            $carrera = Carreras::where('id',$id)->first();
+            $carrera->nombre = $request->get('nombre');
+            $carrera->clave = $request->get('clave');
+            $carrera->save();
+            return redirect()->route('carreras.show',$carrera);
+        }else{
+            return view('welcome');
+        }
     }
 
     /**

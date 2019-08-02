@@ -9,6 +9,7 @@ use App\Empresas;
 use App\Estados;
 use App\Http\Requests\storeBolsaTrabajo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BolsaTrabajoController extends Controller
 {
@@ -48,11 +49,15 @@ class BolsaTrabajoController extends Controller
      */
     public function create()
     {
-        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
-        $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
-        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('trabajos.create', compact('empresas','areas','state','town'));
+        if(Auth::user()->isAdmin == 1){
+            $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+            $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
+            $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            return view('trabajos.create', compact('empresas','areas','state','town'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -66,51 +71,55 @@ class BolsaTrabajoController extends Controller
      */
     public function store(storeBolsaTrabajo $request)
     {
-        $trabajo = new BolsaTrabajo($request->all());
-        $trabajo->puesto = $request->get('puesto');
-        $trabajo->tipo = $request->get('tipo');
-        $trabajo->fecha = $request->get('fecha');
-        $trabajo->descripcion = $request->get('descripcion');
-        $trabajo->contracto = $request->get('contracto');
-        $trabajo->telefono = $request->get('telefono');
-        $trabajo->domicilio = $request->get('domicilio');
-        $trabajo->sueldo = $request->get('sueldo');
-        $trabajo->estado = $request->get('estado');
-        $trabajo->requisitos= $request->get('requisitos');
+        if(Auth::user()->isAdmin == 1){
+            $trabajo = new BolsaTrabajo($request->all());
+            $trabajo->puesto = $request->get('puesto');
+            $trabajo->tipo = $request->get('tipo');
+            $trabajo->fecha = $request->get('fecha');
+            $trabajo->descripcion = $request->get('descripcion');
+            $trabajo->contracto = $request->get('contracto');
+            $trabajo->telefono = $request->get('telefono');
+            $trabajo->domicilio = $request->get('domicilio');
+            $trabajo->sueldo = $request->get('sueldo');
+            $trabajo->estado = $request->get('estado');
+            $trabajo->requisitos= $request->get('requisitos');
 
-        $empresa = $request->get('empresa_id');
-        if(!is_numeric($empresa)){
-            $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
-            $trabajo->empresa_id = $newEmpresa->id;
+            $empresa = $request->get('empresa_id');
+            if(!is_numeric($empresa)){
+                $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
+                $trabajo->empresa_id = $newEmpresa->id;
+            }else{
+                $trabajo->empresa_id = $empresa;
+            }
+
+            $area = $request->get('area_id');
+            if(!is_numeric($area)){
+                $newArea = AreaTrabajo::firstOrCreate(['nombre' => ucwords($area)]);
+                $trabajo->area_id = $newArea->id;
+            }else{
+                $trabajo->area_id = $area;
+            }
+
+            $city = $request->get('ciudad_id');
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(
+                    ['estado_id' => $request->get('estado_id'),
+                        'nombre' => ucwords($city)]);
+                $trabajo->ciudad_id = $newCity->id;
+            }else{
+                $trabajo->ciudad_id = $city;
+            }
+
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/trabajos');
+                $trabajo->imagen = $file;
+            }
+            $trabajo->save();
+            return redirect()->route('trabajos.show',$trabajo);
         }else{
-            $trabajo->empresa_id = $empresa;
+            return view('welcome');
         }
-
-        $area = $request->get('area_id');
-        if(!is_numeric($area)){
-            $newArea = AreaTrabajo::firstOrCreate(['nombre' => ucwords($area)]);
-            $trabajo->area_id = $newArea->id;
-        }else{
-            $trabajo->area_id = $area;
-        }
-
-        $city = $request->get('ciudad_id');
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(
-                ['estado_id' => $request->get('estado_id'),
-                    'nombre' => ucwords($city)]);
-            $trabajo->ciudad_id = $newCity->id;
-        }else{
-            $trabajo->ciudad_id = $city;
-        }
-
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/trabajos');
-            $trabajo->imagen = $file;
-        }
-        $trabajo->save();
-        return redirect()->route('trabajos.show',$trabajo);
 
     }
 
@@ -148,12 +157,16 @@ class BolsaTrabajoController extends Controller
      */
     public function edit($id)
     {
-        $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
-        $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
-        $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
-        $trabajo = BolsaTrabajo::where('id',$id)->first();
-        $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
-        return view('trabajos.edit', compact('trabajo','id','empresas','areas','state','town'));
+        if(Auth::user()->isAdmin == 1){
+            $empresas = Empresas::orderBy('nombre')->pluck('nombre','id');
+            $areas = AreaTrabajo::orderBy('nombre')->pluck('nombre','id');
+            $state = Estados::orderBy('nombre')->pluck('nombre', 'id');
+            $trabajo = BolsaTrabajo::where('id',$id)->first();
+            $town = Ciudades::orderBy('nombre')->pluck('nombre', 'id');
+            return view('trabajos.edit', compact('trabajo','id','empresas','areas','state','town'));
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -165,49 +178,53 @@ class BolsaTrabajoController extends Controller
      */
     public function update(storeBolsaTrabajo $request, $id)
     {
-        $trabajo = BolsaTrabajo::where('id',$id)->first();
-        $trabajo->puesto = $request->get('puesto');
-        $trabajo->tipo = $request->get('tipo');
-        $trabajo->fecha = $request->get('fecha');
-        $trabajo->descripcion = $request->get('descripcion');
-        $trabajo->contracto = $request->get('contracto');
-        $trabajo->telefono = $request->get('telefono');
-        $trabajo->domicilio = $request->get('domicilio');
-        $trabajo->sueldo = $request->get('sueldo');
-        $trabajo->estado = $request->get('estado');
-        $trabajo->requisitos= $request->get('requisitos');
+        if(Auth::user()->isAdmin == 1){
+            $trabajo = BolsaTrabajo::where('id',$id)->first();
+            $trabajo->puesto = $request->get('puesto');
+            $trabajo->tipo = $request->get('tipo');
+            $trabajo->fecha = $request->get('fecha');
+            $trabajo->descripcion = $request->get('descripcion');
+            $trabajo->contracto = $request->get('contracto');
+            $trabajo->telefono = $request->get('telefono');
+            $trabajo->domicilio = $request->get('domicilio');
+            $trabajo->sueldo = $request->get('sueldo');
+            $trabajo->estado = $request->get('estado');
+            $trabajo->requisitos= $request->get('requisitos');
 
-        $empresa = $request->get('empresa_id');
-        if(!is_numeric($empresa)){
-            $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
-            $trabajo->empresa_id = $newEmpresa->id;
+            $empresa = $request->get('empresa_id');
+            if(!is_numeric($empresa)){
+                $newEmpresa = Empresas::firstOrCreate(['nombre' => ucwords($empresa)]);
+                $trabajo->empresa_id = $newEmpresa->id;
+            }else{
+                $trabajo->empresa_id = $empresa;
+            }
+
+            $area = $request->get('area_id');
+            if(!is_numeric($area)){
+                $newArea = AreaTrabajo::firstOrCreate(['nombre' => ucwords($area)]);
+                $trabajo->area_id = $newArea->id;
+            }else{
+                $trabajo->area_id = $area;
+            }
+
+            $city = $request->get('ciudad_id');
+            if(!is_numeric($city)){
+                $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
+                $trabajo->ciudad_id = $newCity->id;
+            }else{
+                $trabajo->ciudad_id = $city;
+            }
+
+            if($request->hasFile('imagen')){
+                $imagen = $request->file('imagen');
+                $file = $imagen->store('imagenes/trabajos');
+                $trabajo->imagen = $file;
+            }
+            $trabajo->save();
+            return redirect()->route('trabajos.show',$trabajo);
         }else{
-            $trabajo->empresa_id = $empresa;
+            return view('welcome');
         }
-
-        $area = $request->get('area_id');
-        if(!is_numeric($area)){
-            $newArea = AreaTrabajo::firstOrCreate(['nombre' => ucwords($area)]);
-            $trabajo->area_id = $newArea->id;
-        }else{
-            $trabajo->area_id = $area;
-        }
-
-        $city = $request->get('ciudad_id');
-        if(!is_numeric($city)){
-            $newCity = Ciudades::firstOrCreate(['nombre' => ucwords($city)]);
-            $trabajo->ciudad_id = $newCity->id;
-        }else{
-            $trabajo->ciudad_id = $city;
-        }
-
-        if($request->hasFile('imagen')){
-            $imagen = $request->file('imagen');
-            $file = $imagen->store('imagenes/trabajos');
-            $trabajo->imagen = $file;
-        }
-        $trabajo->save();
-        return redirect()->route('trabajos.show',$trabajo);
     }
 
     /**
